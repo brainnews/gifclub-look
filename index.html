@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>GifClub</title>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+		<link rel = "stylesheet" type = "text/css" href = "css/magic.min.css" />
+		<link rel = "stylesheet" type = "text/css" href = "css/nouislider.css" />
+		<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" 
+         rel = "stylesheet">
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+		<link rel = "stylesheet" type = "text/css" href = "css/styles.css" />
+		<link rel = "stylesheet" type = "text/css" href = "css/gif-display.css" />
+		<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,900,900i" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet">
+		<link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
+		<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="overlay"></div>
+			<div id="editor">
+				<div class="container-fluid">
+					<span id="editor-load">
+						<div class="row">
+							<div class="col-sm">
+								<h4>New mood</h4>
+								<p class="small">Grab a SoundCloud track and mix it with some GIPHY visuals.</p>
+								<div class="input-group">
+						      		<input id="soundCloudSearch" type="text" class="form-control search-secondary" placeholder="Enter a SoundCloud URL">
+						      		<span class="input-group-btn">
+						        		<button class="btn btn-secondary search-secondary-btn" type="button">Go</button>
+						      		</span>
+						    	</div>
+							</div>
+							<div class="col-sm">
+								<h4>Old mood</h4>
+								<p class="small">Jump back into a previous project.</p>
+								<button type="button" class="btn btn-secondary" style="width: 100%;">Open project</button>
+							</div>
+						</div>
+					</span>
+					<span id="editor-loaded" class="hidden">
+						<div class="row">
+							<div class="col-sm-4">
+								<!-- <a href="http://www.soundcloud.com"><img src="images/soundcloud-logo-white.png" class="responsive-img"></a> -->
+							</div>
+							<div class="col-sm-2">
+								<ul class="list-inline">
+									<li id="editorPlayPauseButton" style="cursor: pointer; margin-right: 10px;" class="list-inline-item"><i class="fa fa-play" aria-hidden="true"></i></li>
+									<li class="time-code active-time-code list-inline-item"></li>
+									<li id="trackDurationContainer" class="list-inline-item"></li>
+									
+								</ul>
+							</div>
+							<div class="col-sm-6 text-right">
+								<ul class="list-inline">
+									<li class="list-inline-item" onclick="ClearVisuals();"><button class="btn btn-editor" type="button">clear visuals</button></li>
+									<li class="list-inline-item" onclick="ClearEditorTrack();"><button class="btn btn-editor" type="button">clear track</button></li>
+									<li class="list-inline-item"><button class="btn btn-editor" type="button">save project</button></li>
+								</ul>
+							</div>
+						</div>
+						<div class="row align-items-center">
+							<div class="col-sm-4">
+								<div class="row align-items-center">
+									<div id="trackArt" class="col-sm-3">
+										<div class="loader">Loading...</div>
+									</div>
+									<div class="col-sm-9 track-info">
+										<p id="trackTitle" class="text-truncate"></p>
+										<p id="trackCreator" class="text-truncate"></p>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-8">
+								<div id="trackScrubber" class="editor-timeline">
+									<div id="scrubberButtonContainer">
+										<button id="scrubberButton" class="btn btn-editor" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+				    					<div id="scrubberInputContainer" class="input-field hidden">
+							           		<input id="scrubberInput" class="input-small" type="text" placeholder="Search GIPHY">
+							           		<div class="input-close"><i class="fa fa-times-circle"></i></div>
+							          	</div>
+				    				</div>
+								</div>
+							</div>
+						</div>
+					</span>
+				</div>
+			</div>
+
+			<div id="ui-container" class="ui-container">
+				<ul class="list-inline ui-carousel">
+					<li data-target="#uiCarousel" data-slide-to="0" class="list-inline-item active"><h2>Staff moods</h2></li>
+					<li data-target="#uiCarousel" data-slide-to="1" class="list-inline-item"><h2>Settings</h2></li>
+					<li data-target="#uiCarousel" data-slide-to="2" class="list-inline-item"><h2>Help</h2></li>
+				</ul>
+				<div id="uiCarousel" class="carousel slide" data-ride="carousel">
+				  <div class="carousel-inner">
+				    <div class="carousel-item active">
+				    	<div class="container">
+							<div class="row align-items-center mb-60">
+							    <div class="col-sm">
+							      <div class="mood-card staff-mood placeholder-bg-01" data-playlist="galactic">
+							      	<div class="mood-info invisible">
+							      		<h4 class="mood-title">Galactic</h4>
+							      		<p><strong>Visuals</strong><br/>brainnews</p>
+							      		<p><strong>Sounds</strong><br/>raevan</p>
+							      		<p>45:56</p>
+							      	</div>
+							      </div>
+							    </div>
+							    <div class="col-sm">
+							      <div class="mood-card staff-mood placeholder-bg-02" data-playlist="late bloomer">
+							      	<div class="mood-info invisible">
+							      		<h4 class="mood-title">Late Bloomer</h4>
+							      		<p><strong>Visuals</strong><br/>brainnews</p>
+							      		<p><strong>Sounds</strong><br/>yaeji x discwoman</p>
+							      		<p>1:45:56</p>
+							      	</div>
+							      </div>
+							    </div>
+							    <div class="col-sm">
+							      <button id="editor-button" type="button" class="btn btn-primary btn-create shadow-1">Create<br/>your<br/>own</button>
+							    </div>
+							</div>
+							<div class="row align-items-center">
+								<div class="col-sm">
+									<div class="input-group">
+								      <input id="giphy-search" type="text" class="form-control shadow-1 search-primary" placeholder="Search real quick" aria-label="Search real quick">
+								      <span class="input-group-btn">
+								        <button id="giphy-search-button" class="btn btn-primary search-primary-btn shadow-1" type="button">Go</button>
+								      </span>
+								    </div>
+								</div>
+							</div>
+				    	</div>
+				    </div>
+				    <div class="carousel-item">
+				      <img class="d-block w-100" src="..." alt="Second slide">
+				    </div>
+				    <div class="carousel-item">
+				      <img class="d-block w-100" src="..." alt="Third slide">
+				    </div>
+				  </div>
+				</div>
+			</div>
+			<div id="popupGridWrapper" class="popup-grid-wrapper">
+				<div id="popupGif-1" class="popup-gif magictime"></div>
+				<div id="popupGif-2" class="popup-gif magictime"></div>
+				<div id="popupGif-3" class="popup-gif magictime"></div>
+				<div id="popupGif-6" class="popup-gif magictime"></div>
+				<div id="popupGif-7" class="popup-gif magictime"></div>
+				<div id="popupGif-8" class="popup-gif magictime"></div>
+				<div id="popupGif-9" class="popup-gif magictime"></div>
+				<div id="popupGif-10" class="popup-gif magictime"></div>
+				<div id="popupGif-11" class="popup-gif magictime"></div>
+				<div id="popupGif-12" class="popup-gif magictime"></div>
+				<div id="popupGif-14" class="popup-gif magictime"></div>
+				<div id="popupGif-15" class="popup-gif magictime"></div>
+				<div id="popupGif-16" class="popup-gif magictime"></div>
+			</div>
+			<div id="gif-container" class="gif-container">
+				<p class="warning-text">Photosensitive seizure warning. A very small percentage of people may experience a seizure when exposed to certain visual images, including flashing lights or patterns that may appear while viewing the GifClub Visual System.</p>
+			</div>
+			<div class="static" id="staticContainer"></div>
+			<div class="giphy-badge"><a style="border-bottom: none;" href="http://www.giphy.com" target="_blank"><img src="images/Poweredby_100px-Black_VertLogo.png"></a></div>
+			<div id="soundcloudContainer" class="soundcloud-player">
+				<iframe id="sc-widget" width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miles-gilbert-2/sets/test&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_artwork=false&amp;show_playcount=false&amp;buying=false&amp;show_user=false&amp;show_reposts=false&amp;liking=false&amp;download=false&amp;visual=false"></iframe>
+			</div>
+		</div>
+		
+		<script src="js/jquery-1.11.1.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+		<script src="js/platform-detection.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/nouislider.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/gifclub.js"></script>
+		<script src="js/giphysearch.js"></script>
+		<script src="js/gifdisplay.js"></script>
+		<script src="https://connect.soundcloud.com/sdk/sdk-3.1.2.js"></script>
+		<script src="js/sc-api.js"></script>
+		<script src="js/selects.js"></script>
+		<script src="js/music.js"></script>
+	</body>
+</html>
