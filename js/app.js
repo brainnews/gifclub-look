@@ -26,7 +26,6 @@ $('.carousel').carousel({
 
 $('.ui-carousel li').click(function(){
     if ($(this).hasClass('active')) {
-        console.log("already active tab");
     } else {
         $(this).toggleClass('active');
         $(this).siblings().removeClass('active');
@@ -35,9 +34,9 @@ $('.ui-carousel li').click(function(){
 
 
 $('.mood-info').hover(function(){
-    $(this).removeClass('invisible', 120, 'easeInOutQuint');
+    $(this).removeClass('no-show', 120, 'easeInOutQuint');
     }, function(){
-    $(this).addClass('invisible', 120, 'easeInOutQuint');
+    $(this).addClass('no-show', 120, 'easeInOutQuint');
 });
 
 $(editorButton).click(function(){
@@ -51,3 +50,10 @@ $('.overlay').click(function(){
     $('.overlay').toggleClass('overlay-active');
 })
 
+$('.switch-group .switch-item').click(function(){
+    if ($(this).hasClass('active')) {
+    } else {
+        $(this).toggleClass('active');
+        $(this).siblings().removeClass('active');
+    }
+});

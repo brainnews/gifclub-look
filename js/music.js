@@ -13,7 +13,7 @@ var clientId = 'ARX6YqJeUZYURsTksMBlqrzkPmdLqI3x';
 var playlistTracks = [];
 var currentTrackNum = 0;
 var ended;
-var editorLoaded = null;
+var editorLoaded = false;
 var userStarted = false;
 var loadedTrackUrl;
 //var trackScrubber = document.getElementById('trackScrubber');
@@ -96,10 +96,6 @@ widget.bind(SC.Widget.Events.READY, function() {
 				$(trackArt).html('<img src="' + art + '" class="img-fluid img-circle">');
 				$(trackTitle).html('<a href="' + url + '" target="_blank">' + title + '</a>');
 				$(trackCreator).html(artist);
-
-				$(loadedTrackInfoContainer).html(
-					'<div class="row valign-wrapper mb-0"><div class="col s4 pl-0"><img src="' + art + '" class="circle responsive-img ml-0 track-art"></div><div class="col s8"><a class="truncate" href="' + url + '" target="_blank">' + title + '</a><span class="truncate">' + artist + '</span></div></div>'
-					);
 				
 			} else {
 				$(trackInfoContainer).attr("href", url);
@@ -163,15 +159,19 @@ widget.bind(SC.Widget.Events.READY, function() {
 });
 
 $(soundCloudSearch).keydown(function( event ) {
-	if ( event.which == 13 ) {
+	if (event.which == 13) {
 	   	FetchTrackForEditor();
 	}
 });
 
 function FetchTrackForEditor(){
-	editorLoaded = true;
-	ToggleEditorData();
-	LoadTrackForEditor(soundCloudSearch.value);
+	if (soundCloudSearch.value != '') {
+	   	editorLoaded = true;
+		ToggleEditorData();
+		LoadTrackForEditor(soundCloudSearch.value);
+	} else {
+		soundCloudSearch.value = 'Please enter a SoundCloud URL';
+	}
 }
 
 function ToggleEditorData() {

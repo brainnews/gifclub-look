@@ -70,7 +70,10 @@ $('.staff-mood').click(function() {
     var q = $(this).data("playlist");
     LoadSoundToWidget(staffPicks[q].playlist, staffPicks[q].timeline, staffPicks[q].gpm);
     ToggleUI();
-    ClearEditorTrack();
+    
+    if(editorLoaded) {
+        ClearEditorTrack();
+    }
 });
 
 $(trendingButton).click(function() {

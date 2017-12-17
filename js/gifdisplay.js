@@ -1,10 +1,11 @@
 var animationFrequency = 10;
+var punchFrequency = 5;
 var animations = ['slideUpReturn', 'slideDownReturn','slideRightReturn','slideLeftReturn', 'puffIn'];
 var hasStarted = false;
 var recording = false;
 var playback = false;
 var gpm = 1400;
-var clearRate = 10000;
+var clearRate = 5000;
 var numResults;
 var gifStreamTimeout;
 var clearGifsTimeout;
@@ -67,16 +68,19 @@ function ShowGif() {
 			} else {
 				var largeGIF = channelgifs.data[randomNum].images.original_mp4.mp4;
 			}
-			var smallGIF = channelgifPopup = channelgifs.data[randomNum2].images.preview.mp4;
+			var smallGIF = channelgifs.data[randomNum2].images.preview.mp4;
 			if (largeGIF) {
 				channelgif = largeGIF;
 			}
-			if (smallGIF) {
-				channelgifPopup = smallGIF;
-			}
 			videoBackground.innerHTML = '<video autoplay loop playsinline id="video-background" muted><source src="' + channelgif + '"></video>';
-			if (randomPopup) {
-				randomPopup.innerHTML = '<video autoplay loop playsinline id="video-background" class="z-depth-' + randomDepth +'" muted><source src="' + channelgifPopup + '"></video>';
+
+			if (litMode) {
+				if (smallGIF) {
+					channelgifPopup = smallGIF;
+				}
+				if (randomPopup) {
+					randomPopup.innerHTML = '<video autoplay loop playsinline id="video-background" class="z-depth-' + randomDepth +'" muted><source src="' + channelgifPopup + '"></video>';
+				}
 			}
 		}
 
@@ -106,5 +110,11 @@ function ShowGif() {
 		var randomAnimation = animations[Math.floor((Math.random() * animations.length) + 1)];
 		$(randomPopup).addClass(randomAnimation);
 	}
+
+	// if (Math.floor(Math.random() * 10) < punchFrequency) {
+	// 	var randomAnimation = animations[Math.floor((Math.random() * animations.length) + 1)];
+	// 	$(videoBackground).toggleClass('punch-bg');
+	// 	console.log('bg punched');
+	// }
 	StartGifStream();
 }
