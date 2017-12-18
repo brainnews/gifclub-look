@@ -111,6 +111,11 @@ function ShowGif() {
 		$(randomPopup).addClass(randomAnimation);
 	}
 
+	// if (Math.floor(Math.random() * 10) < animationFrequency) {
+	// 	$(randomPopup).addClass('shake-opacity shake-constant');
+	// 	console.log('shaking');
+	// }
+
 	// if (Math.floor(Math.random() * 10) < punchFrequency) {
 	// 	var randomAnimation = animations[Math.floor((Math.random() * animations.length) + 1)];
 	// 	$(videoBackground).toggleClass('punch-bg');
