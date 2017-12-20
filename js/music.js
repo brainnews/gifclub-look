@@ -156,6 +156,19 @@ widget.bind(SC.Widget.Events.READY, function() {
 		playing = true;
 		$(editorPlayPauseButton).children().removeClass('fa-play').addClass('fa-pause');
 	});
+
+	widget.bind(SC.Widget.Events.SEEK, function() {
+		widget.getPosition(function(position) {
+			seekTimeCode = msToTime(position);
+			console.log("seeking to " + seekTimeCode);
+			for (x in timeline) {
+		    	if (x < position) {
+		    		console.log("Search: " + timeline[x]);
+		    		GetGifs(timeline[x]);
+		    	}
+			}
+		});
+	});
 });
 
 $(soundCloudSearch).keydown(function( event ) {
