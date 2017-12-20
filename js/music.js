@@ -137,12 +137,12 @@ widget.bind(SC.Widget.Events.READY, function() {
 			}
 			$(scrubberButtonContainer).css("left", trackProgress + "%");
 
-			for (x in timeline) {
-		    	if (x == trackMillis) {
-		    		console.log("Search: " + timeline[x]);
-		    		GetGifs(timeline[x]);
-		    	}
-			}
+				for (x in timeline) {
+			    	if (x == trackMillis) {
+			    		console.log("Search: " + timeline[x]);
+			    		GetGifs(timeline[x]);
+			    	}
+				}
 
 		});
 	});
@@ -237,11 +237,13 @@ function ResolvePlaylist(url) {
 
 function PlayVisuals() {
 	counter = setInterval(function(){
-		for (x in visuals) {
-	    	if (ConvertTimestamp(x) == millis) {
-	    		console.log("timestamp matched!");
-	    		GetGifs(visuals[x]);
-	    	}
+		if (!editorLoaded) {
+			for (x in visuals) {
+		    	if (ConvertTimestamp(x) == millis) {
+		    		console.log("timestamp matched!");
+		    		GetGifs(visuals[x]);
+		    	}
+			}
 		}
 		millis = millis + 1000;
 	}, 1000);

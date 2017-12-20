@@ -66,14 +66,13 @@ $('.mood-channel').click(function() {
 });
 
 $('.staff-mood').click(function() {
+    if(editorLoaded) {
+        ClearEditorTrack();
+    }
     ResetMusic();
     var q = $(this).data("playlist");
     LoadSoundToWidget(staffPicks[q].playlist, staffPicks[q].timeline, staffPicks[q].gpm);
     ToggleUI();
-    
-    if(editorLoaded) {
-        ClearEditorTrack();
-    }
 });
 
 $(trendingButton).click(function() {
