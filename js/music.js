@@ -55,6 +55,7 @@ SC.initialize({
 });
 
 GetTopTracks();
+//CorsRequest();
 
 noUiSlider.create(slider, {
 	start: [0],
@@ -215,6 +216,22 @@ function LoadSoundToWidget (q, t, g) {
 	visuals = t;
 	gpm = g;
 	PlayVisuals();
+}
+
+function LoadStaffSound (q) {
+	//var q = musicSearch.value;
+	editorLoaded = false;
+	widget.load(q, {
+		"auto_play": "true",
+		"buying": "false",
+		"liking": "false",
+		"download": "false",
+		"sharing": "false",
+		"show_artwork": "false",
+		"show_comments": "false",
+		"show_playcount": "false",
+		"show_user": "false"
+	});
 }
 
 function LoadTrackForEditor (q) {
@@ -435,21 +452,41 @@ function GetTopTracks(){
 	var today = new Date();
 	var year = today.getFullYear();
 	var month = today.getMonth();
+
 	if (month > 0) {
 		month = month - 1;
 	} else {
 		month = 11;
 	}
+
 	var day = today.getDate();
 	var time = msToTime(today.getTime());
 	formattedTime = year + '-' + month + '-' + day + ' ' + time;
 	console.log(formattedTime);
 
 	SC.get('/tracks', {
-	  bpm: { from: 120, to: 140 }, genres: 'hiphoprap', limit: 5, created_at: {from: formattedTime}
+		q: 'flip',
+	  limit: 5,
+	  created_at: {from: formattedTime}
 	}).then(function(tracks) {
 		for (i = 0; i < tracks.length; i++) {
 	  		console.log(tracks[i].permalink_url);
+	  		var permalink = tracks[i].permalink_url;
+	  		var title = tracks[i].title;
+	  		var artist = tracks[i].user.username;
+	  		var art = tracks[i].artwork_url;
+	  		$('#staffSoundsFlips').append('<li class="staff-sound-link" data-url="' + permalink + '"><img src="' + art + '" class="float-left" alt="track art"><p class="mb-6">' + title + '</p><p class="small">' + artist + '</p><a href="' + permalink + '" target="_blank"><i class="fa fa-external-link-square float-right" aria-hidden="true"></i>');
 	  	}
+
+	  	$('.staff-sound-link').click(function() {
+		    if(editorLoaded) {
+		        ClearEditorTrack();
+		    }
+		    ResetMusic();
+		    var q = $(this).data("url");
+		    LoadStaffSound(q);
+		    console.log("playing staff sound");
+		    //ToggleUI();
+		});
 	});
 }

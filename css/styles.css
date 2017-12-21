@@ -7,6 +7,7 @@
   --editor-height: 200px;
   --dark-purple: #8a2be2;
   --magenta: #C33167;
+  --medium-blue: #4048a2;
 }
 
 body {
@@ -53,23 +54,27 @@ h4 {
 }
 
 .mb-30 {
-  margin-bottom: 30px;
+  margin-bottom: 30px !important;
 }
 
 .mb-20 {
-  margin-bottom: 20px;
+  margin-bottom: 20px !important;
 }
 
 .mb-10 {
-  margin-bottom: 10px;
+  margin-bottom: 10px !important;
 }
 
 .mb-0 {
-  margin-bottom: 0px;
+  margin-bottom: 0px !important;
+}
+
+.mb-6 {
+  margin-bottom: 6px !important;
 }
 
 .mb-60 {
-  margin-bottom: 60px;
+  margin-bottom: 60px !important;
 }
 
 .no-show {
@@ -673,4 +678,50 @@ input[type=range]::-webkit-slider-thumb {
 
 .punch-bg {
   z-index: 30;
+}
+
+.staff-sounds-list li {
+      background-color: transparent;
+    padding: 12px 0;
+    margin-bottom: -1px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--medium-blue);
+    border-top: 1px solid var(--medium-blue);
+    color: rgba(255,255,255,0.5);
+}
+
+.staff-sounds-list li:hover {
+  background-color: var(--dark-purple);
+  color: rgba(255,255,255,1);
+}
+
+.staff-sounds-list img {
+  height: 40px;
+    margin-right: 10px;
+    margin-left: 8px;
+    margin-top: -3px;
+    border-radius: 0 !important;
+}
+
+.staff-sounds-list i {
+  margin-top: -25px;
+  margin-right: 10px;
+}
+
+.staff-sounds-list a:active, .staff-sounds-list a:visited, .staff-sounds-list a:hover {
+  color: var(--pale-pink);
+}
+
+.staff-sound-now-playing {
+    font-size: 12px;
+    font-weight: normal;
+    position: absolute;
+    right: 50px;
+    top: 55px;
+}
+
+.music-addon {
+  background-color: var(--black);
+  border: none;
+  color: var(--pale-pink);
 }
