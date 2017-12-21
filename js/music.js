@@ -50,6 +50,12 @@ var editorMenuHtml =
 
 var preloaderHtml = '<div class="progress"><div class="indeterminate"></div></div>';
 
+SC.initialize({
+  client_id: clientId
+});
+
+GetTopTracks();
+
 noUiSlider.create(slider, {
 	start: [0],
 	connect: [true, false],
@@ -423,4 +429,27 @@ function ClearVisuals() {
 	console.log("Visuals cleared!");
 	$('.noUi-pips').html("");
 	timeline = {};
+}
+
+function GetTopTracks(){
+	var today = new Date();
+	var year = today.getFullYear();
+	var month = today.getMonth();
+	if (month > 0) {
+		month = month - 1;
+	} else {
+		month = 11;
+	}
+	var day = today.getDate();
+	var time = msToTime(today.getTime());
+	formattedTime = year + '-' + month + '-' + day + ' ' + time;
+	console.log(formattedTime);
+
+	SC.get('/tracks', {
+	  bpm: { from: 120, to: 140 }, genres: 'hiphoprap', limit: 5, created_at: {from: formattedTime}
+	}).then(function(tracks) {
+		for (i = 0; i < tracks.length; i++) {
+	  		console.log(tracks[i].permalink_url);
+	  	}
+	});
 }
