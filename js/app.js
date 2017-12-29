@@ -8,12 +8,13 @@ var isMobile = false;
 window.onload = function() {
     // PLATFORM CHECK
     var os = getOS();
+    // var bodyHeight = $('body').height();
+    // $('.wrapper').css({ height: bodyHeight });
 
-    if (os == 'Android') {
+    if (os == 'Android' || os == 'iOS') {
         isMobile = true;
-    } else if ( os == 'iOS') {
-        isMobile == true;
-        $(iphoneUiButton).removeClass('hide');
+        var bodyHeight = $('body').height();
+        $('.wrapper').css({ height: bodyHeight })
     }
 
     ShowStatic();

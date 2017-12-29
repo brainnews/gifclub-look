@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>GifClub</title>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -19,8 +20,13 @@
 	</head>
 	<body>
 		<div class="wrapper">
+			<div class="mobile-search d-sm-none">
+				<div class="input-group">
+			      	<input id="giphy-search-mobile" type="text" class="form-control search-primary shadow-1" placeholder="Search real quick" aria-label="Search real quick">
+			    </div>
+			</div>
 			<div class="overlay"></div>
-			<div id="editor">
+			<div id="editor" class="d-none d-md-block">
 				<div class="container-fluid">
 					<span id="editor-load">
 						<div class="row">
@@ -91,18 +97,24 @@
 			</div>
 
 			<div id="ui-container" class="ui-container">
-				<ul class="list-inline ui-carousel">
-					<li data-target="#uiCarousel" data-slide-to="0" class="list-inline-item active"><h2>Staff moods</h2></li>
-					<li data-target="#uiCarousel" data-slide-to="1" class="list-inline-item"><h2>Staff sounds</h2></li>
+				<ul class="list-inline ui-carousel mb-30 d-none d-md-block">
+					<li data-target="#uiCarousel" data-slide-to="0" class="list-inline-item active"><h2>Moods</h2></li>
+					<li data-target="#uiCarousel" data-slide-to="1" class="list-inline-item"><h2>Sounds</h2></li>
 					<li data-target="#uiCarousel" data-slide-to="2" class="list-inline-item"><h2>Profile</h2></li>
 					<li data-target="#uiCarousel" data-slide-to="3" class="list-inline-item"><h2>Settings</h2></li>
+				</ul>
+				<ul class="list-inline ui-carousel d-sm-none mobile-nav">
+					<li data-target="#uiCarousel" data-slide-to="0" class="list-inline-item active"><i class="fa fa-heartbeat" aria-hidden="true"></i>Moods</li>
+					<li data-target="#uiCarousel" data-slide-to="1" class="list-inline-item"><i class="fa fa-music" aria-hidden="true"></i>Sounds</li>
+					<li data-target="#uiCarousel" data-slide-to="2" class="list-inline-item"><i class="fa fa-smile-o" aria-hidden="true"></i>Profile</li>
+					<li data-target="#uiCarousel" data-slide-to="3" class="list-inline-item"><i class="fa fa-sliders" aria-hidden="true"></i>Settings</li>
 				</ul>
 				<div id="uiCarousel" class="carousel slide" data-ride="carousel">
 				  <div class="carousel-inner">
 				    <div class="carousel-item active">
 				    	<div class="container">
 							<div class="row align-items-center mb-60" id="staffPicksContainer">
-							    <div class="col-sm">
+							    <div class="col-4">
 							      <div class="mood-card" style="background-image: url(https://i1.sndcdn.com/artworks-000234458721-pfm441-t500x500.jpg);">
 							      	<div class="mood-info staff-mood no-show" data-playlist="galactic">
 							      		<h4 class="mood-title" id="moodTitle">Galactic</h4>
@@ -112,7 +124,7 @@
 							      	</div>
 							      </div>
 							    </div>
-							    <div class="col-sm">
+							    <div class="col-4">
 							      <div class="mood-card" style="background-image: url(https://i1.sndcdn.com/artworks-000159819615-262xs9-t500x500.jpg);">
 							      	<div class="mood-info staff-mood no-show" data-playlist="late bloomer">
 							      		<h4 class="mood-title" id="moodTitle">Late Bloomer</h4>
@@ -122,14 +134,13 @@
 							      	</div>
 							      </div>
 							    </div>
-							    <div class="col-sm">
+							    <div class="col-4">
 							      <button id="editor-button" type="button" class="btn btn-primary btn-create shadow-1">Create<br/>your<br/>own</button>
 							    </div>
 							</div>
-							<div class="row align-items-center mb-10">
-								<div class="col-sm">
+							<div class="row align-items-center mb-10 d-none d-md-block">
+								<div class="col">
 									<div class="input-group">
-										
 								      	<input id="giphy-search" type="text" class="form-control search-primary shadow-1" placeholder="Search real quick" aria-label="Search real quick">
 								      	<span class="input-group-btn">
 								        	<button id="giphy-search-button" class="btn btn-primary search-primary-btn shadow-1" type="button">Go</button>
@@ -137,8 +148,8 @@
 								    </div>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col-sm">
+							<div class="row d-none d-md-block">
+								<div class="col">
 									<p class="small opacity-5">Tip: use # and a number to limit the amount of search results. Like "puppies #25" to get 25 GIFs of puppies.</p>
 								</div>
 							</div>
@@ -162,11 +173,10 @@
 				      <div class="container">
 				      	<div class="row align-items-center settings-row mb-10 shadow-1">
 
-							<div class="col-sm-6">
-		      					<h4>Profile <small class="text-muted">coming soon</small></h4>
-		      					<p class="small">Log in to save moods created using the editor.</p>
+							<div class="col-6">
+		      					<p class="small">Log in to save moods created using the editor. (Coming soon)</p>
 		      				</div>
-		      				<div class="col-sm-6">
+		      				<div class="col-6">
 			      				<button type="button" class="btn btn-secondary w-100" style="cursor: not-allowed; opacity: 0.1;">Log in</button>
 							</div>
 						</div>
@@ -175,20 +185,20 @@
 				    <div class="carousel-item">
 				    	<div class="container">
 							<div class="row align-items-center settings-row mb-10 shadow-1">
-								<div class="col-sm-6">
-			      					<h4>GPM: <span id="gpmContainer" style="font-style: normal;">🔥 🔥 🔥</span></h4>
+								<div class="col-6">
+			      					<p class="mb-6"><strong>GPM:</strong> <span id="gpmContainer" style="font-style: normal;">🔥 🔥 🔥</span></p>
 			      					<p class="small">GIFs per minute. Well not exactly, but you get it.</p>
 			      				</div>
-			      				<div class="col-sm-6">
+			      				<div class="col-6">
 				      				<input type="range" id="gpmRange" min="300" max="3000" style="margin-top: 8px;" />
 								</div>
 							</div>
 							<div class="row align-items-center settings-row shadow-1 mb-10">
-								<div class="col-sm-6">
-									<h4>Lit mode</h4>
+								<div class="col-6">
+									<p class="mb-6"><strong>Lit mode</strong></p>
 									<p class="small">Added hype factor. On by default. We like it this way.</p>
 								</div>
-								<div class="col-sm-6">
+								<div class="col-6">
 									<ul class="list-inline switch-group mb-0">
 										<li class="list-inline-item switch-item"><button type="button" class="btn btn-secondary switch-1" onclick="litMode = false;">OFF</button></li>
 										<li class="list-inline-item switch-item active"><button type="button" class="btn btn-secondary switch-2" onclick="litMode = true;">ON</button></li>
@@ -216,10 +226,12 @@
 				<div id="popupGif-16" class="popup-gif magictime"></div>
 			</div>
 			<div id="gif-container" class="gif-container">
-				<p class="warning-text">Photosensitive seizure warning. A very small percentage of people may experience a seizure when exposed to certain visual images, including flashing lights or patterns that may appear while viewing the GifClub Visual System.</p>
+				<p class="warning-text d-none d-md-block">Photosensitive seizure warning. A very small percentage of people may experience a seizure when exposed to certain visual images, including flashing lights or patterns that may appear while viewing the GifClub Visual System.</p>
+				<div class="giphy-badge">
+					<a style="border-bottom: none;" href="http://www.giphy.com" target="_blank"><img class="img-fluid" src="images/Poweredby_100px-Black_VertLogo.png"></a>
+				</div>
 			</div>
 			<div class="static" id="staticContainer"></div>
-			<div class="giphy-badge"><a style="border-bottom: none;" href="http://www.giphy.com" target="_blank"><img src="images/Poweredby_100px-Black_VertLogo.png"></a></div>
 			<div id="soundcloudContainer" class="soundcloud-player">
 				<iframe id="sc-widget" width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miles-gilbert-2/sets/test&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_artwork=false&amp;show_playcount=false&amp;buying=false&amp;show_user=false&amp;show_reposts=false&amp;liking=false&amp;download=false&amp;visual=false"></iframe>
 			</div>

@@ -23,7 +23,6 @@ var gpmContainer = document.getElementById("gpmContainer");
 var pausePlayButton = document.getElementById("pausePlayButton");
 var recordTapeArray = [];
 var playback = false;
-var isMobile = false;
 
 
 $(document).ready(function(){
@@ -55,7 +54,9 @@ function BlurSearch(){
 }
 
 function ToggleUI() {
-    $(uiContainer).fadeToggle(300);
+    if (!isMobile) {
+        $(uiContainer).fadeToggle(300);
+    }
 }
 
 $('.mood-channel').click(function() {

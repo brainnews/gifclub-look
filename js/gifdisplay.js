@@ -79,7 +79,7 @@ function ShowGif() {
 					channelgifPopup = smallGIF;
 				}
 				if (randomPopup) {
-					randomPopup.innerHTML = '<video autoplay loop playsinline id="video-background" class="z-depth-' + randomDepth +'" muted><source src="' + channelgifPopup + '"></video>';
+					randomPopup.innerHTML = '<video autoplay loop playsinline class="video-popup z-depth-' + randomDepth +'" muted><source src="' + channelgifPopup + '"></video>';
 				}
 			}
 		}

@@ -1,5 +1,6 @@
 var searchButton = document.getElementById("giphy-search-button");
 var giphySearch = document.getElementById("giphy-search");
+var giphySearchMobile = document.getElementById("giphy-search-mobile");
 var channelgifs;
 var preHTML = '<img src="';
 var postHTML = '" />';
@@ -67,6 +68,12 @@ $(giphySearch).keydown(function( event ) {
 	}
 });
 
+$(giphySearchMobile).keydown(function( event ) {
+	if ( event.which == 13 ) {
+		CustomSearch();
+	}
+});
+
 $(searchButton).click(function(){
 	if (giphySearch.value != '') {
 		CustomSearch();
@@ -79,9 +86,14 @@ function CustomSearch() {
 	ToggleUI();
 	//ResetMusic();
 	StopSelectsVisuals();
-
-	var query = giphySearch.value;
+	var query;
 	var customSearchLimit;
+
+	if (giphySearchMobile.value != '') {
+		query = giphySearchMobile.value;
+	} else {
+		query = giphySearch.value;
+	}
 
 	if (query.includes('#')) {
 		var queryWithLimit = query.split('#');
@@ -95,7 +107,7 @@ function CustomSearch() {
 		});
 	} else {
 		$.ajax({
-		  	url: searchUrlPre + giphySearch.value + searchUrlPost + searchLimit,
+		  	url: searchUrlPre + query + searchUrlPost + searchLimit,
 		  	type: 'GET',
 		  	success: function(data) {
 				channelgifs = data;
