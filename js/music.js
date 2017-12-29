@@ -232,6 +232,7 @@ function LoadStaffSound (q) {
 		"show_playcount": "false",
 		"show_user": "false"
 	});
+	widget.play();
 }
 
 function LoadTrackForEditor (q) {
@@ -475,7 +476,7 @@ function GetTopTracks(){
 	  		var title = tracks[i].title;
 	  		var artist = tracks[i].user.username;
 	  		var art = tracks[i].artwork_url;
-	  		$('#staffSoundsFlips').append('<li class="staff-sound-link" data-url="' + permalink + '"><img src="' + art + '" class="float-left" alt="track art"><p class="mb-6">' + title + ' <a href="' + permalink + '" target="_blank"><i class="fa fa-external-link-square sc-link" aria-hidden="true"></i></a></p><p class="small">' + artist + '</p><div class="play-indicator hidden">now playing</div></li>');
+	  		$('#staffSoundsFlips').append('<li class="staff-sound-link" data-url="' + permalink + '"><img src="' + art + '" class="float-left" alt="track art"><p class="text-truncate mb-6">' + title + ' <a href="' + permalink + '" target="_blank"><i class="fa fa-external-link-square sc-link" aria-hidden="true"></i></a></p><p class="text-truncate small">' + artist + '</p><div class="play-indicator hidden">now playing</div></li>');
 	  	}
 
 	  	$('.staff-sound-link').click(function() {

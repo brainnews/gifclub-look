@@ -20,6 +20,12 @@
 	</head>
 	<body>
 		<div class="wrapper">
+			<ul class="list-inline ui-carousel d-sm-none mobile-nav">
+					<li data-target="#uiCarousel" data-slide-to="0" class="list-inline-item active"><i class="fa fa-heartbeat" aria-hidden="true"></i>Moods</li>
+					<li data-target="#uiCarousel" data-slide-to="1" class="list-inline-item"><i class="fa fa-music" aria-hidden="true"></i>Sounds</li>
+					<li data-target="#uiCarousel" data-slide-to="2" class="list-inline-item"><i class="fa fa-smile-o" aria-hidden="true"></i>Profile</li>
+					<li data-target="#uiCarousel" data-slide-to="3" class="list-inline-item"><i class="fa fa-sliders" aria-hidden="true"></i>Settings</li>
+			</ul>
 			<div class="mobile-search d-sm-none">
 				<div class="input-group">
 			      	<input id="giphy-search-mobile" type="text" class="form-control search-primary shadow-1" placeholder="Search real quick" aria-label="Search real quick">
@@ -103,38 +109,35 @@
 					<li data-target="#uiCarousel" data-slide-to="2" class="list-inline-item"><h2>Profile</h2></li>
 					<li data-target="#uiCarousel" data-slide-to="3" class="list-inline-item"><h2>Settings</h2></li>
 				</ul>
-				<ul class="list-inline ui-carousel d-sm-none mobile-nav">
-					<li data-target="#uiCarousel" data-slide-to="0" class="list-inline-item active"><i class="fa fa-heartbeat" aria-hidden="true"></i>Moods</li>
-					<li data-target="#uiCarousel" data-slide-to="1" class="list-inline-item"><i class="fa fa-music" aria-hidden="true"></i>Sounds</li>
-					<li data-target="#uiCarousel" data-slide-to="2" class="list-inline-item"><i class="fa fa-smile-o" aria-hidden="true"></i>Profile</li>
-					<li data-target="#uiCarousel" data-slide-to="3" class="list-inline-item"><i class="fa fa-sliders" aria-hidden="true"></i>Settings</li>
-				</ul>
+				
 				<div id="uiCarousel" class="carousel slide" data-ride="carousel">
 				  <div class="carousel-inner">
 				    <div class="carousel-item active">
 				    	<div class="container">
 							<div class="row align-items-center mb-60" id="staffPicksContainer">
-							    <div class="col-4">
+							    <div class="col">
 							      <div class="mood-card" style="background-image: url(https://i1.sndcdn.com/artworks-000234458721-pfm441-t500x500.jpg);">
+							      	<i class="fa fa-info-circle btn-mood-info" aria-hidden="true"></i>
 							      	<div class="mood-info staff-mood no-show" data-playlist="galactic">
-							      		<h4 class="mood-title" id="moodTitle">Galactic</h4>
 							      		<p><strong>Visuals</strong><br/><span id="visualsBy">brainwaves</span></p>
 							      		<p><strong>Sounds</strong><br/><span id="vsoundsBy">THUNDERSTONE RADIO</span></p>
 							      		<p id="moodLength">42:13</p>
 							      	</div>
+							      	<h4 class="mood-title" id="moodTitle">Galactic</h4>
 							      </div>
 							    </div>
-							    <div class="col-4">
+							    <div class="col">
 							      <div class="mood-card" style="background-image: url(https://i1.sndcdn.com/artworks-000159819615-262xs9-t500x500.jpg);">
+							      	<i class="fa fa-info-circle btn-mood-info" aria-hidden="true"></i>
 							      	<div class="mood-info staff-mood no-show" data-playlist="late bloomer">
-							      		<h4 class="mood-title" id="moodTitle">Late Bloomer</h4>
 							      		<p><strong>Visuals</strong><br/><span id="visualsBy">brainwaves</span></p>
 							      		<p><strong>Sounds</strong><br/><span id="vsoundsBy">DISCWOMAN</span></p>
 							      		<p id="moodLength">53:36</p>
 							      	</div>
+							      	<h4 class="mood-title" id="moodTitle">Late Bloomer</h4>
 							      </div>
 							    </div>
-							    <div class="col-4">
+							    <div class="col-4 d-none d-md-block">
 							      <button id="editor-button" type="button" class="btn btn-primary btn-create shadow-1">Create<br/>your<br/>own</button>
 							    </div>
 							</div>

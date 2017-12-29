@@ -3,7 +3,7 @@ var settingsBar = document.getElementById('settings-bar');
 var uiContainer = document.getElementById('ui-container');
 var editorButton = document.getElementById('editor-button');
 var editor = document.getElementById('editor');
-var isMobile = false;
+var isMobile = true;
 
 window.onload = function() {
     // PLATFORM CHECK
@@ -34,10 +34,19 @@ $('.ui-carousel li').click(function(){
 });
 
 
+
 $('.mood-info').hover(function(){
-    $(this).removeClass('no-show', 120, 'easeInOutQuint');
-    }, function(){
-    $(this).addClass('no-show', 120, 'easeInOutQuint');
+    if (!isMobile){
+        $(this).removeClass('no-show', 120, 'easeInOutQuint');
+    }
+}, function(){
+    if (!isMobile){
+        $(this).addClass('no-show', 120, 'easeInOutQuint');
+    }
+});
+
+$('.btn-mood-info').click(function(){
+    $(this).next().toggleClass('no-show');
 });
 
 $(editorButton).click(function(){
