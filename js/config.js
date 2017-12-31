@@ -10,7 +10,6 @@ var staticGifs = [
 	"https://media.giphy.com/media/3osBLvjveLwbNbbzmE/giphy.gif",
 	"https://media.giphy.com/media/l1KdaDwwPOn7uULKw/giphy.gif",
 	"https://media.giphy.com/media/l3q2EENvDyPQuRFIY/giphy.gif",
-	"https://media.giphy.com/media/oy7wGVaohJYe4/giphy.gif",
 	"https://media.giphy.com/media/3oriNZRqSXdeSUMlmo/giphy.gif",
 	"https://media.giphy.com/media/3ov9jTM0jI4r4atQ9a/giphy.gif",
 	"https://media.giphy.com/media/l0Iy9QlIgTQrNcP5K/giphy.gif",

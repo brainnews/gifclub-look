@@ -89,7 +89,7 @@ var timeline = {};
 var widgetIframe = document.getElementById('sc-widget'), 
 widget = SC.Widget(widgetIframe);
 
-widget.bind(SC.Widget.Events.READY, function() { 
+widget.bind(SC.Widget.Events.READY, function() {
 	widget.bind(SC.Widget.Events.PLAY, function() {
 		// get information about currently playing sound 
 		widget.getCurrentSound(function(currentSound) {
@@ -144,12 +144,12 @@ widget.bind(SC.Widget.Events.READY, function() {
 			}
 			$(scrubberButtonContainer).css("left", trackProgress + "%");
 
-				for (x in timeline) {
-			    	if (x == trackMillis) {
-			    		console.log("Search: " + timeline[x]);
-			    		GetGifs(timeline[x]);
-			    	}
-				}
+			for (x in timeline) {
+		    	if (x == trackMillis) {
+		    		console.log("Search: " + timeline[x]);
+		    		GetGifs(timeline[x]);
+		    	}
+			}
 
 		});
 	});
@@ -157,11 +157,13 @@ widget.bind(SC.Widget.Events.READY, function() {
 	widget.bind(SC.Widget.Events.PAUSE, function() {
 		playing = false;
 		$(editorPlayPauseButton).children().removeClass('fa-pause').addClass('fa-play');
+		$('.btn-mobile-play-audio').children('.fa').removeClass('fa-volume-up').addClass('fa-volume-off');
 	});
 
 	widget.bind(SC.Widget.Events.PLAY, function() {
 		playing = true;
 		$(editorPlayPauseButton).children().removeClass('fa-play').addClass('fa-pause');
+		$('.btn-mobile-play-audio').children('.fa').removeClass('fa-volume-off').addClass('fa-volume-up');
 	});
 
 	widget.bind(SC.Widget.Events.SEEK, function() {
@@ -232,7 +234,6 @@ function LoadStaffSound (q) {
 		"show_playcount": "false",
 		"show_user": "false"
 	});
-	widget.play();
 }
 
 function LoadTrackForEditor (q) {

@@ -66,7 +66,7 @@ $('.mood-channel').click(function() {
     ResetMusic();
 });
 
-$('.staff-mood').click(function() {
+$('.mood-card').click(function() {
     if(editorLoaded) {
         ClearEditorTrack();
     }

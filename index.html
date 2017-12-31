@@ -21,13 +21,16 @@
 	<body>
 		<div class="wrapper">
 			<ul class="list-inline ui-carousel d-sm-none mobile-nav">
-					<li data-target="#uiCarousel" data-slide-to="0" class="list-inline-item active"><i class="fa fa-heartbeat" aria-hidden="true"></i>Moods</li>
-					<li data-target="#uiCarousel" data-slide-to="1" class="list-inline-item"><i class="fa fa-music" aria-hidden="true"></i>Sounds</li>
-					<li data-target="#uiCarousel" data-slide-to="2" class="list-inline-item"><i class="fa fa-smile-o" aria-hidden="true"></i>Profile</li>
-					<li data-target="#uiCarousel" data-slide-to="3" class="list-inline-item"><i class="fa fa-sliders" aria-hidden="true"></i>Settings</li>
+					<li data-target="#uiCarousel" data-slide-to="0" class="list-inline-item active"><i class="fa fa-heartbeat" aria-hidden="true"></i></li>
+					<li data-target="#uiCarousel" data-slide-to="1" class="list-inline-item"><i class="fa fa-music" aria-hidden="true"></i></li>
+					<li data-target="#uiCarousel" data-slide-to="2" class="list-inline-item"><i class="fa fa-smile-o" aria-hidden="true"></i></li>
+					<li data-target="#uiCarousel" data-slide-to="3" class="list-inline-item"><i class="fa fa-sliders" aria-hidden="true"></i></li>
 			</ul>
 			<div class="mobile-search d-sm-none">
-				<div class="input-group">
+				<div class="btn-mobile-search">
+					<i class="fa fa-search" aria-hidden="true"></i>
+				</div>
+				<div class="input-group hidden">
 			      	<input id="giphy-search-mobile" type="text" class="form-control search-primary shadow-1" placeholder="Search real quick" aria-label="Search real quick">
 			    </div>
 			</div>
@@ -116,29 +119,44 @@
 				    	<div class="container">
 							<div class="row align-items-center mb-60" id="staffPicksContainer">
 							    <div class="col">
-							      <div class="mood-card" style="background-image: url(https://i1.sndcdn.com/artworks-000234458721-pfm441-t500x500.jpg);">
-							      	<i class="fa fa-info-circle btn-mood-info" aria-hidden="true"></i>
-							      	<div class="mood-info staff-mood no-show" data-playlist="galactic">
-							      		<p><strong>Visuals</strong><br/><span id="visualsBy">brainwaves</span></p>
-							      		<p><strong>Sounds</strong><br/><span id="vsoundsBy">THUNDERSTONE RADIO</span></p>
-							      		<p id="moodLength">42:13</p>
-							      	</div>
-							      	<h4 class="mood-title" id="moodTitle">Galactic</h4>
-							      </div>
-							    </div>
-							    <div class="col">
-							      <div class="mood-card" style="background-image: url(https://i1.sndcdn.com/artworks-000159819615-262xs9-t500x500.jpg);">
-							      	<i class="fa fa-info-circle btn-mood-info" aria-hidden="true"></i>
-							      	<div class="mood-info staff-mood no-show" data-playlist="late bloomer">
-							      		<p><strong>Visuals</strong><br/><span id="visualsBy">brainwaves</span></p>
-							      		<p><strong>Sounds</strong><br/><span id="vsoundsBy">DISCWOMAN</span></p>
-							      		<p id="moodLength">53:36</p>
-							      	</div>
-							      	<h4 class="mood-title" id="moodTitle">Late Bloomer</h4>
-							      </div>
-							    </div>
-							    <div class="col-4 d-none d-md-block">
-							      <button id="editor-button" type="button" class="btn btn-primary btn-create shadow-1">Create<br/>your<br/>own</button>
+							    	<p class="small mb-20">Moods</p>
+							    	<ul class="list-inline moods-list">
+							    		<li class="list-inline-item">
+							    			<div class="mood-card" data-playlist="galactic" style="background-image: url(https://i1.sndcdn.com/artworks-000234458721-pfm441-t500x500.jpg);">
+										    </div>
+										    <h4 class="mood-title" id="moodTitle">Galactic</h4>
+							    		</li>
+							    		<li class="list-inline-item">
+							    			<div class="mood-card" data-playlist="late bloomer" style="background-image: url(https://i1.sndcdn.com/artworks-000159819615-262xs9-t500x500.jpg);">
+										    </div>
+										    <h4 class="mood-title" id="moodTitle">Late Bloomer</h4>
+							    		</li>
+							    		<li class="list-inline-item">
+							    			<div class="mood-card" style="background-image: url(https://i1.sndcdn.com/artworks-000159819615-262xs9-t500x500.jpg);">
+										    </div>
+										    <h4 class="mood-title" id="moodTitle">Late Bloomer</h4>
+							    		</li>
+							    		<li class="list-inline-item">
+							    			<div class="mood-card" style="background-image: url(https://i1.sndcdn.com/artworks-000159819615-262xs9-t500x500.jpg);">
+										    </div>
+										    <h4 class="mood-title" id="moodTitle">Late Bloomer</h4>
+							    		</li>
+							    		<li class="list-inline-item">
+							    			<div class="mood-card" style="background-image: url(https://i1.sndcdn.com/artworks-000159819615-262xs9-t500x500.jpg);">
+										    </div>
+										    <h4 class="mood-title" id="moodTitle">Late Bloomer</h4>
+							    		</li>
+							    		<li class="list-inline-item">
+							    			<div class="mood-card" style="background-image: url(https://i1.sndcdn.com/artworks-000159819615-262xs9-t500x500.jpg);">
+										    </div>
+										    <h4 class="mood-title" id="moodTitle">Late Bloomer</h4>
+							    		</li>
+							    		<li class="list-inline-item">
+							    			<div class="col-4 d-none d-md-block">
+										      <button id="editor-button" type="button" class="btn btn-primary btn-create shadow-1">Create<br/>your<br/>own</button>
+										    </div>
+							    		</li>
+							    	</ul>						      
 							    </div>
 							</div>
 							<div class="row align-items-center mb-10 d-none d-md-block">
@@ -213,6 +231,25 @@
 				  </div>
 				</div>
 			</div>
+			<div class="video-player-controls d-sm-none">
+				<ul class="list-inline">
+					<li class="list-inline-item">
+						<div class="giphy-badge">
+							<a style="border-bottom: none;" href="http://www.giphy.com" target="_blank"><img class="img-fluid" src="images/Poweredby_100px-Black_VertLogo.png"></a>
+						</div>
+					</li>
+					<!-- <li class="list-inline-item float-right">
+						<div class="btn-mobile-fullscreen">
+							<i class="fa fa-arrows-alt" aria-hidden="true"></i>
+						</div>
+					</li> -->
+					<li class="list-inline-item float-right">
+						<div class="btn-mobile-play-audio">
+							<i class="fa fa-volume-off" aria-hidden="true"></i>
+						</div>
+					</li>
+				</ul>
+			</div>
 			<div id="popupGridWrapper" class="popup-grid-wrapper">
 				<div id="popupGif-1" class="popup-gif magictime"></div>
 				<div id="popupGif-2" class="popup-gif magictime"></div>
@@ -230,9 +267,6 @@
 			</div>
 			<div id="gif-container" class="gif-container">
 				<p class="warning-text d-none d-md-block">Photosensitive seizure warning. A very small percentage of people may experience a seizure when exposed to certain visual images, including flashing lights or patterns that may appear while viewing the GifClub Visual System.</p>
-				<div class="giphy-badge">
-					<a style="border-bottom: none;" href="http://www.giphy.com" target="_blank"><img class="img-fluid" src="images/Poweredby_100px-Black_VertLogo.png"></a>
-				</div>
 			</div>
 			<div class="static" id="staticContainer"></div>
 			<div id="soundcloudContainer" class="soundcloud-player">

@@ -71,6 +71,7 @@ $(giphySearch).keydown(function( event ) {
 $(giphySearchMobile).keydown(function( event ) {
 	if ( event.which == 13 ) {
 		CustomSearch();
+		giphySearchMobile.blur();
 	}
 });
 
