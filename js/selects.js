@@ -1,5 +1,6 @@
 var staffPicks = {
 	"galactic": {
+                "title": "galactic",
 		"playlist": "https://soundcloud.com/thunderstone-radio/gs5",
 		"gpm": 500,
 		"timeline": {
@@ -33,6 +34,7 @@ var staffPicks = {
                 "track_art": "https://i1.sndcdn.com/artworks-000234458721-pfm441-t500x500.jpg"
 	},
 	"late bloomer": {
+                "title": "late bloomer",
 		"playlist": "https://soundcloud.com/discwoman/discwoman-04-x-yaeji",
 		"gpm": 2000,
 		"timeline": {
@@ -49,5 +51,62 @@ var staffPicks = {
                 "sounds_by": "DISCWOMAN",
                 "length": "53:36",
                 "track_art": "https://i1.sndcdn.com/artworks-000159819615-262xs9-t500x500.jpg"
-	}
+	},
+        "mood 3": {
+                "title": "mood 3",
+                "playlist": "https://soundcloud.com/discwoman/discwoman-04-x-yaeji",
+                "gpm": 2000,
+                "timeline": {
+                        "00:00:00": "flowers black and white",
+                        "00:00:15": "flowers",
+                        "00:02:20": "stars surreal",
+                        "00:04:00": "pink rainbow",
+                        "00:06:48": "surreal rainbow",
+                        "00:07:40": "trippy surreal",
+                        "00:09:28": "beach 90s",
+                        "00:11:48": "2000s music",
+                },
+                "visuals_by": "brainwaves",
+                "sounds_by": "DISCWOMAN",
+                "length": "53:36",
+                "track_art": "http://lorempixel.com/400/400"
+        },
+        "mood 4": {
+                "title": "mood 4",
+                "playlist": "https://soundcloud.com/discwoman/discwoman-04-x-yaeji",
+                "gpm": 2000,
+                "timeline": {
+                        "00:00:00": "flowers black and white",
+                        "00:00:15": "flowers",
+                        "00:02:20": "stars surreal",
+                        "00:04:00": "pink rainbow",
+                        "00:06:48": "surreal rainbow",
+                        "00:07:40": "trippy surreal",
+                        "00:09:28": "beach 90s",
+                        "00:11:48": "2000s music",
+                },
+                "visuals_by": "brainwaves",
+                "sounds_by": "DISCWOMAN",
+                "length": "53:36",
+                "track_art": "http://lorempixel.com/400/400"
+        },
+        "mood 5": {
+                "title": "mood 5",
+                "playlist": "https://soundcloud.com/discwoman/discwoman-04-x-yaeji",
+                "gpm": 2000,
+                "timeline": {
+                        "00:00:00": "flowers black and white",
+                        "00:00:15": "flowers",
+                        "00:02:20": "stars surreal",
+                        "00:04:00": "pink rainbow",
+                        "00:06:48": "surreal rainbow",
+                        "00:07:40": "trippy surreal",
+                        "00:09:28": "beach 90s",
+                        "00:11:48": "2000s music",
+                },
+                "visuals_by": "brainwaves",
+                "sounds_by": "DISCWOMAN",
+                "length": "53:36",
+                "track_art": "http://lorempixel.com/400/400"
+        }
 }

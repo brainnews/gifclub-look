@@ -3,7 +3,8 @@ var settingsBar = document.getElementById('settings-bar');
 var uiContainer = document.getElementById('ui-container');
 var editorButton = document.getElementById('editor-button');
 var editor = document.getElementById('editor');
-var isMobile = true;
+var giphySearchMobile = document.getElementById("giphy-search-mobile");
+var isMobile = false;
 
 window.onload = function() {
     // PLATFORM CHECK
@@ -18,6 +19,7 @@ window.onload = function() {
     }
 
     ShowStatic();
+    GetMoods();
     widget.pause();
 };
 
@@ -35,18 +37,42 @@ $('.ui-carousel li').click(function(){
 });
 
 $('.btn-mobile-search').click(function () {
-    ToggleMobileSearch();
+    $('.btn-mobile-search').addClass('hidden');
+    $('.btn-mobile-search-back').removeClass('hidden');
+    $('.btn-mobile-search-clear').addClass('hidden');
+    $('.mobile-input').removeClass('hidden');
+    $(giphySearchMobile).focus();
+});
+
+$('.btn-mobile-search-back').click(function () {
+    $('.btn-mobile-search').removeClass('hidden');
+    $('.btn-mobile-search-back').addClass('hidden');
+    $('.btn-mobile-search-clear').addClass('hidden');
+    $('.mobile-input').addClass('hidden');
+    giphySearchMobile.value = '';
+    $(giphySearchMobile).blur();
+});
+
+$('.btn-mobile-search-clear').click(function () {
+    giphySearchMobile.value = '';
+    $(giphySearchMobile).focus();
+    $(this).toggleClass('hidden');
+});
+
+$(giphySearchMobile).keydown(function(){
+    $('.btn-mobile-search-clear').removeClass('hidden');
 });
 
 function ToggleMobileSearch() {
-    $('.btn-mobile-search').siblings().toggleClass('hidden', 200, function() {
-        if($(giphySearchMobile).is(":focus")){
-            $(giphySearchMobile).blur();
-        } else {
-            $(giphySearchMobile).focus();
-        }
-    });
-    $('.btn-mobile-search').children('.fa').toggleClass('fa-times');
+    if($(giphySearchMobile).is(":focus")){
+        $(giphySearchMobile).blur();
+    } else {
+        $(giphySearchMobile).focus();
+    }
+    $('.btn-mobile-search').toggleClass('hidden');
+    $('.btn-mobile-search-back').toggleClass('hidden');
+    $('.btn-mobile-search-clear').addClass('hidden');
+    $('.mobile-input').toggleClass('hidden');
 }
 
 $('.mood-info').hover(function(){
@@ -100,4 +126,20 @@ $('.switch-group .switch-item').click(function(){
 
 function ForcePlayWidget(){
     widget.play();
+}
+
+function GetMoods() {
+    for (x in staffPicks) {
+        $('.moods-list').append('<li class="list-inline-item mood-card" data-playlist="' + staffPicks[x].title + '"><img class="mood-art" src="' + staffPicks[x].track_art + '"><p class="mood-title" id="moodTitle">' + staffPicks[x].title + '</p></li>');
+    }
+
+    $('.mood-card').click(function() {
+        if(editorLoaded) {
+            ClearEditorTrack();
+        }
+        ResetMusic();
+        var q = $(this).data("playlist");
+        LoadSoundToWidget(staffPicks[q].playlist, staffPicks[q].timeline, staffPicks[q].gpm);
+        ToggleUI();
+    });
 }

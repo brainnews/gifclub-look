@@ -95,7 +95,7 @@ h4 {
   display: grid;
   grid-row-gap: 0px;
   grid-template-columns: 1fr;
-  grid-template-rows: 50px 375px 1fr;
+  grid-template-rows: 50px 330px 1fr;
   overflow: hidden;
   height: 100vh;
 }
@@ -186,6 +186,14 @@ h4 {
   background-color: var(--dark-plum);
 }
 
+.ui-header {
+    background-color: #000;
+    width: 100%;
+    margin-top: -15px;
+    padding: 10px;
+    text-align: center;
+}
+
 .mobile-nav {
   color: var(--white);
   background-color: var(--black);
@@ -268,55 +276,48 @@ h4 {
 .moods-list {
   overflow-x: scroll;
   overflow-y: hidden;
-  
-  width:100%;
-  white-space:nowrap; 
+  width: 100%;
+  white-space: nowrap; 
 }
 
-.moods-list li {
-  height: 60px;
-  width: 100px;
-}
 
 .mood-card {
   height: 100%;
-  background-color: var(--pale-pink);
-  border-radius: 4px;
+  width: 120px;
   transition: all .12s ease-in-out;
   box-shadow: 0 3px 6px 0 rgba(0,0,0,0.23), 0 3px 6px 0 rgba(0,0,0,0.16);
-  background-repeat: no-repeat;
-  background-position: center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
   cursor: pointer;
+  position: relative;
 }
 
-.mood-info {
-  padding: 6px;
-  color: var(--white);
-  background-color: rgba(222,180,201,0.9);
-  height: 100%;
-  border-radius: 4px;
-  font-size: 10px;
+.mood-art {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 2px;
 }
 
 .mood-title {
-  font-size: 11px;
-  margin-bottom: 4px;
-  margin-top: 10px;
-}
-
-.mood-info p {
-  margin-bottom: 4px;
-}
-
-.btn-mood-info {
-  right: 24px;
-  top: 8px;
+  font-size: 12px;
+  letter-spacing: 0.03rem;
+  text-transform: uppercase;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  padding: 10px;
+  color: #fff;
+  border-radius: 0 0 2px 2px;
+  font-weight: 600;
   position: absolute;
-  z-index: 9999;
+  bottom: 0;
+  background-image:
+    linear-gradient(
+      to bottom, 
+      rgba(0,0,0,0), rgba(0,0,0,0.5) 90%
+    );
+  width: 100%;
+  /*text-shadow:
+  0px 0px 1px rgba(0,0,0,0.7),
+  0px 0px 2px rgba(0,0,0,0.5);*/
 }
 
 .placeholder-bg-01 {
@@ -366,6 +367,20 @@ h4 {
 .btn-mobile-search {
   position: absolute;
   right: 15px;
+  top: 13px;
+  z-index: 99999;
+}
+
+.btn-mobile-search-clear {
+  position: absolute;
+  right: 15px;
+  top: 13px;
+  z-index: 99999;
+}
+
+.btn-mobile-search-back {
+  position: absolute;
+  left: 15px;
   top: 13px;
   z-index: 99999;
 }

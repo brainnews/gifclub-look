@@ -1,6 +1,5 @@
 var searchButton = document.getElementById("giphy-search-button");
 var giphySearch = document.getElementById("giphy-search");
-var giphySearchMobile = document.getElementById("giphy-search-mobile");
 var channelgifs;
 var preHTML = '<img src="';
 var postHTML = '" />';

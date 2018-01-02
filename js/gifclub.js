@@ -66,16 +66,6 @@ $('.mood-channel').click(function() {
     ResetMusic();
 });
 
-$('.mood-card').click(function() {
-    if(editorLoaded) {
-        ClearEditorTrack();
-    }
-    ResetMusic();
-    var q = $(this).data("playlist");
-    LoadSoundToWidget(staffPicks[q].playlist, staffPicks[q].timeline, staffPicks[q].gpm);
-    ToggleUI();
-});
-
 $(trendingButton).click(function() {
     GetTrending();
     ResetMusic();
