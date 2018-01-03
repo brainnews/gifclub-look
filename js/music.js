@@ -2,7 +2,7 @@ var duration;
 var visuals;
 var playing = false;
 var millis = 0;
-var counter = null;
+var counter;
 var isPaused = true;
 var trackInfoContainer = document.getElementById('trackInfoContainer');
 var soundCloudSearch = document.getElementById('soundCloudSearch');

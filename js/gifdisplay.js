@@ -10,10 +10,23 @@ var numResults;
 var gifStreamTimeout;
 var clearGifsTimeout;
 
+function StopGifStream() {
+	var intervalID = gifStreamTimeout;
+	var intervalID2 = counter;
+	console.log(intervalID);
+	clearInterval(intervalID);
+	clearInterval(intervalID2);
+	videoBackground.innerHTML = '';
+	popupGridWrapper.innerHTML = emptyPopupGrid;
+}
+
 function StartGifStream() {
-	gifStreamTimeout = setTimeout(function(){
+	gifStreamTimeout = setInterval(function(){
 		ShowGif();
 	}, gpm);
+	clearGifsTimeout = setInterval(function(){
+    	popupGridWrapper.innerHTML = emptyPopupGrid;
+    }, clearRate);
 }
 
 function CheckPlaybackStatus() {
@@ -27,9 +40,8 @@ function CheckPlaybackStatus() {
 }
 
 function ClearGifsByInterval () {
-	clearGifsTimeout = setTimeout(function(){
+	clearGifsTimeout = setInterval(function(){
     	popupGridWrapper.innerHTML = emptyPopupGrid;
-    	ClearGifsByInterval();
     }, clearRate);
 }
 
@@ -110,16 +122,4 @@ function ShowGif() {
 		var randomAnimation = animations[Math.floor((Math.random() * animations.length) + 1)];
 		$(randomPopup).addClass(randomAnimation);
 	}
-
-	// if (Math.floor(Math.random() * 10) < animationFrequency) {
-	// 	$(randomPopup).addClass('shake-opacity shake-constant');
-	// 	console.log('shaking');
-	// }
-
-	// if (Math.floor(Math.random() * 10) < punchFrequency) {
-	// 	var randomAnimation = animations[Math.floor((Math.random() * animations.length) + 1)];
-	// 	$(videoBackground).toggleClass('punch-bg');
-	// 	console.log('bg punched');
-	// }
-	StartGifStream();
 }

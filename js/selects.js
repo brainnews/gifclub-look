@@ -30,7 +30,7 @@ var staffPicks = {
 		},
                 "visuals_by": "brainwaves",
                 "sounds_by": "THUNDERSTONE RADIO",
-                "length": "42:13",
+                "duration": "42:13",
                 "track_art": "https://i1.sndcdn.com/artworks-000234458721-pfm441-t500x500.jpg"
 	},
 	"late bloomer": {
@@ -49,7 +49,7 @@ var staffPicks = {
 		},
                 "visuals_by": "brainwaves",
                 "sounds_by": "DISCWOMAN",
-                "length": "53:36",
+                "duration": "53:36",
                 "track_art": "https://i1.sndcdn.com/artworks-000159819615-262xs9-t500x500.jpg"
 	},
         "mood 3": {
@@ -68,7 +68,7 @@ var staffPicks = {
                 },
                 "visuals_by": "brainwaves",
                 "sounds_by": "DISCWOMAN",
-                "length": "53:36",
+                "duration": "53:36",
                 "track_art": "http://lorempixel.com/400/400"
         },
         "mood 4": {
@@ -87,7 +87,7 @@ var staffPicks = {
                 },
                 "visuals_by": "brainwaves",
                 "sounds_by": "DISCWOMAN",
-                "length": "53:36",
+                "duration": "53:36",
                 "track_art": "http://lorempixel.com/400/400"
         },
         "mood 5": {
@@ -106,7 +106,7 @@ var staffPicks = {
                 },
                 "visuals_by": "brainwaves",
                 "sounds_by": "DISCWOMAN",
-                "length": "53:36",
+                "duration": "53:36",
                 "track_art": "http://lorempixel.com/400/400"
         }
 }
