@@ -89,12 +89,24 @@ $('.btn-mood-info').click(function(){
     $(this).next().toggleClass('no-show');
 });
 
+$('.btn-mobile-play-mood').click(function(){
+    console.log("playing");
+    widget.play();
+    PlayVisuals();
+    $(this).toggleClass('hidden');
+    $('.btn-mobile-play-audio').toggleClass('hidden');
+});
+
 $('.btn-mobile-play-audio').click(function(){
-    if (playing) {
-        widget.pause();
-    } else {
-        widget.play();
-    }
+    widget.getVolume(function(volume) {
+        if (volume > 0){
+            widget.setVolume(0);
+            $(this).children().removeClass('fa-volume-up').addClass('fa-volume-off');
+        } else {
+            widget.setVolume(100);
+            $(this).children().removeClass('fa-volume-off').addClass('fa-volume-up');
+        }
+    });
 });
 
 $('.btn-mobile-fullscreen').click(function(){
@@ -140,6 +152,9 @@ function GetMoods() {
         ResetMusic();
         var q = $(this).data("playlist");
         LoadSoundToWidget(staffPicks[q].playlist, staffPicks[q].timeline, staffPicks[q].gpm);
+        $(staticContainer).css('background-image', 'url(images/static.gif)');
+        $(staticContainer).toggleClass('opacity-5');
+        $('.btn-mobile-play-mood').toggleClass('hidden');
         ToggleUI();
     });
 }
