@@ -98,13 +98,14 @@ $('.btn-mobile-play-mood').click(function(){
 });
 
 $('.btn-mobile-play-audio').click(function(){
+    $('.btn-mobile-play-audio .fa').toggleClass('fa-volume-off');
     widget.getVolume(function(volume) {
         if (volume > 0){
             widget.setVolume(0);
-            $(this).children().removeClass('fa-volume-up').addClass('fa-volume-off');
+            //$(this).children().removeClass('fa-volume-up').addClass('fa-volume-off');
         } else {
             widget.setVolume(100);
-            $(this).children().removeClass('fa-volume-off').addClass('fa-volume-up');
+            //$(this).children().removeClass('fa-volume-off').addClass('fa-volume-up');
         }
     });
 });
