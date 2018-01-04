@@ -11,11 +11,9 @@ var gifStreamTimeout;
 var clearGifsTimeout;
 
 function StopGifStream() {
-	var intervalID = gifStreamTimeout;
-	var intervalID2 = counter;
-	console.log(intervalID);
-	clearInterval(intervalID);
-	clearInterval(intervalID2);
+	clearInterval(gifStreamTimeout);
+	clearInterval(counter);
+	visuals = {};
 	videoBackground.innerHTML = '';
 	popupGridWrapper.innerHTML = emptyPopupGrid;
 }

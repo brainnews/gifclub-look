@@ -91,7 +91,7 @@ widget = SC.Widget(widgetIframe);
 
 widget.bind(SC.Widget.Events.READY, function() {
 	widget.bind(SC.Widget.Events.PLAY, function() {
-		PlayVisuals();
+		//PlayVisuals();
 		// get information about currently playing sound 
 		widget.getCurrentSound(function(currentSound) {
 			var art = currentSound.artwork_url;
@@ -134,6 +134,7 @@ widget.bind(SC.Widget.Events.READY, function() {
 		widget.getPosition(function(position) {
 			gifSearchTimecode = msToTime(position);
 			trackMillis = Math.round(position / 100) * 100;
+			//console.log(trackMillis);
 			//trackMillis = Math.trunc(position);
 			$('.active-time-code').html(gifSearchTimecode);
 			trackProgress = msToPercent(position, msDuration);
@@ -145,10 +146,10 @@ widget.bind(SC.Widget.Events.READY, function() {
 			}
 			$(scrubberButtonContainer).css("left", trackProgress + "%");
 
-			for (x in timeline) {
+			for (x in visuals) {
 		    	if (x == trackMillis) {
-		    		console.log("Search: " + timeline[x]);
-		    		GetGifs(timeline[x]);
+		    		console.log("Search: " + visuals[x]);
+		    		GetGifs(visuals[x]);
 		    	}
 			}
 
@@ -169,10 +170,10 @@ widget.bind(SC.Widget.Events.READY, function() {
 		widget.getPosition(function(position) {
 			seekTimeCode = msToTime(position);
 			console.log("seeking to " + seekTimeCode);
-			for (x in timeline) {
+			for (x in visuals) {
 		    	if (x < position) {
-		    		console.log("Search: " + timeline[x]);
-		    		GetGifs(timeline[x]);
+		    		console.log("Search: " + visuals[x]);
+		    		GetGifs(visuals[x]);
 		    	}
 			}
 		});
@@ -263,7 +264,7 @@ function PlayVisuals() {
 	counter = setInterval(function(){
 		if (!editorLoaded) {
 			for (x in visuals) {
-		    	if (ConvertTimestamp(x) == millis) {
+		    	if (x == millis) {
 		    		console.log("timestamp matched!");
 		    		GetGifs(visuals[x]);
 		    	}
@@ -272,22 +273,6 @@ function PlayVisuals() {
 		millis = millis + 1000;
 	}, 1000);
 }
-
-// function PreviewTimeline() {
-// 	counter = setInterval(function(){
-// 		for (x in timeline) {
-// 	    	if (x == millis) {
-// 	    		console.log("Search: " + timeline[x]);
-// 	    		GetGifs(timeline[x]);
-// 	    	}
-// 		}
-// 		millis = millis + 1000;
-// 	}, 1000);
-// }
-
-// $(previewTimelineButton).click(function(){
-// 	PreviewTimeline();
-// });
 
 function ConvertTimestamp(timestamp) {
 	var a = timestamp.split(":");
@@ -381,7 +366,7 @@ $(scrubberInput).keydown(function( event ) {
 	if ( event.which == 13 ) {
 		//create and populate the key value pair in timeline
 		var inputQuery = scrubberInput.value;
-	   	timeline[trackMillis] = inputQuery;
+	   	visuals[trackMillis] = inputQuery;
 	   	GetGifs(inputQuery);
 	   	$(pips).append(pipHtmlPre + trackProgress + '%;" data-millis="' + trackMillis + '" title="' + inputQuery + '">' + inputQuery + '</div>');
 	  	createDraggable();
@@ -429,8 +414,8 @@ function createDraggable() {
         	//update data-millis with new position in millis
         	$(this).attr('data-millis', newMillis);
         	//push new millis to timeline and delete old one
-        	timeline[newMillis] = timeline[currentMillis];
-			delete timeline[currentMillis];
+        	visuals[newMillis] = visuals[currentMillis];
+			delete visuals[currentMillis];
         }
 	});
 }
@@ -446,7 +431,7 @@ function CloseGifSearch(){
 function ClearVisuals() {
 	console.log("Visuals cleared!");
 	$('.noUi-pips').html("");
-	timeline = {};
+	visuals = {};
 }
 
 function GetTopTracks(){

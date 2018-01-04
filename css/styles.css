@@ -225,6 +225,11 @@ h4 {
   min-height: 0;
 }
 
+.carousel-item .container {
+  padding-right: 0;
+  padding-left: 0;
+}
+
 .ui-carousel {
   padding-left: 15px;
 }
@@ -277,6 +282,7 @@ h4 {
   overflow-y: hidden;
   width: 100%;
   white-space: nowrap; 
+  padding-left: 15px;
 }
 
 

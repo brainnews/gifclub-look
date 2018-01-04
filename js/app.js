@@ -132,7 +132,7 @@ function GetMoods() {
         if(editorLoaded) {
             ClearEditorTrack();
         }
-        ResetMusic();
+        //ResetMusic();
         var q = $(this).data("playlist");
         LoadSoundToWidget(staffPicks[q].playlist, staffPicks[q].timeline, staffPicks[q].gpm);
         $(staticContainer).css('background-image', 'url(' + staffPicks[q].track_art + ')');
