@@ -54,7 +54,7 @@ SC.initialize({
   client_id: clientId
 });
 
-GetTopTracks();
+//GetTopTracks();
 //CorsRequest();
 
 noUiSlider.create(slider, {
@@ -147,7 +147,7 @@ widget.bind(SC.Widget.Events.READY, function() {
 			$(scrubberButtonContainer).css("left", trackProgress + "%");
 
 			for (x in visuals) {
-		    	if (x == trackMillis) {
+		    	if (x == trackMillis && playing == true) {
 		    		console.log("Search: " + visuals[x]);
 		    		GetGifs(visuals[x]);
 		    	}
@@ -172,7 +172,7 @@ widget.bind(SC.Widget.Events.READY, function() {
 			console.log("seeking to " + seekTimeCode);
 			for (x in visuals) {
 		    	if (x < position) {
-		    		console.log("Search: " + visuals[x]);
+		    		console.log("Seeking to: " + visuals[x]);
 		    		GetGifs(visuals[x]);
 		    	}
 			}

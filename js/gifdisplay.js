@@ -11,11 +11,14 @@ var gifStreamTimeout;
 var clearGifsTimeout;
 
 function StopGifStream() {
-	clearInterval(gifStreamTimeout);
-	clearInterval(counter);
+	if (isMobile) {
+		playing = false;
+	}
 	visuals = {};
-	videoBackground.innerHTML = '';
-	popupGridWrapper.innerHTML = emptyPopupGrid;
+	$(videoBackground).toggleClass('hidden');
+	$(popupGridWrapper).toggleClass('hidden');
+	// videoBackground.innerHTML = '';
+	// popupGridWrapper.innerHTML = emptyPopupGrid;
 }
 
 function StartGifStream() {

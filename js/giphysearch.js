@@ -37,9 +37,6 @@ function GetGifs(q) {
 	if (!hasStarted) {
         $(staticContainer).css('background-image', 'url(images/static.gif)');
     }
-    clearTimeout(gifStreamTimeout);
-    clearTimeout(clearGifsTimeout);
-    ClearGifsByInterval();
 }
 
 function GetTrending() {

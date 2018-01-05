@@ -124,6 +124,7 @@ function GetMoods() {
 
     $('.mood-card').click(function() {
         StopGifStream();
+        $('.btn-mobile-play-audio').addClass('hidden');
         $('.mood-loaded-overlay').removeClass('hidden');
 
         $('.mood-loaded-info').html('<span class="title placeholder w-25"></span><span class="info placeholder w-50"></span><span class="info placeholder w-75"></span><span class="info placeholder w-50"></span>');
@@ -142,10 +143,12 @@ function GetMoods() {
             $('.mood-loaded-play').html('<i class="fa fa-play btn-mobile-play-mood" aria-hidden="true"></i>');
             $('.mood-loaded-info').html('<span class="title">' + staffPicks[q].title + '</span><span class="info">Visuals by ' + staffPicks[q].visuals_by + '</span><span class="info">Sounds by ' + staffPicks[q].sounds_by + '</span><span class="info">' + staffPicks[q].duration + '</span>');
             $('.btn-mobile-play-mood').click(function(){
+                $(staticContainer).css('background-image', 'url(images/static.gif)');
                 widget.play();
-                //PlayVisuals();
+                $(videoBackground).toggleClass('hidden');
+                $(popupGridWrapper).toggleClass('hidden');
                 $('.mood-loaded-overlay').toggleClass('hidden');
-                $('.btn-mobile-play-audio').toggleClass('hidden');
+                $('.btn-mobile-play-audio').removeClass('hidden');
             });
         }, 1800);
 
