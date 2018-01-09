@@ -95,7 +95,7 @@ h4 {
   display: grid;
   grid-row-gap: 0px;
   grid-template-columns: 1fr;
-  grid-template-rows: 50px 330px 1fr;
+  grid-template-rows: 60px 320px 1fr;
   overflow: hidden;
   height: 100vh;
 }
@@ -106,6 +106,8 @@ h4 {
   height: 60px;
   width: 100%;
   z-index: 9999;
+  font-size: 22px;
+  color: rgba(255,255,255,0.8);
 }
 
 .static {
@@ -225,9 +227,8 @@ h4 {
   min-height: 0;
 }
 
-.carousel-item .container {
-  padding-right: 0;
-  padding-left: 0;
+.carousel-item {
+  margin-bottom: 60px;
 }
 
 .ui-carousel {
@@ -297,7 +298,7 @@ h4 {
 
 .mood-art {
   width: 100%;
-  height: 100px;
+  height: 200px;
   object-fit: cover;
   border-radius: 2px;
 }
@@ -474,8 +475,8 @@ h4 {
   background-color: var(--black);
   color: var(--pale-pink);
   letter-spacing: 0.08rem;
-  height: 50px;
-  padding-left: 38px;
+  height: 60px;
+  padding-left: 45px;
 }
 
 .search-primary::placeholder {
@@ -851,12 +852,22 @@ input[type=range]::-webkit-slider-thumb {
   z-index: 30;
 }
 
+.staff-sounds-list {
+  margin-bottom: 60px;
+}
+
 .staff-sounds-list li {
-      background-color: transparent;
-    padding: 12px 0;
-    cursor: pointer;
-    border-top: 1px solid #000;
-    color: rgba(255,255,255,0.5);
+  background-color: transparent;
+  padding: 12px 0;
+  cursor: pointer;
+  border-top: 1px solid #000;
+  color: rgba(255,255,255,0.5);
+  font-size: 14px;
+}
+
+.staff-sounds-list p {
+  margin-bottom: 0;
+  max-width: 220px;
 }
 
 .staff-sounds-list li:hover {
@@ -961,7 +972,7 @@ i.sc-link:hover {
       grid-column-start: 1;
       grid-row-start: 1;
       align-self: center;
-      width: 120%;
+      width: 100%;
   }
 
   .btn-create {
@@ -1011,6 +1022,7 @@ i.sc-link:hover {
     margin-left: 0;
     margin-right: 0;
     color: #fff;
+    margin-bottom: 20px;
   }
 
   .settings-row p {
@@ -1026,14 +1038,21 @@ i.sc-link:hover {
     box-shadow: 0 15px 12px 0 rgba(0,0,0,0.22), 0 19px 38px 0 rgba(0,0,0,0.30);
   }
 
+  .moods-list {
+    margin-bottom: 40px;
+  }
+
   .moods-list li {
     height: 200px;
     width: 200px;
   }
 
+  .mood-card {
+    box-shadow: none;
+  }
+
   .mood-card:hover {
-    margin-top: -30px;
-    box-shadow: 0 25px 22px 0 rgba(0,0,0,0.22), 0 29px 48px 0 rgba(0,0,0,0.30);
+    
   }
 
   .mood-info {
@@ -1046,7 +1065,7 @@ i.sc-link:hover {
   }
 
   .mood-title {
-    margin-bottom: 30px;
+    
   }
 
   .btn-mood-info {
@@ -1055,5 +1074,9 @@ i.sc-link:hover {
 
   .mood-info p {
     margin-bottom: 1rem;
+  }
+
+  .staff-sounds-list {
+    margin-bottom: 0px;
   }
 }

@@ -54,9 +54,6 @@ SC.initialize({
   client_id: clientId
 });
 
-//GetTopTracks();
-//CorsRequest();
-
 noUiSlider.create(slider, {
 	start: [0],
 	connect: [true, false],
@@ -438,17 +435,25 @@ function GetTopTracks(){
 	var today = new Date();
 	var year = today.getFullYear();
 	var month = today.getMonth();
+	var day = today.getDate();
 
 	if (month > 0) {
 		month = month - 1;
 	} else {
 		month = 11;
+		year = year - 1;
 	}
 
-	var day = today.getDate();
+	if (month < 10) {
+		month = "0" + month;
+	}
+
+	if (day < 10) {
+		day = "0" + day;
+	}
+
 	var time = msToTime(today.getTime());
 	formattedTime = year + '-' + month + '-' + day + ' ' + time;
-	console.log(formattedTime);
 
 	SC.get('/tracks', {
 		q: 'flip',

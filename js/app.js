@@ -4,7 +4,7 @@ var uiContainer = document.getElementById('ui-container');
 var editorButton = document.getElementById('editor-button');
 var editor = document.getElementById('editor');
 var giphySearchMobile = document.getElementById("giphy-search-mobile");
-var isMobile = true;
+var isMobile = false;
 
 window.onload = function() {
     // PLATFORM CHECK
@@ -20,6 +20,7 @@ window.onload = function() {
 
     ShowStatic();
     GetMoods();
+    GetTopTracks();
     widget.pause();
 };
 
