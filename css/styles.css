@@ -298,7 +298,7 @@ h4 {
 
 .mood-art {
   width: 100%;
-  height: 200px;
+  height: 100px;
   object-fit: cover;
   border-radius: 2px;
 }
@@ -1068,6 +1068,10 @@ i.sc-link:hover {
     
   }
 
+  .mood-art {
+    height: 200px;
+  }
+
   .btn-mood-info {
     display: none;
   }
@@ -1078,5 +1082,9 @@ i.sc-link:hover {
 
   .staff-sounds-list {
     margin-bottom: 0px;
+  }
+
+  .staff-sounds-list p {
+    max-width: 500px;
   }
 }

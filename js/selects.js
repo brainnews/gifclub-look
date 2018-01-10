@@ -5,12 +5,12 @@ var staffPicks = {
                 "gpm": 2000,
                 "timeline": {
                         0: "cute love",
-                        26100: "cute animals",
-                        50200: "shibe #5",
-                        78800: "hug",
+                        26000: "cute animals",
+                        50000: "shibe #5",
+                        79000: "hug",
                         104000: "makeout",
-                        142600: "pixel pink",
-                        159400: "pixel cute"
+                        143000: "pixel pink",
+                        159000: "pixel cute"
                 },
                 "visuals_by": "brainwaves",
                 "sounds_by": "PC Music",
@@ -26,11 +26,11 @@ var staffPicks = {
                 	120000: "space planets",
                 	124000: "lizard",
                 	240000: "art fubiz",
-                	364800: "surreal pink",
+                	365000: "surreal pink",
                 	424000: "strut",
-                	542800: "makeup",
-                	114800: "twirl",
-                	840100: "pixel pink",
+                	543000: "makeup",
+                	115000: "twirl",
+                	840000: "pixel pink",
                 	905000: "pixel black and white"
 		},
                 "visuals_by": "brainwaves",
@@ -47,14 +47,28 @@ var staffPicks = {
                 	15000: "flowers",
                 	122000: "stars surreal",
                 	240000: "pink rainbow",
-                	364800: "surreal rainbow",
+                	365000: "surreal rainbow",
                 	544000: "trippy surreal",
                 	819000: "beach 90s",
-                	664800: "2000s music",
+                	665000: "2000s music",
 		},
                 "visuals_by": "brainwaves",
                 "sounds_by": "DISCWOMAN",
                 "duration": "53:36",
                 "track_art": "https://i1.sndcdn.com/artworks-000159819615-262xs9-t500x500.jpg"
-	}
+	},
+        "ATTSSx3": {
+                "title": "ATTSSx3",
+                "playlist": "https://soundcloud.com/oriental-cravings/tatu",
+                "gpm": 1000,
+                "timeline": {
+                        0: "tears",
+                        10000: "drama",
+                        25000: "explosions"
+                },
+                "visuals_by": "brainwaves",
+                "sounds_by": "oriental cravings",
+                "duration": "2:57",
+                "track_art": "https://i1.sndcdn.com/artworks-000269311049-4ul31l-t500x500.jpg"
+        }
 }

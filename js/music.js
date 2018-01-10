@@ -1,5 +1,5 @@
 var duration;
-var visuals;
+var visuals = {};
 var playing = false;
 var millis = 0;
 var counter;
@@ -88,7 +88,7 @@ widget = SC.Widget(widgetIframe);
 
 widget.bind(SC.Widget.Events.READY, function() {
 	widget.bind(SC.Widget.Events.PLAY, function() {
-		//PlayVisuals();
+		PlayVisuals();
 		// get information about currently playing sound 
 		widget.getCurrentSound(function(currentSound) {
 			var art = currentSound.artwork_url;
@@ -143,12 +143,12 @@ widget.bind(SC.Widget.Events.READY, function() {
 			}
 			$(scrubberButtonContainer).css("left", trackProgress + "%");
 
-			for (x in visuals) {
-		    	if (x == trackMillis && playing == true) {
-		    		console.log("Search: " + visuals[x]);
-		    		GetGifs(visuals[x]);
-		    	}
-			}
+			// for (x in visuals) {
+		 //    	if (x == trackMillis && playing == true) {
+		 //    		console.log("Search: " + visuals[x]);
+		 //    		GetGifs(visuals[x]);
+		 //    	}
+			// }
 
 		});
 	});
@@ -262,13 +262,17 @@ function PlayVisuals() {
 		if (!editorLoaded) {
 			for (x in visuals) {
 		    	if (x == millis) {
-		    		console.log("timestamp matched!");
+		    		console.log("timestamp matched: " + visuals[x]);
 		    		GetGifs(visuals[x]);
 		    	}
 			}
 		}
 		millis = millis + 1000;
 	}, 1000);
+
+	clearGifsTimeout = setInterval(function(){
+    	popupGridWrapper.innerHTML = emptyPopupGrid;
+    }, clearRate);
 }
 
 function ConvertTimestamp(timestamp) {

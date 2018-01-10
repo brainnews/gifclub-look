@@ -11,6 +11,7 @@ var gifStreamTimeout;
 var clearGifsTimeout;
 
 function StopGifStream() {
+	millis = 0;
 	if (isMobile) {
 		playing = false;
 	}
@@ -22,12 +23,9 @@ function StopGifStream() {
 }
 
 function StartGifStream() {
-	gifStreamTimeout = setInterval(function(){
+	gifStreamTimeout = setTimeout(function(){
 		ShowGif();
 	}, gpm);
-	clearGifsTimeout = setInterval(function(){
-    	popupGridWrapper.innerHTML = emptyPopupGrid;
-    }, clearRate);
 }
 
 function CheckPlaybackStatus() {
@@ -41,8 +39,9 @@ function CheckPlaybackStatus() {
 }
 
 function ClearGifsByInterval () {
-	clearGifsTimeout = setInterval(function(){
+	clearGifsTimeout = setTimeout(function(){
     	popupGridWrapper.innerHTML = emptyPopupGrid;
+    	ClearGifsByInterval();
     }, clearRate);
 }
 
@@ -73,7 +72,7 @@ function ShowGif() {
 			channelgifPopup = channelgifs.data[randomNum2].images.preview_webp.url;
 			videoBackground.innerHTML = '<img id="video-background" src="' + channelgif + '" width="100%" />';
 			if (randomPopup) {
-				randomPopup.innerHTML = '<img class="z-depth-' + randomDepth +'" src="' + channelgifPopup + '" width="100%" />';
+				randomPopup.innerHTML = '<img class="video-popup z-depth-' + randomDepth +'" src="' + channelgifPopup + '" width="100%" />';
 			}
 		} else {
 			if (typeof(channelgifs.data[randomNum].images.original_mp4) == 'undefined') {
@@ -92,7 +91,7 @@ function ShowGif() {
 					channelgifPopup = smallGIF;
 				}
 				if (randomPopup) {
-					randomPopup.innerHTML = '<video autoplay loop playsinline class="video-popup z-depth-' + randomDepth +'" muted><source src="' + channelgifPopup + '"></video>';
+					randomPopup.innerHTML = '<video autoplay loop playsinline id="video-background" class="video-popup z-depth-' + randomDepth +'" muted><source src="' + channelgifPopup + '"></video>';
 				}
 			}
 		}
@@ -107,14 +106,14 @@ function ShowGif() {
 			channelgifPopup = recordTapeArray[randomNum2];
 			videoBackground.innerHTML = '<img id="video-background" src="' + channelgif + '" width="100%" />';
 			if (randomPopup) {
-				randomPopup.innerHTML = '<img class="z-depth-' + randomDepth +'" src="' + channelgifPopup + '" width="100%" />';
+				randomPopup.innerHTML = '<img class="video-popup z-depth-' + randomDepth +'" src="' + channelgifPopup + '" width="100%" />';
 			}
 		} else {
 			channelgif = recordTapeArray[randomNum];
 			channelgifPopup = recordTapeArray[randomNum2];
 			videoBackground.innerHTML = '<video autoplay loop playsinline id="video-background" muted><source src="' + channelgif + '"></video>';
 			if (randomPopup) {
-				randomPopup.innerHTML = '<video autoplay loop playsinline id="video-background" class="z-depth-' + randomDepth +'" muted><source src="' + channelgifPopup + '"></video>';
+				randomPopup.innerHTML = '<video autoplay loop playsinline id="video-background" class="video-popup z-depth-' + randomDepth +'" muted><source src="' + channelgifPopup + '"></video>';
 			}
 		}
 	}
@@ -123,4 +122,16 @@ function ShowGif() {
 		var randomAnimation = animations[Math.floor((Math.random() * animations.length) + 1)];
 		$(randomPopup).addClass(randomAnimation);
 	}
+
+	// if (Math.floor(Math.random() * 10) < animationFrequency) {
+	// 	$(randomPopup).addClass('shake-opacity shake-constant');
+	// 	console.log('shaking');
+	// }
+
+	// if (Math.floor(Math.random() * 10) < punchFrequency) {
+	// 	var randomAnimation = animations[Math.floor((Math.random() * animations.length) + 1)];
+	// 	$(videoBackground).toggleClass('punch-bg');
+	// 	console.log('bg punched');
+	// }
+	StartGifStream();
 }
