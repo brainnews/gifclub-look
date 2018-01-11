@@ -46,13 +46,16 @@ $('.btn-mobile-search').click(function () {
 });
 
 $('.btn-mobile-search-back').click(function () {
+    HideSearch();
+});
+
+function HideSearch(){
     $('.btn-mobile-search').removeClass('hidden');
     $('.btn-mobile-search-back').addClass('hidden');
     $('.btn-mobile-search-clear').addClass('hidden');
     $('.mobile-input').addClass('hidden');
-    giphySearchMobile.value = '';
     $(giphySearchMobile).blur();
-});
+}
 
 $('.btn-mobile-search-clear').click(function () {
     giphySearchMobile.value = '';
@@ -124,7 +127,7 @@ function GetMoods() {
     }
 
     $('.mood-card').click(function() {
-        StopGifStream();
+        StopTimer();
         $('.btn-mobile-play-audio').addClass('hidden');
         $('.mood-loaded-overlay').removeClass('hidden');
 
@@ -134,24 +137,31 @@ function GetMoods() {
         if(editorLoaded) {
             ClearEditorTrack();
         }
-        //ResetMusic();
+
         var q = $(this).data("playlist");
         LoadSoundToWidget(staffPicks[q].playlist, staffPicks[q].timeline, staffPicks[q].gpm);
-        $(staticContainer).css('background-image', 'url(' + staffPicks[q].track_art + ')');
-        $(staticContainer).removeClass('opacity-5');
 
-        setTimeout(function(){
-            $('.mood-loaded-play').html('<i class="fa fa-play btn-mobile-play-mood" aria-hidden="true"></i>');
-            $('.mood-loaded-info').html('<span class="title">' + staffPicks[q].title + '</span><span class="info">Visuals by ' + staffPicks[q].visuals_by + '</span><span class="info">Sounds by ' + staffPicks[q].sounds_by + '</span><span class="info">' + staffPicks[q].duration + '</span>');
-            $('.btn-mobile-play-mood').click(function(){
-                $(staticContainer).css('background-image', 'url(images/static.gif)');
-                widget.play();
-                $(videoBackground).toggleClass('hidden');
-                $(popupGridWrapper).toggleClass('hidden');
-                $('.mood-loaded-overlay').toggleClass('hidden');
-                $('.btn-mobile-play-audio').removeClass('hidden');
-            });
-        }, 1800);
+        if(isMobile) {
+            $(staticContainer).css('background-image', 'url(' + staffPicks[q].track_art + ')');
+            $(staticContainer).removeClass('opacity-5');
+
+            setTimeout(function(){
+                $('.mood-loaded-play').html('<i class="fa fa-play btn-mobile-play-mood" aria-hidden="true"></i>');
+                $('.mood-loaded-info').html('<span class="title">' + staffPicks[q].title + '</span><span class="info">Visuals by ' + staffPicks[q].visuals_by + '</span><span class="info">Sounds by ' + staffPicks[q].sounds_by + '</span><span class="info">' + staffPicks[q].duration + '</span>');
+                $('.btn-mobile-play-mood').click(function(){
+                    StartTimer();
+                    $(staticContainer).css('background-image', 'url(images/static.gif)');
+                    widget.play();
+                    $(videoBackground).removeClass('hidden');
+                    $(popupGridWrapper).removeClass('hidden');
+                    $('.mood-loaded-overlay').toggleClass('hidden');
+                    $('.btn-mobile-play-audio').removeClass('hidden');
+                });
+            }, 1800);
+        } else {
+            StartTimer();
+            $(staticContainer).css('background-image', 'url(images/static.gif)');
+        }
 
         ToggleUI();
     });

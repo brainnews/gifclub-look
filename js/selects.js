@@ -24,7 +24,7 @@ var staffPicks = {
 		"timeline": {
         		0: "trippy space stars",
                 	120000: "space planets",
-                	124000: "lizard",
+                	180000: "lizard",
                 	240000: "art fubiz",
                 	365000: "surreal pink",
                 	424000: "strut",

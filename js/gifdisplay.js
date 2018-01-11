@@ -5,27 +5,33 @@ var hasStarted = false;
 var recording = false;
 var playback = false;
 var gpm = 1400;
-var clearRate = 5000;
+var clearRate = 10000;
 var numResults;
 var gifStreamTimeout;
 var clearGifsTimeout;
 
-function StopGifStream() {
-	millis = 0;
-	if (isMobile) {
-		playing = false;
-	}
-	visuals = {};
-	$(videoBackground).toggleClass('hidden');
-	$(popupGridWrapper).toggleClass('hidden');
-	// videoBackground.innerHTML = '';
-	// popupGridWrapper.innerHTML = emptyPopupGrid;
+var timer;
+var clearTimer;
+var timerOn = false;
+
+function StartTimer(){
+	console.log("timer playing");
+    timerOn = true;
+    timer = setInterval(ShowGif, gpm);
+    clearTimer = setInterval(ClearPopups, clearRate);
 }
 
-function StartGifStream() {
-	gifStreamTimeout = setTimeout(function(){
-		ShowGif();
-	}, gpm);
+function StopTimer() {
+	if (timerOn) {
+		$(videoBackground).html('').toggleClass('hidden');
+		$(popupGridWrapper).html(emptyPopupGrid).toggleClass('hidden');
+	}
+	visuals = {};
+	timerOn = false;
+	channelgifs = null;
+	console.log("timer stopped");
+    clearInterval(timer);
+    clearInterval(clearTimer);
 }
 
 function CheckPlaybackStatus() {
@@ -38,11 +44,8 @@ function CheckPlaybackStatus() {
     }
 }
 
-function ClearGifsByInterval () {
-	clearGifsTimeout = setTimeout(function(){
-    	popupGridWrapper.innerHTML = emptyPopupGrid;
-    	ClearGifsByInterval();
-    }, clearRate);
+function ClearPopups () {
+	popupGridWrapper.innerHTML = emptyPopupGrid;
 }
 
 function ShowStatic() {
@@ -122,16 +125,4 @@ function ShowGif() {
 		var randomAnimation = animations[Math.floor((Math.random() * animations.length) + 1)];
 		$(randomPopup).addClass(randomAnimation);
 	}
-
-	// if (Math.floor(Math.random() * 10) < animationFrequency) {
-	// 	$(randomPopup).addClass('shake-opacity shake-constant');
-	// 	console.log('shaking');
-	// }
-
-	// if (Math.floor(Math.random() * 10) < punchFrequency) {
-	// 	var randomAnimation = animations[Math.floor((Math.random() * animations.length) + 1)];
-	// 	$(videoBackground).toggleClass('punch-bg');
-	// 	console.log('bg punched');
-	// }
-	StartGifStream();
 }

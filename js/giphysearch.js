@@ -20,7 +20,6 @@ function GetGifs(q) {
 		  	type: 'GET',
 		  	success: function(data) {
 				channelgifs = data;
-				StartGifStream();
 		  	}
 		});
 	} else {
@@ -29,14 +28,9 @@ function GetGifs(q) {
 		  	type: 'GET',
 		  	success: function(data) {
 				channelgifs = data;
-				StartGifStream();
 		  	}
 		});
 	}
-
-	if (!hasStarted) {
-        $(staticContainer).css('background-image', 'url(images/static.gif)');
-    }
 }
 
 function GetTrending() {
@@ -46,7 +40,7 @@ function GetTrending() {
 	  success: function(data) {
 		channelgifs = data;
 		//console.log(channelgifs);
-		StartGifStream();
+		//StartGifStream();
 	  }
 	});
 	if (!hasStarted) {
@@ -80,9 +74,8 @@ $(searchButton).click(function(){
 })
 
 function CustomSearch() {
-	ToggleUI();
-	//ResetMusic();
-	StopSelectsVisuals();
+	HideSearch();
+	StopTimer();
 	var query;
 	var customSearchLimit;
 
@@ -99,7 +92,7 @@ function CustomSearch() {
 		  	type: 'GET',
 		  	success: function(data) {
 				channelgifs = data;
-				StartGifStream();
+				StartTimer();
 		  	}
 		});
 	} else {
@@ -108,7 +101,7 @@ function CustomSearch() {
 		  	type: 'GET',
 		  	success: function(data) {
 				channelgifs = data;
-				StartGifStream();
+				StartTimer();
 		  	}
 		});
 	}

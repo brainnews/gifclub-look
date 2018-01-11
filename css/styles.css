@@ -232,7 +232,7 @@ h4 {
 }
 
 .ui-carousel {
-  padding-left: 15px;
+
 }
 
 .ui-carousel .list-inline-item:not(:last-child) {
@@ -283,7 +283,6 @@ h4 {
   overflow-y: hidden;
   width: 100%;
   white-space: nowrap; 
-  padding-left: 15px;
 }
 
 
@@ -931,7 +930,7 @@ i.sc-link:hover {
     grid-column-start: 2;
     grid-column-end: span 4;
     grid-row-start: 2;
-    grid-row-end: span 4;
+    grid-row-end: span 3;
     box-shadow: none;
     display: block;
     background-color: transparent;
@@ -983,15 +982,12 @@ i.sc-link:hover {
 
   .search-primary {
     font-family: 'Archivo Black', sans-serif;
-    border-radius: 4px !important;
     border: none;
     font-size: 30px;
     font-style: italic;
     background-color: var(--black);
     color: var(--pale-pink);
-    padding:  0 25px;
     letter-spacing: 0.08rem;
-    height: 90px;
     margin: 0;
   }
 
@@ -1044,7 +1040,7 @@ i.sc-link:hover {
 
   .moods-list li {
     height: 200px;
-    width: 200px;
+    width: 25%;
   }
 
   .mood-card {

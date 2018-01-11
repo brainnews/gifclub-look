@@ -79,16 +79,11 @@ var customTrack = {
 
 var timeline = {};
 
-// SC.initialize({
-// 	client_id: 'ARX6YqJeUZYURsTksMBlqrzkPmdLqI3x'
-// });
-
 var widgetIframe = document.getElementById('sc-widget'), 
 widget = SC.Widget(widgetIframe);
 
 widget.bind(SC.Widget.Events.READY, function() {
-	widget.bind(SC.Widget.Events.PLAY, function() {
-		PlayVisuals();
+	widget.bind(SC.Widget.Events.PLAY, function() { 
 		// get information about currently playing sound 
 		widget.getCurrentSound(function(currentSound) {
 			var art = currentSound.artwork_url;
@@ -123,6 +118,7 @@ widget.bind(SC.Widget.Events.READY, function() {
 	});
 
 	widget.bind(SC.Widget.Events.FINISH, function() {
+		StopTimer();
 		playing = false;
 		$(editorPlayPauseButton).children().removeClass('fa-pause').addClass('fa-play');
 	});
@@ -143,12 +139,12 @@ widget.bind(SC.Widget.Events.READY, function() {
 			}
 			$(scrubberButtonContainer).css("left", trackProgress + "%");
 
-			// for (x in visuals) {
-		 //    	if (x == trackMillis && playing == true) {
-		 //    		console.log("Search: " + visuals[x]);
-		 //    		GetGifs(visuals[x]);
-		 //    	}
-			// }
+			for (x in visuals) {
+		    	if (x == trackMillis && playing == true) {
+		    		console.log("Search: " + visuals[x]);
+		    		GetGifs(visuals[x]);
+		    	}
+			}
 
 		});
 	});
@@ -248,16 +244,8 @@ function LoadTrackForEditor (q) {
 	});
 }
 
-function ResolvePlaylist(url) {
-	SC.resolve(url).then(function(playlist){
-		var trackCount = playlist.tracks.length;
-		for (var i = 0; i < trackCount; i++) {
-			playlistTracks.push(playlist.tracks[i].id);
-		}
-    });
-}
-
 function PlayVisuals() {
+	StartGifStream();
 	counter = setInterval(function(){
 		if (!editorLoaded) {
 			for (x in visuals) {
@@ -269,6 +257,7 @@ function PlayVisuals() {
 		}
 		millis = millis + 1000;
 	}, 1000);
+
 
 	clearGifsTimeout = setInterval(function(){
     	popupGridWrapper.innerHTML = emptyPopupGrid;
@@ -461,11 +450,10 @@ function GetTopTracks(){
 
 	SC.get('/tracks', {
 		q: 'flip',
-	  limit: 5,
-	  created_at: {from: formattedTime}
+	  	limit: 5,
+	  	created_at: {from: formattedTime}
 	}).then(function(tracks) {
 		for (i = 0; i < tracks.length; i++) {
-	  		console.log(tracks[i].permalink_url);
 	  		var permalink = tracks[i].permalink_url;
 	  		var title = tracks[i].title;
 	  		var artist = tracks[i].user.username;
