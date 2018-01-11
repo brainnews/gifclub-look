@@ -184,6 +184,7 @@ function FetchTrackForEditor(){
 	   	editorLoaded = true;
 		ToggleEditorData();
 		LoadTrackForEditor(soundCloudSearch.value);
+		$(staticContainer).css('background-image', 'url(images/static.gif)');
 	} else {
 		soundCloudSearch.value = 'Please enter a SoundCloud URL';
 	}
@@ -242,6 +243,7 @@ function LoadTrackForEditor (q) {
 		"show_playcount": "false",
 		"show_user": "false"
 	});
+	StartTimer();
 }
 
 function PlayVisuals() {
@@ -328,6 +330,7 @@ $(editorPlayPauseButton).click(function(){
 });
 
 function ClearEditorTrack(){
+	StopTimer();
 	editorLoaded = false;
 	userStarted = false;
 	playing = false;

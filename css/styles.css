@@ -13,7 +13,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  color: var(--pale-pink);
+  color: var(--white);
   background-color: var(--black);
   overflow: hidden;
   height: 100%;
@@ -342,7 +342,6 @@ h4 {
 
 .btn-primary {
   width: 100%;
-  height: 90px;
   background-color: var(--black);
   color: var(--pale-pink);
   font-size: 30px;
@@ -560,6 +559,7 @@ h4 {
   background-color: var(--dark-purple);
   color: var(--white);
   cursor: pointer;
+  height: 53px;
 }
 
 .btn-secondary:hover {

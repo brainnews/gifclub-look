@@ -79,7 +79,7 @@
 								<ul class="list-inline">
 									<li class="list-inline-item" onclick="ClearVisuals();"><button class="btn btn-editor" type="button">clear visuals</button></li>
 									<li class="list-inline-item" onclick="ClearEditorTrack();"><button class="btn btn-editor" type="button">clear track</button></li>
-									<li class="list-inline-item"><button class="btn btn-editor" type="button">save project</button></li>
+									<!-- <li class="list-inline-item"><button class="btn btn-editor" type="button">save project</button></li> -->
 								</ul>
 							</div>
 						</div>
@@ -122,7 +122,7 @@
 				<div id="uiCarousel" class="carousel slide" data-ride="carousel">
 				  <div class="carousel-inner">
 				    <div class="carousel-item active">
-				    	<div class="container" style="padding-right: 0; padding-left: 0;">
+				    	<div class="container" style="padding-right: 0;">
 							<div class="row align-items-center" id="staffPicksContainer">
 							    <p class="small ui-header d-sm-none">Moods</p>
 							    <div class="col">
@@ -130,6 +130,11 @@
 
 							    	</ul>						      
 							    </div>
+							</div>
+							<div class="row align-items-center d-none d-md-block">
+								<div class="col">
+									<button id="editor-button" class="btn btn-primary shadow-1" type="button">Create a mood</button>
+								</div>
 							</div>
 							<!-- <div class="row align-items-center d-none d-md-block" style="margin-left: 0; margin-right: 0;">
 								<div class="col">

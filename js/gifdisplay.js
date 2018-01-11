@@ -65,7 +65,7 @@ function ShowGif() {
 	var randomPopup = document.getElementById('popupGif-' + randomCell);
 	var randomDepth = Math.floor((Math.random() * 5) + 1);
 
-	if (!playback) {
+	if (channelgifs) {
 		numResults = Object.keys(channelgifs.data).length;
 		var randomNum = Math.floor((Math.random() * numResults));
 		var randomNum2 = Math.floor((Math.random() * numResults));
@@ -99,27 +99,30 @@ function ShowGif() {
 			}
 		}
 
-	} else {
-		numResults = recordTapeArray.length;
-		var randomNum = Math.floor((Math.random() * numResults));
-		var randomNum2 = Math.floor((Math.random() * numResults));
-
-		if (isMobile) {
-			channelgif = recordTapeArray[randomNum];
-			channelgifPopup = recordTapeArray[randomNum2];
-			videoBackground.innerHTML = '<img id="video-background" src="' + channelgif + '" width="100%" />';
-			if (randomPopup) {
-				randomPopup.innerHTML = '<img class="video-popup z-depth-' + randomDepth +'" src="' + channelgifPopup + '" width="100%" />';
-			}
-		} else {
-			channelgif = recordTapeArray[randomNum];
-			channelgifPopup = recordTapeArray[randomNum2];
-			videoBackground.innerHTML = '<video autoplay loop playsinline id="video-background" muted><source src="' + channelgif + '"></video>';
-			if (randomPopup) {
-				randomPopup.innerHTML = '<video autoplay loop playsinline id="video-background" class="video-popup z-depth-' + randomDepth +'" muted><source src="' + channelgifPopup + '"></video>';
-			}
-		}
 	}
+	//old record tape code
+	
+	// else {
+	// 	numResults = recordTapeArray.length;
+	// 	var randomNum = Math.floor((Math.random() * numResults));
+	// 	var randomNum2 = Math.floor((Math.random() * numResults));
+
+	// 	if (isMobile) {
+	// 		channelgif = recordTapeArray[randomNum];
+	// 		channelgifPopup = recordTapeArray[randomNum2];
+	// 		videoBackground.innerHTML = '<img id="video-background" src="' + channelgif + '" width="100%" />';
+	// 		if (randomPopup) {
+	// 			randomPopup.innerHTML = '<img class="video-popup z-depth-' + randomDepth +'" src="' + channelgifPopup + '" width="100%" />';
+	// 		}
+	// 	} else {
+	// 		channelgif = recordTapeArray[randomNum];
+	// 		channelgifPopup = recordTapeArray[randomNum2];
+	// 		videoBackground.innerHTML = '<video autoplay loop playsinline id="video-background" muted><source src="' + channelgif + '"></video>';
+	// 		if (randomPopup) {
+	// 			randomPopup.innerHTML = '<video autoplay loop playsinline id="video-background" class="video-popup z-depth-' + randomDepth +'" muted><source src="' + channelgifPopup + '"></video>';
+	// 		}
+	// 	}
+	// }
 
 	if (Math.floor(Math.random() * 10) < animationFrequency) {
 		var randomAnimation = animations[Math.floor((Math.random() * animations.length) + 1)];
