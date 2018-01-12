@@ -118,7 +118,7 @@ widget.bind(SC.Widget.Events.READY, function() {
 	});
 
 	widget.bind(SC.Widget.Events.FINISH, function() {
-		StopTimer();
+		//StopTimer();
 		playing = false;
 		$(editorPlayPauseButton).children().removeClass('fa-pause').addClass('fa-play');
 	});
@@ -373,10 +373,12 @@ function createDraggable() {
 	var currentMillis;
 	var newMillis;
 	var elHeight = $(this).height();
-	$('search-pip').resizable({
-		maxHeight: elHeight,
-      	minHeight: elHeight
+	$('.search-pip').dblclick(function() {
+  		$(this).remove();
+  		var pipMillis = $(this).attr('data-millis');
+  		delete visuals[pipMillis];
 	});
+
 	$('.search-pip').draggable({
 		addClasses: false,
 		axis: 'x',
@@ -450,6 +452,7 @@ function GetTopTracks(){
 
 	var time = msToTime(today.getTime());
 	formattedTime = year + '-' + month + '-' + day + ' ' + time;
+	console.log(formattedTime);
 
 	SC.get('/tracks', {
 		q: 'flip',

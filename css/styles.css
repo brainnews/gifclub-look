@@ -726,6 +726,18 @@ h4 {
   text-overflow: ellipsis;
 }
 
+.alert {
+    padding: 4px 8px;
+    font-size: 14px;
+    background-color: #444;
+    border: none;
+    color: var( --white);
+}
+
+.alert-dismissible .close {
+  padding: 3px 8px;
+}
+
 .noUi-marker {
   background: #000;
 }

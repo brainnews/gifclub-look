@@ -4,7 +4,7 @@ var channelgifs;
 var preHTML = '<img src="';
 var postHTML = '" />';
 var gifIndex = 0;
-var searchLimit = 50;
+var searchLimit = 25;
 var staticGifs;
 var staticSearchLimit = 30;
 
