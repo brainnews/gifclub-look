@@ -23,7 +23,7 @@ var staffPicks = {
                 "title": "love theme",
                 "playlist": "https://soundcloud.com/pcmus/pink-and-blue",
                 "gpm": 2000,
-                "timeline": {2100: "cute love", 13300: "cute animals", 26200: "friendship", 51800: "hearts #5", 62700: "rainbows #5", 74600: "flirt", 104000: "kiss", 142600: "blush #15"},
+                "timeline": {0: "cute love", 13300: "cute animals", 26200: "friendship", 51800: "hearts #5", 62700: "rainbows #5", 74600: "flirt", 104000: "kiss", 142600: "blush #15"},
                 "visuals_by": "brainwaves",
                 "sounds_by": "PC Music",
                 "duration": "2:53",

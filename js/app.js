@@ -8,6 +8,7 @@ var isMobile = false;
 
 window.onload = function() {
     // PLATFORM CHECK
+    widget.pause();
     var os = getOS();
     // var bodyHeight = $('body').height();
     // $('.wrapper').css({ height: bodyHeight });
@@ -21,7 +22,7 @@ window.onload = function() {
     ShowStatic();
     GetMoods();
     GetTopTracks();
-    widget.pause();
+    //GetMoodPreviews();
 };
 
 $('.carousel').carousel({
@@ -165,4 +166,35 @@ function GetMoods() {
 
         ToggleUI();
     });
+}
+
+function GetMoodPreviews(){
+    for (x in staffPicks) {
+        var q = staffPicks[x].timeline[0];
+        $.ajax({
+            url: searchUrlPre + q + searchUrlPost + 5,
+            type: 'GET',
+            success: function(data) {
+                var imageArray = data;
+                var images = [];
+
+                for (i = 0; i < Object.keys(imageArray.data).length; i++){
+                    images.push(imageArray.data[i].images.fixed_width_small.url);
+                }
+                
+                gifshot.createGIF({
+                  'images': images,
+                  'frameDuration': 5
+                },function(obj) {
+                  if(!obj.error) {
+                    var image = obj.image,
+                    animatedImage = document.createElement('img');
+                    animatedImage.src = image;
+                    $('.mood-art').attr('src', image);
+                  }
+                });
+            }
+        });
+    }
+
 }
