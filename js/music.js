@@ -1,5 +1,8 @@
-var duration;
+var art, title, artist, url, duration;
+var mood_gpm = 3400;
+var mood_title = "Untitled mood";
 var visuals = {};
+
 var playing = false;
 var millis = 0;
 var counter;
@@ -70,15 +73,6 @@ noUiSlider.create(slider, {
 
 var pips = slider.querySelector('.noUi-pips');
 
-var customTrack = {
-	"name": "Test",
-	"timeline": {
-
-	}
-};
-
-var timeline = {};
-
 var widgetIframe = document.getElementById('sc-widget'), 
 widget = SC.Widget(widgetIframe);
 
@@ -86,11 +80,10 @@ widget.bind(SC.Widget.Events.READY, function() {
 	widget.bind(SC.Widget.Events.PLAY, function() { 
 		// get information about currently playing sound 
 		widget.getCurrentSound(function(currentSound) {
-			var art = currentSound.artwork_url;
-			var maxLength = 22;
-			var title = currentSound.title;
-			var artist = currentSound.user.username;
-			var url = currentSound.permalink_url;
+			art = currentSound.artwork_url;
+			title = currentSound.title;
+			artist = currentSound.user.username;
+			url = currentSound.permalink_url;
 
 			if (editorLoaded) {
 				$(trackArt).html('<img src="' + art + '" class="img-fluid img-circle">');
@@ -99,12 +92,6 @@ widget.bind(SC.Widget.Events.READY, function() {
 				
 			} else {
 				$(trackInfoContainer).attr("href", url);
-				if (title.length > maxLength) {
-					var truncatedTitle = title.substring(0, maxLength);
-					$(trackInfoContainer).html("Now playing: " + truncatedTitle + "... by " + artist);
-				} else {
-					$(trackInfoContainer).html("Now playing: " + title + " by " + artist);
-				}
 			}
 		});
 		widget.getDuration(function(duration) {
@@ -185,6 +172,8 @@ function FetchTrackForEditor(){
 		ToggleEditorData();
 		LoadTrackForEditor(soundCloudSearch.value);
 		$(staticContainer).css('background-image', 'url(images/static.gif)');
+		mood_id = ID();
+		console.log(mood_id);
 	} else {
 		soundCloudSearch.value = 'Please enter a SoundCloud URL';
 	}

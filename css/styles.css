@@ -55,6 +55,10 @@ h4 {
   letter-spacing: 0.04rem;
 }
 
+.mr-20 {
+  margin-right: 20px !important;
+}
+
 .mb-30 {
   margin-bottom: 30px !important;
 }
@@ -926,6 +930,61 @@ i.sc-link:hover {
   float: right;
   margin-top: -25px;
   margin-right: 10px;
+}
+
+.user-photo {
+  width: 100px;
+  border: 2px solid var(--pale-pink);
+}
+
+.user-mood-thumb img {
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+
+.user-mood-thumb .dropdown {
+  position: absolute;
+  bottom: 18px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  padding: .5rem .5rem;
+}
+
+.dropdown-menu li {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dropdown-menu li:hover {
+  color: var(--magenta);
+}
+
+#user-moods-list li{
+  margin-right: 10px;
+  position: relative;
+}
+
+#user-moods-list p {
+  max-width: 100px;
+}
+
+.gpm-input-container input {
+  max-width: 70px;
+}
+
+.mood-title-input-container input {
+  max-width: 140px;
+}
+
+.editable-input input {
+    padding-right: 24px;
+    background-color: var(--white);
+    border-radius: 2px;
+    border: none;
+    padding: 2px 4px;
 }
 
 @media (min-width: 768px) {

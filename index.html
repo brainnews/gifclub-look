@@ -17,6 +17,9 @@
 		<link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet">
 		<link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
 		<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
+		<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jqueryui-editable/css/jqueryui-editable.css" rel="stylesheet"/>
+		<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+
 	</head>
 	<body>
 		<div class="wrapper">
@@ -67,19 +70,21 @@
 							<div class="col-sm-4">
 								<!-- <a href="http://www.soundcloud.com"><img src="images/soundcloud-logo-white.png" class="responsive-img"></a> -->
 							</div>
-							<div class="col-sm-2">
+							<div class="col-sm-4">
 								<ul class="list-inline">
 									<li id="editorPlayPauseButton" style="cursor: pointer; margin-right: 10px;" class="list-inline-item"><i class="fa fa-play" aria-hidden="true"></i></li>
-									<li class="time-code active-time-code list-inline-item"></li>
-									<li id="trackDurationContainer" class="list-inline-item"></li>
-									
+									<li class="time-code active-time-code list-inline-item" style="margin-right: 0;"></li>
+									<li id="trackDurationContainer" class="list-inline-item mr-20"></li>	
+									<li class="list-inline-item mr-20 mood-title-input-container"><a class="editable" href="#" id="mood-title-input" data-type="text" data-title="Enter title">Untitled Mood</a></li>
+									<li class="list-inline-item gpm-input-container">GPM: <a class="editable" href="#" id="mood-gpm-input" data-type="text" data-title="Enter GPM">1000</a></li>
 								</ul>
 							</div>
-							<div class="col-sm-6 text-right">
+							<div class="col-sm-4 text-right">
 								<ul class="list-inline">
+									
 									<li class="list-inline-item" onclick="ClearVisuals();"><button class="btn btn-editor" type="button">clear visuals</button></li>
 									<li class="list-inline-item" onclick="ClearEditorTrack();"><button class="btn btn-editor" type="button">clear track</button></li>
-									<!-- <li class="list-inline-item"><button class="btn btn-editor" type="button">save project</button></li> -->
+									<li class="list-inline-item"><button id="save-mood" class="btn btn-editor" type="button">save project</button></li>
 								</ul>
 							</div>
 						</div>
@@ -110,7 +115,7 @@
 						<div class="row" style="margin-top: 6px;">
 							<div class="col-sm-8 offset-sm-4">
 								<div class="alert alert-warning alert-dismissible fade show" role="alert">
-								  <strong>Click the <i class="fa fa-search" aria-hidden="true"></i></strong> to add a search. <strong>Double click</strong> a search tag to delete it.
+								  <strong>Click the <i class="fa fa-search" aria-hidden="true"></i></strong> to add visuals on the timeline. <strong>Double click</strong> a visual to delete it.
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 								    <span aria-hidden="true">&times;</span>
 								  </button>
@@ -125,7 +130,7 @@
 				<ul class="list-inline ui-carousel d-none d-md-block text-center">
 					<li data-target="#uiCarousel" data-slide-to="0" class="list-inline-item active"><h2>Moods</h2></li>
 					<li data-target="#uiCarousel" data-slide-to="1" class="list-inline-item"><h2>Sounds</h2></li>
-					<li data-target="#uiCarousel" data-slide-to="2" class="list-inline-item"><h2>Profile</h2></li>
+					<li data-target="#uiCarousel" data-slide-to="2" class="list-inline-item"><h2>Mood Board</h2></li>
 					<li data-target="#uiCarousel" data-slide-to="3" class="list-inline-item"><h2>Settings</h2></li>
 				</ul>
 				
@@ -176,12 +181,12 @@
 				    <div class="carousel-item">
 				      <div class="container">
 				      	<div class="row align-items-center shadow-1 settings-row">
-				      		<p class="small mb-20 ui-header d-sm-none">You</p>
-							<div class="col-6">
-		      					<p class="small">Log in to save moods created using the editor. (Coming soon)</p>
-		      				</div>
-		      				<div class="col-6">
-			      				<button type="button" class="btn btn-secondary w-100" style="cursor: not-allowed; opacity: 0.1;">Log in</button>
+				      		<p class="small mb-20 ui-header d-sm-none">Mood Board</p>
+							<div class="col" id="firebaseui-auth-container">
+								<p class="mb-20" id="welcome-message"></p>
+								<ul id="user-moods-list" class="list-inline">
+
+								</ul>
 							</div>
 						</div>
 				      </div>
@@ -263,11 +268,23 @@
 				<iframe id="sc-widget" width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/miles-gilbert-2/sets/test&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_artwork=false&amp;show_playcount=false&amp;buying=false&amp;show_user=false&amp;show_reposts=false&amp;liking=false&amp;download=false&amp;visual=false"></iframe>
 			</div>
 		</div>
-		
 		<script src="js/jquery-1.11.1.min.js"></script>
+		<!-- FIREBASE -->
+
+		
+		<script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-database.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-firestore.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-messaging.js"></script>
+
+		<script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+		<script src="js/user-manager.js"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jqueryui-editable/js/jqueryui-editable.min.js"></script>
 		<script src="js/platform-detection.js"></script>
 		<script src="js/app.js"></script>
 		<script src="js/nouislider.js"></script>

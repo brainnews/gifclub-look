@@ -142,30 +142,34 @@ function GetMoods() {
         var q = $(this).data("playlist");
         LoadSoundToWidget(staffPicks[q].playlist, staffPicks[q].timeline, staffPicks[q].gpm);
 
-        if(isMobile) {
-            $(staticContainer).css('background-image', 'url(' + staffPicks[q].track_art + ')');
-            $(staticContainer).removeClass('opacity-5');
-
-            setTimeout(function(){
-                $('.mood-loaded-play').html('<i class="fa fa-play btn-mobile-play-mood" aria-hidden="true"></i>');
-                $('.mood-loaded-info').html('<span class="title">' + staffPicks[q].title + '</span><span class="info">Visuals by ' + staffPicks[q].visuals_by + '</span><span class="info">Sounds by ' + staffPicks[q].sounds_by + '</span><span class="info">' + staffPicks[q].duration + '</span>');
-                $('.btn-mobile-play-mood').click(function(){
-                    StartTimer();
-                    $(staticContainer).css('background-image', 'url(images/static.gif)');
-                    widget.play();
-                    $(videoBackground).removeClass('hidden');
-                    $(popupGridWrapper).removeClass('hidden');
-                    $('.mood-loaded-overlay').toggleClass('hidden');
-                    $('.btn-mobile-play-audio').removeClass('hidden');
-                });
-            }, 1800);
-        } else {
-            StartTimer();
-            $(staticContainer).css('background-image', 'url(images/static.gif)');
-        }
+        StartVisuals();
 
         ToggleUI();
     });
+}
+
+function StartVisuals(){
+    if(isMobile) {
+        $(staticContainer).css('background-image', 'url(' + staffPicks[q].track_art + ')');
+        $(staticContainer).removeClass('opacity-5');
+
+        setTimeout(function(){
+            $('.mood-loaded-play').html('<i class="fa fa-play btn-mobile-play-mood" aria-hidden="true"></i>');
+            $('.mood-loaded-info').html('<span class="title">' + staffPicks[q].title + '</span><span class="info">Visuals by ' + staffPicks[q].visuals_by + '</span><span class="info">Sounds by ' + staffPicks[q].sounds_by + '</span><span class="info">' + staffPicks[q].duration + '</span>');
+            $('.btn-mobile-play-mood').click(function(){
+                StartTimer();
+                $(staticContainer).css('background-image', 'url(images/static.gif)');
+                widget.play();
+                $(videoBackground).removeClass('hidden');
+                $(popupGridWrapper).removeClass('hidden');
+                $('.mood-loaded-overlay').toggleClass('hidden');
+                $('.btn-mobile-play-audio').removeClass('hidden');
+            });
+        }, 1800);
+    } else {
+        StartTimer();
+        $(staticContainer).css('background-image', 'url(images/static.gif)');
+    }
 }
 
 function GetMoodPreviews(){
@@ -198,3 +202,12 @@ function GetMoodPreviews(){
     }
 
 }
+
+//turn to inline mode
+$.fn.editable.defaults.mode = 'inline';
+
+$(document).ready(function() {
+    $('.editable').editable({
+        showbuttons: false
+    });
+});
