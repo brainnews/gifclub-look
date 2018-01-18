@@ -947,6 +947,24 @@ i.sc-link:hover {
   bottom: 18px;
   right: 10px;
   cursor: pointer;
+  visibility: hidden;
+}
+
+.btn-new-mood {
+    padding: 2px 4px;
+    font-size: 12px;
+    font-family: Roboto;
+    font-weight: 600;
+    text-transform: uppercase;
+    background-color: var(--pale-pink);
+    color: var(--black);
+    margin-left: 5px;
+    display: none;
+}
+
+.btn-new-mood:hover {
+  background-color: var(--magenta);
+  color: var(--white);
 }
 
 .dropdown-menu {
@@ -985,6 +1003,16 @@ i.sc-link:hover {
     border-radius: 2px;
     border: none;
     padding: 2px 4px;
+}
+
+.beta-tag {
+    background-color: var(--magenta);
+    padding: 4px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: 700;
+    margin-left: 5px;
 }
 
 @media (min-width: 768px) {
@@ -1107,6 +1135,7 @@ i.sc-link:hover {
 
   .moods-list {
     margin-bottom: 40px;
+    overflow-x: hidden;
   }
 
   .moods-list li {
@@ -1153,5 +1182,13 @@ i.sc-link:hover {
 
   .staff-sounds-list p {
     max-width: 500px;
+  }
+
+  .user-mood-thumb .dropdown {
+    visibility: visible;
+  }
+
+  .btn-new-mood {
+    display: inline;
   }
 }

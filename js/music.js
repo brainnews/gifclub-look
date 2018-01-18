@@ -1,7 +1,7 @@
 var art, title, artist, url, duration;
 var mood_gpm = 3400;
 var mood_title = "Untitled mood";
-var visuals = {};
+var visuals = null;
 
 var playing = false;
 var millis = 0;

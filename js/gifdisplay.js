@@ -26,7 +26,7 @@ function StopTimer() {
 		$(videoBackground).html('').toggleClass('hidden');
 		$(popupGridWrapper).html(emptyPopupGrid).toggleClass('hidden');
 	}
-	visuals = {};
+	//visuals = {};
 	timerOn = false;
 	channelgifs = null;
 	console.log("timer stopped");

@@ -3,7 +3,30 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>GifClub</title>
+		<!-- HTML Meta Tags -->
+		<title>GIFClub = Music + GIFs</title>
+		<meta name="description" content="GIFClub mashes GIPHY's most popular GIFs and SoundCloud's hottest remixes together to create an audio-visual assault on the eyes and ears. Try it at your next party.">
+
+		<!-- Google / Search Engine Tags -->
+		<meta itemprop="name" content="GIFClub = Music + GIFs">
+		<meta itemprop="description" content="GIFClub mashes GIPHY's most popular GIFs and SoundCloud's hottest remixes together to create an audio-visual assault on the eyes and ears. Try it at your next party.">
+		<meta itemprop="image" content="http://thegif.club/images/logo.png">
+
+		<!-- Facebook Meta Tags -->
+		<meta property="og:url" content="http://thegif.club">
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="GIFClub = Music + GIFs">
+		<meta property="og:description" content="GIFClub mashes GIPHY's most popular GIFs and SoundCloud's hottest remixes together to create an audio-visual assault on the eyes and ears. Try it at your next party.">
+		<meta property="og:image" content="http://thegif.club/images/logo.png">
+
+		<!-- Twitter Meta Tags -->
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:title" content="GIFClub = Music + GIFs">
+		<meta name="twitter:description" content="GIFClub mashes GIPHY's most popular GIFs and SoundCloud's hottest remixes together to create an audio-visual assault on the eyes and ears. Try it at your next party.">
+		<meta name="twitter:image" content="http://thegif.club/images/logo.png">
+
+		<!-- Meta Tags Generated via http://heymeta.com -->
+
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 		<link rel = "stylesheet" type = "text/css" href = "css/magic.min.css" />
@@ -30,6 +53,7 @@
 					<li data-target="#uiCarousel" data-slide-to="3" class="list-inline-item"><i class="fa fa-sliders" aria-hidden="true"></i></li>
 			</ul>
 			<div class="mobile-search">
+				<span class="beta-tag float-left" style="margin-top: 20px; margin-left: 15px; opacity: 0.4; position: absolute;">gifclub beta</span>
 				<div class="btn-mobile-search">
 					<i class="fa fa-search" aria-hidden="true"></i>
 				</div>
@@ -48,8 +72,8 @@
 				<div class="container-fluid">
 					<span id="editor-load">
 						<div class="row">
-							<div class="col-sm">
-								<h4>New mood</h4>
+							<div class="col-sm-6">
+								<h4>Create a mood</h4>
 								<p class="small">Grab a SoundCloud track and mix it with some GIPHY visuals.</p>
 								<div class="input-group">
 						      		<input id="soundCloudSearch" type="text" class="form-control search-secondary" placeholder="Enter a SoundCloud URL">
@@ -57,11 +81,6 @@
 						        		<button class="btn btn-secondary search-secondary-btn" type="button" onclick="FetchTrackForEditor();">Go</button>
 						      		</span>
 						    	</div>
-							</div>
-							<div class="col-sm">
-								<h4>Old mood <small class="text-muted">coming soon</small></h4>
-								<p class="small">Jump back into a previous project.</p>
-								<button type="button" class="btn btn-secondary" style="width: 100%; cursor: not-allowed; opacity: 0.3;">Open project</button>
 							</div>
 						</div>
 					</span>
@@ -142,7 +161,7 @@
 							    <p class="small ui-header d-sm-none">Moods</p>
 							    <div class="col">
 							    	<ul class="list-inline moods-list">
-
+							    		<div id="mood-loader" class="loader text-center">Loading...</div>
 							    	</ul>						      
 							    </div>
 							</div>
@@ -193,7 +212,7 @@
 				    </div>
 				    <div class="carousel-item">
 				    	<div class="container">
-							<div class="row align-items-center shadow-1 settings-row">
+							<div class="row align-items-center shadow-1 settings-row mb-10">
 								<p class="small mb-20 ui-header d-sm-none">Settings</p>
 								<div class="col-6">
 			      					<p class="mb-6"><strong>GPM:</strong> <span id="gpmContainer" style="font-style: normal;">🔥 🔥 🔥</span></p>
@@ -214,6 +233,12 @@
 										<li class="list-inline-item switch-item active"><button type="button" class="btn btn-secondary switch-2" onclick="litMode = true;">ON</button></li>
 									</ul>
 								</div>
+							</div>
+							<div class="row align-items-center shadow-1 settings-row text-center">
+								<div class="col-12">
+			      					<p class="mb-6"><strong>GIFClub Audio Visual System</strong><span class="beta-tag">beta</span></p>
+			      					<p class="small">Created by <a href="http://www.twitter.com/_brainnews" target="_blank">@_brainnews</a></p>
+			      				</div>
 							</div>
 						</div>
 				    </div>

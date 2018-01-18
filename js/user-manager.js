@@ -49,7 +49,14 @@ initApp = function() {
       var providerData = user.providerData;
 
       user.getIdToken().then(function(accessToken) {
-      	document.getElementById('welcome-message').innerHTML = 'Your moods <span class="float-right">Signed in as ' + displayName + ' – <a href="#" id="sign-out">Sign out</a>';
+      	document.getElementById('welcome-message').innerHTML = 'Your moods <button class="btn btn-new-mood editor-button">create new mood</button> <span class="float-right">Signed in as ' + displayName + ' – <a href="#" id="sign-out">Sign out</a>';
+
+        $('.editor-button').click(function(){
+          $(editor).toggleClass('editor-open', 120, 'easeInOutQuint');
+            $('.overlay').toggleClass('overlay-active');
+            ToggleUI();
+        });
+
         $("#sign-out").click(function(){
 	  		  SignOut();
         });
@@ -66,23 +73,15 @@ initApp = function() {
       ref.on('child_added', function(childSnapshot, prevChildKey) {
         var added_mood = childSnapshot.val();
         var mood_key = childSnapshot.key;
-        $('#user-moods-list').append('<li data-mood-id="' + mood_key + '" class="list-inline-item text-center user-mood-thumb"><div class="dropdown"><i id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-ellipsis-h" aria-hidden="true"></i><div class="dropdown-menu" aria-labelledby="dLabel"><ul class="list-unstyled"><li class="edit-user-mood" data-mood-id="' + mood_key + '">Edit mood</li><li class="delete-user-mood" data-mood-id="' + mood_key + '">Delete mood</li></ul></div></div><img data-mood-id="' + mood_key + '" class="mb-6 mood-thumb" src="' + added_mood.track_art + '"><p class="text-truncate">' + added_mood.mood_title + '</p>');
+        $('#user-moods-list').prepend('<li data-mood-id="' + mood_key + '" class="list-inline-item text-center user-mood-thumb"><div class="dropdown"><i id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-ellipsis-h" aria-hidden="true"></i><div class="dropdown-menu" aria-labelledby="dLabel"><ul class="list-unstyled"><li class="edit-user-mood" data-mood-id="' + mood_key + '">Edit mood (soon)</li><li class="delete-user-mood" data-mood-id="' + mood_key + '">Delete mood</li></ul></div></div><img data-mood-id="' + mood_key + '" class="mb-6 mood-thumb" src="' + added_mood.track_art + '"><p class="text-truncate">' + added_mood.mood_title + '</p></li>');
 
         $('.mood-thumb').click(function(){
-          visuals = {};
           var keyToPlay = $(this).data('mood-id');
           
           ref.once('value').then(function(snapshot) {
             var moodObj = snapshot.val();
-            console.log(moodObj[keyToPlay].mood_title);
-
-            if(editorLoaded) {
-              ClearEditorTrack();
-            }
-
             LoadSoundToWidget(moodObj[keyToPlay].track_url, moodObj[keyToPlay].timeline, moodObj[keyToPlay].gpm);
-
-            StartVisuals();
+            StartVisuals(moodObj, keyToPlay);
             ToggleUI();
           });
         });
@@ -107,29 +106,14 @@ initApp = function() {
       ref.on('child_removed', function(oldChildSnapshot) {
         var added_mood = oldChildSnapshot.val();
         var mood_key = oldChildSnapshot.key;
-        console.log("deleting: " + mood_key);
-        var nodeToRemove = $('#user-moods-list').find('li').data('mood-id', mood_key);
-        console.log(nodeToRemove);
-
-        //$(nodeToRemove).remove();
+        $('li[data-mood-id="' + mood_key + '"]').remove();
       });
-
-    // 	ref.on("value", function(snapshot) {
-	   // 		//console.log(snapshot.val());
-	   // 		var user_moods = snapshot.val();
-	   		
-	   // 		for (x in user_moods) {
-    //       $('#user-moods-list').append('<li data-mood-id="' + x + '" class="list-inline-item text-center"><img class="mood-thumb mb-6" src="' + user_moods[x].track_art + '"><p class="text-truncate">' + user_moods[x].mood_title + '</p>');
-   	// 	  }
-
-    //   ref.off("value");
-
-  		// }, function (error) { console.log("Error: " + error.code); });
     } else {
       // User is signed out.
       // The start method will wait until the DOM is loaded.
       ui.start('#firebaseui-auth-container', uiConfig);
-      document.getElementById('welcome-message').innerHTML = 'Signed in below to save moods created with the GIFClub editor.';
+      document.getElementById('welcome-message').innerHTML = '<span class="text-center">Signed in below to save moods created with the GIFClub editor.</span>';
+      $('#user-moods-list').html('');
     }
   }, function(error) {
     console.log(error);
