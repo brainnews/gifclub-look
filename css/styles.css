@@ -582,7 +582,7 @@ h4 {
 
 .btn-editor {
     background-color: var(--pale-purple);
-    color: var(--white);
+    color: var(--black);
     text-transform: uppercase;
     font-size: 10px;
     letter-spacing: 0.04rem;
@@ -592,7 +592,7 @@ h4 {
 }
 
 .btn-editor:hover {
-  color: var(--black);
+  background-color: var(--magenta);
   margin-top: -2px;
 }
 

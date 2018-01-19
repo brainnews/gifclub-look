@@ -112,7 +112,7 @@ initApp = function() {
       // User is signed out.
       // The start method will wait until the DOM is loaded.
       ui.start('#firebaseui-auth-container', uiConfig);
-      document.getElementById('welcome-message').innerHTML = '<span class="text-center">Signed in below to save moods created with the GIFClub editor.</span>';
+      document.getElementById('welcome-message').innerHTML = '<span class="text-center">Sign in to view moods created with the GIFClub editor.<br/>(desktop only)</span>';
       $('#user-moods-list').html('');
     }
   }, function(error) {
