@@ -4,7 +4,7 @@ var gifs = [];
 var preHTML = '<img src="';
 var postHTML = '" />';
 var gifIndex = 0;
-var searchLimit = 25;
+var searchLimit = 50;
 var staticGifs;
 var staticSearchLimit = 30;
 
@@ -94,7 +94,7 @@ function CustomSearch() {
 		  	type: 'GET',
 		  	success: function(data) {
 		  		gifs = ParseArenaChannel(data);
-				StartTimer('still');
+				StartTimer('gif');
 		  	}
 		});
 	} else if (query.includes('#')) {
@@ -104,7 +104,7 @@ function CustomSearch() {
 		  	type: 'GET',
 		  	success: function(data) {
 				gifs = ParseGifs(data);
-				StartTimer('video');
+				StartTimer('mp4');
 		  	}
 		});
 	} else {
@@ -113,7 +113,7 @@ function CustomSearch() {
 		  	type: 'GET',
 		  	success: function(data) {
 				gifs = ParseGifs(data);
-				StartTimer('video');
+				StartTimer('mp4');
 		  	}
 		});
 	}
@@ -167,7 +167,7 @@ function ParseGifs(obj) {
 
 function ParseArenaChannel(obj) {
 	var gifArray = [];
-	for(i = 0; i < searchLimit; i++){
+	for(i = 0; i < Object.keys(obj.contents).length; i++){
 		if (obj.contents[i].hasOwnProperty('image')){
 			gifArray.push(obj.contents[i].image.original.url);
 		}

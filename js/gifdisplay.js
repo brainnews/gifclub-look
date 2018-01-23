@@ -24,7 +24,7 @@ function StopTimer() {
 		$(videoBackground).html('').toggleClass('hidden');
 		$(popupGridWrapper).html(emptyPopupGrid).toggleClass('hidden');
 	}
-	//visuals = {};
+	visuals = {};
 	timerOn = false;
 	//gifs = null;
     clearInterval(timer);
@@ -62,12 +62,12 @@ function ShowGif(imageType) {
 	var randomNum = Math.floor((Math.random() * numResults));
 	var randomNum2 = Math.floor((Math.random() * numResults));
 	
-	if (imageType == 'still') {
+	if (imageType == 'gif') {
 		videoBackground.innerHTML = '<img id="video-background" src="' + gifs[randomNum] + '" width="100%" />';
 		if (litMode && randomPopup) {
 			randomPopup.innerHTML = '<img class="video-popup z-depth-' + randomDepth +'" src="' + gifs[randomNum2] + '" width="100%" />';
 		}
-	} else if (imageType == 'video') {
+	} else if (imageType == 'mp4') {
 		videoBackground.innerHTML = '<video autoplay loop playsinline id="video-background" muted><source src="' + gifs[randomNum] + '"></video>';
 
 		if (litMode && randomPopup) {

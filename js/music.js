@@ -197,7 +197,6 @@ function LoadSoundToWidget (q, t, g) {
 	});
 	visuals = t;
 	gpm = g;
-	//PlayVisuals();
 }
 
 function LoadStaffSound (q) {
