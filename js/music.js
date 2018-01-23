@@ -1,6 +1,4 @@
-var art, title, artist, url, duration;
-var mood_gpm = 3400;
-var mood_title = "Untitled mood";
+var art, title, artist, url, duration;;
 var visuals = null;
 
 var playing = false;
@@ -169,11 +167,10 @@ $(soundCloudSearch).keydown(function( event ) {
 function FetchTrackForEditor(){
 	if (soundCloudSearch.value != '') {
 	   	editorLoaded = true;
+	   	visuals = {};
 		ToggleEditorData();
 		LoadTrackForEditor(soundCloudSearch.value);
 		$(staticContainer).css('background-image', 'url(images/static.gif)');
-		mood_id = ID();
-		console.log(mood_id);
 	} else {
 		soundCloudSearch.value = 'Please enter a SoundCloud URL';
 	}

@@ -1,5 +1,8 @@
 var currentUserMoods = null;
 var mood_id = null;
+var currentMoodKey = null;
+var currentUser = null;
+var hasSaved = false;
 
 // Initialize Firebase
 var config = {
@@ -45,6 +48,7 @@ initApp = function() {
       var emailVerified = user.emailVerified;
       var photoURL = user.photoURL;
       var uid = user.uid;
+      currentUser = user.uid;
       var phoneNumber = user.phoneNumber;
       var providerData = user.providerData;
 
@@ -64,7 +68,7 @@ initApp = function() {
 
       $("#save-mood").click(function(){
         console.log("saving mood");
-		    saveMood(uid, mood_id, displayName);
+		    saveMood(uid, displayName);
 	    });
 
       //Get object of user's moods
@@ -120,10 +124,40 @@ initApp = function() {
   });
 };
 
-function saveMood(user_id, mood_id, visuals_by) {
-  var moodsListRef = firebase.database().ref('users/' + user_id + '/moods/');
-  var newMoodRef = moodsListRef.push();
-  newMoodRef.set({
+// function saveMood(user_id, visuals_by) {
+//   var editorIsOpen = $('#editor').hasClass('editor-open');
+//   var newMoodKey = null;
+//   var newMoodRef = null;
+
+//   if (editorIsOpen) {
+//     if (!hasSaved) {
+//       var moodsListRef = firebase.database().ref('users/' + user_id + '/moods/');
+//       newMoodRef = moodsListRef.push();
+//       newMoodKey = moodsListRef.push().key;
+
+//       newMoodRef.set({
+//         mood_title: document.getElementById('mood-title-input').textContent,
+//         track_url: document.getElementById("trackTitle").firstChild.getAttribute('href'),
+//         gpm: document.getElementById('mood-gpm-input').textContent,
+//         timeline: visuals,
+//         visuals_by: visuals_by,
+//         sounds_by: document.getElementById('trackCreator').textContent,
+//         duration: msDuration,
+//         track_art: document.getElementById("trackArt").firstChild.getAttribute('src')
+//       });
+//       hasSaved = true;
+//     } else {
+//       newMoodRef.update({
+//         mood_title: document.getElementById('mood-title-input').textContent,
+//         gpm: document.getElementById('mood-gpm-input').textContent,
+//         timeline: visuals
+//       });
+//     }
+//   }
+// }
+
+function saveMood(user_id, visuals_by) {
+  var moodData = {
     mood_title: document.getElementById('mood-title-input').textContent,
     track_url: document.getElementById("trackTitle").firstChild.getAttribute('href'),
     gpm: document.getElementById('mood-gpm-input').textContent,
@@ -132,7 +166,19 @@ function saveMood(user_id, mood_id, visuals_by) {
     sounds_by: document.getElementById('trackCreator').textContent,
     duration: msDuration,
     track_art: document.getElementById("trackArt").firstChild.getAttribute('src')
-  });
+  };
+
+  var moodsListRef = firebase.database().ref('users/' + user_id + '/moods/');
+  var newMoodKey = moodsListRef.push().key;
+  var moodRef = moodsListRef.push();
+
+  if (!hasSaved) {
+    moodRef.set(moodData);
+    hasSaved = true;
+  } else {
+    firebase.database().ref('users/' + user_id + '/moods/' + newMoodKey).update(moodData);
+  }
+
 }
 
 window.addEventListener('load', function() {

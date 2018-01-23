@@ -176,6 +176,7 @@ h4 {
 .video-popup {
   align-self: center;
   width: 100%;
+  border-radius: 2px;
 }
 
 .ui-container {
@@ -1006,13 +1007,34 @@ i.sc-link:hover {
 }
 
 .beta-tag {
-    background-color: var(--magenta);
-    padding: 4px;
-    border-radius: 2px;
-    text-transform: uppercase;
-    font-size: 10px;
-    font-weight: 700;
-    margin-left: 5px;
+  background-color: var(--magenta);
+  padding: 4px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 700;
+  margin-left: 5px;
+}
+
+.z-depth-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.z-depth-2 {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.z-depth-3 {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.z-depth-4 {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.z-depth-5 {
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 
 @media (min-width: 768px) {

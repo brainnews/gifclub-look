@@ -6,7 +6,6 @@ var recording = false;
 var playback = false;
 var gpm = 1400;
 var clearRate = 10000;
-var numResults;
 var gifStreamTimeout;
 var clearGifsTimeout;
 
@@ -14,10 +13,9 @@ var timer;
 var clearTimer;
 var timerOn = false;
 
-function StartTimer(){
-	console.log("timer playing");
+function StartTimer(imageType){
     timerOn = true;
-    timer = setInterval(ShowGif, gpm);
+    timer = setInterval(ShowGif, gpm, imageType);
     clearTimer = setInterval(ClearPopups, clearRate);
 }
 
@@ -28,8 +26,7 @@ function StopTimer() {
 	}
 	//visuals = {};
 	timerOn = false;
-	channelgifs = null;
-	console.log("timer stopped");
+	//gifs = null;
     clearInterval(timer);
     clearInterval(clearTimer);
 }
@@ -54,51 +51,28 @@ function ShowStatic() {
 	$(staticContainer).css('background-image', 'url(' + staticGif + ')');
 }
 
-function ShowGif() {
+function ShowGif(imageType) {
 	if (!hasStarted) {
 		hasStarted = true;
-	}
-
-	var channelgif;
-	var channelgifPopup;
+	} 
+	var numResults = gifs.length;
 	var randomCell = Math.floor((Math.random() * 16) + 1);
 	var randomPopup = document.getElementById('popupGif-' + randomCell);
 	var randomDepth = Math.floor((Math.random() * 5) + 1);
-
-	if (channelgifs) {
-		numResults = Object.keys(channelgifs.data).length;
-		var randomNum = Math.floor((Math.random() * numResults));
-		var randomNum2 = Math.floor((Math.random() * numResults));
-		
-		if (isMobile) {
-			channelgif = channelgifs.data[randomNum].images.preview_webp.url;
-			channelgifPopup = channelgifs.data[randomNum2].images.preview_webp.url;
-			videoBackground.innerHTML = '<img id="video-background" src="' + channelgif + '" width="100%" />';
-			if (randomPopup) {
-				randomPopup.innerHTML = '<img class="video-popup z-depth-' + randomDepth +'" src="' + channelgifPopup + '" width="100%" />';
-			}
-		} else {
-			if (typeof(channelgifs.data[randomNum].images.original_mp4) == 'undefined') {
-				var largeGIF = 'images/static.gif';
-			} else {
-				var largeGIF = channelgifs.data[randomNum].images.original_mp4.mp4;
-			}
-			var smallGIF = channelgifs.data[randomNum2].images.preview.mp4;
-			if (largeGIF) {
-				channelgif = largeGIF;
-			}
-			videoBackground.innerHTML = '<video autoplay loop playsinline id="video-background" muted><source src="' + channelgif + '"></video>';
-
-			if (litMode) {
-				if (smallGIF) {
-					channelgifPopup = smallGIF;
-				}
-				if (randomPopup) {
-					randomPopup.innerHTML = '<video autoplay loop playsinline id="video-background" class="video-popup z-depth-' + randomDepth +'" muted><source src="' + channelgifPopup + '"></video>';
-				}
-			}
+	var randomNum = Math.floor((Math.random() * numResults));
+	var randomNum2 = Math.floor((Math.random() * numResults));
+	
+	if (imageType == 'still') {
+		videoBackground.innerHTML = '<img id="video-background" src="' + gifs[randomNum] + '" width="100%" />';
+		if (litMode && randomPopup) {
+			randomPopup.innerHTML = '<img class="video-popup z-depth-' + randomDepth +'" src="' + gifs[randomNum2] + '" width="100%" />';
 		}
+	} else if (imageType == 'video') {
+		videoBackground.innerHTML = '<video autoplay loop playsinline id="video-background" muted><source src="' + gifs[randomNum] + '"></video>';
 
+		if (litMode && randomPopup) {
+			randomPopup.innerHTML = '<video autoplay loop playsinline id="video-background" class="video-popup z-depth-' + randomDepth +'" muted><source src="' + gifs[randomNum2] + '"></video>';
+		}
 	}
 	//old record tape code
 	

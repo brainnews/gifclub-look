@@ -1,6 +1,6 @@
 var searchButton = document.getElementById("giphy-search-button");
 var giphySearch = document.getElementById("giphy-search");
-var channelgifs;
+var gifs = [];
 var preHTML = '<img src="';
 var postHTML = '" />';
 var gifIndex = 0;
@@ -19,7 +19,7 @@ function GetGifs(q) {
 		  	url: searchUrlPre + queryWithLimit[0] + searchUrlPost + queryWithLimit[1],
 		  	type: 'GET',
 		  	success: function(data) {
-				channelgifs = data;
+				gifs = ParseGifs(data);
 		  	}
 		});
 	} else {
@@ -27,7 +27,7 @@ function GetGifs(q) {
 		  	url: searchUrlPre + q + searchUrlPost + searchLimit,
 		  	type: 'GET',
 		  	success: function(data) {
-				channelgifs = data;
+				gifs = ParseGifs(data);
 		  	}
 		});
 	}
@@ -38,7 +38,7 @@ function GetTrending() {
 	  url: trendingUrl,
 	  type: 'GET',
 	  success: function(data) {
-		channelgifs = data;
+		gifs = ParseGifs(data);
 		//console.log(channelgifs);
 		//StartGifStream();
 	  }
@@ -85,14 +85,26 @@ function CustomSearch() {
 		query = giphySearch.value;
 	}
 
-	if (query.includes('#')) {
+	if (query.startsWith('https://www.are.na')){
+		var lastSlash = query.lastIndexOf('/');
+		var channelTitle = query.slice(lastSlash + 1);
+		console.log(channelTitle);
+		$.ajax({
+		  	url: 'http://api.are.na/v2/channels/' + channelTitle + '/contents',
+		  	type: 'GET',
+		  	success: function(data) {
+		  		gifs = ParseArenaChannel(data);
+				StartTimer('still');
+		  	}
+		});
+	} else if (query.includes('#')) {
 		var queryWithLimit = query.split('#');
 		$.ajax({
 		  	url: searchUrlPre + queryWithLimit[0] + searchUrlPost + queryWithLimit[1],
 		  	type: 'GET',
 		  	success: function(data) {
-				channelgifs = data;
-				StartTimer();
+				gifs = ParseGifs(data);
+				StartTimer('video');
 		  	}
 		});
 	} else {
@@ -100,8 +112,8 @@ function CustomSearch() {
 		  	url: searchUrlPre + query + searchUrlPost + searchLimit,
 		  	type: 'GET',
 		  	success: function(data) {
-				channelgifs = data;
-				StartTimer();
+				gifs = ParseGifs(data);
+				StartTimer('video');
 		  	}
 		});
 	}
@@ -120,8 +132,7 @@ function MoodSearch(q, limit) {
 	  	url: searchUrlPre + q + searchUrlPost + limit,
 	  	type: 'GET',
 	  	success: function(data) {
-		channelgifs = data;
-		console.log(channelgifs);
+		gifs = ParseGifs(data);
 		StartGifStream();
 		ToggleUI();
 	  }
@@ -140,8 +151,26 @@ function GetStatic(){
 	  url: searchUrlPre + 'static' + searchUrlPost + staticSearchLimit,
 	  type: 'GET',
 	  success: function(data) {
-		staticGifs = data;
+		staticGifs = ParseGifs(data);;
 		ShowStatic();
 	  }
 	});
+}
+
+function ParseGifs(obj) {
+	var gifArray = [];
+	for(i = 0; i < Object.keys(obj.data).length; i++){
+		gifArray.push(obj.data[i].images.original_mp4.mp4);
+	}
+	return gifArray;
+}
+
+function ParseArenaChannel(obj) {
+	var gifArray = [];
+	for(i = 0; i < searchLimit; i++){
+		if (obj.contents[i].hasOwnProperty('image')){
+			gifArray.push(obj.contents[i].image.original.url);
+		}
+	}
+	return gifArray;
 }

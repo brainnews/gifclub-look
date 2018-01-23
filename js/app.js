@@ -55,6 +55,7 @@ function HideSearch(){
     $('.btn-mobile-search-clear').addClass('hidden');
     $('.mobile-input').addClass('hidden');
     $(giphySearchMobile).blur();
+    ToggleUI();
 }
 
 $('.btn-mobile-search-clear').click(function () {
@@ -155,7 +156,7 @@ function StartVisuals(db, q){
             $('.mood-loaded-play').html('<i class="fa fa-play btn-mobile-play-mood" aria-hidden="true"></i>');
             $('.mood-loaded-info').html('<span class="title">' + db[q].mood_title + '</span><span class="info">Visuals by ' + db[q].visuals_by + '</span><span class="info">Sounds by ' + db[q].sounds_by + '</span><span class="info">' + db[q].duration + '</span>');
             $('.btn-mobile-play-mood').click(function(){
-                StartTimer();
+                StartTimer('video');
                 $(staticContainer).css('background-image', 'url(images/static.gif)');
                 widget.play();
                 $(videoBackground).removeClass('hidden');
@@ -165,7 +166,7 @@ function StartVisuals(db, q){
             });
         }, 1800);
     } else {
-        StartTimer();
+        StartTimer('video');
         $(staticContainer).css('background-image', 'url(images/static.gif)');
     }
 }
