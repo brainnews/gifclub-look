@@ -127,7 +127,7 @@ widget.bind(SC.Widget.Events.READY, function() {
 			for (x in visuals) {
 		    	if (x == trackMillis && playing == true) {
 		    		console.log("Search: " + visuals[x]);
-		    		GetGifs(visuals[x]);
+		    		CustomSearch(visuals[x]);
 		    	}
 			}
 
@@ -316,6 +316,8 @@ $(editorPlayPauseButton).click(function(){
 
 function ClearEditorTrack(){
 	StopTimer();
+	currentMoodKey = null;
+	hasSaved = false;
 	editorLoaded = false;
 	userStarted = false;
 	playing = false;
@@ -345,14 +347,16 @@ $(scrubberInput).keydown(function( event ) {
 		//create and populate the key value pair in timeline
 		var inputQuery = scrubberInput.value;
 	   	visuals[trackMillis] = inputQuery;
-	   	GetGifs(inputQuery);
+	   	CustomSearch(inputQuery);
 	   	$(pips).append(pipHtmlPre + trackProgress + '%;" data-millis="' + trackMillis + '" title="' + inputQuery + '">' + inputQuery + '</div>');
+	   	SaveMood();
 	  	createDraggable();
 	   	CloseGifSearch();
 	}
 });
 
 function createDraggable() {
+
 	var recoupLeft, recoupTop;
 	var positionInPercent;
 	var currentMillis;
@@ -362,6 +366,7 @@ function createDraggable() {
   		$(this).remove();
   		var pipMillis = $(this).attr('data-millis');
   		delete visuals[pipMillis];
+  		SaveMood();
 	});
 
 	$('.search-pip').draggable({
@@ -396,6 +401,7 @@ function createDraggable() {
         	//push new millis to timeline and delete old one
         	visuals[newMillis] = visuals[currentMillis];
 			delete visuals[currentMillis];
+			SaveMood();
         }
 	});
 }

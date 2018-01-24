@@ -24,7 +24,9 @@ function StopTimer() {
 		$(videoBackground).html('').toggleClass('hidden');
 		$(popupGridWrapper).html(emptyPopupGrid).toggleClass('hidden');
 	}
-	visuals = {};
+	if ($('#editor').hasClass('editor-open') == false) {
+		visuals = {};
+	}
 	timerOn = false;
 	//gifs = null;
     clearInterval(timer);

@@ -58,37 +58,14 @@ $(giphySearch).keydown(function( event ) {
 	}
 });
 
-$(giphySearchMobile).keydown(function( event ) {
-	if ( event.which == 13 ) {
-		CustomSearch();
-		giphySearchMobile.blur();
-	}
-});
-
-$(searchButton).click(function(){
-	if (giphySearch.value != '') {
-		CustomSearch();
-	} else {
-		giphySearch.value = "Enter something";
-	}
-})
-
-function CustomSearch() {
+function CustomSearch(q) {
 	HideSearch();
 	StopTimer();
-	var query;
 	var customSearchLimit;
 
-	if (giphySearchMobile.value != '') {
-		query = giphySearchMobile.value;
-	} else {
-		query = giphySearch.value;
-	}
-
-	if (query.startsWith('https://www.are.na')){
-		var lastSlash = query.lastIndexOf('/');
-		var channelTitle = query.slice(lastSlash + 1);
-		console.log(channelTitle);
+	if (q.startsWith('https://www.are.na')){
+		var lastSlash = q.lastIndexOf('/');
+		var channelTitle = q.slice(lastSlash + 1);
 		$.ajax({
 		  	url: 'http://api.are.na/v2/channels/' + channelTitle + '/contents',
 		  	type: 'GET',
@@ -97,8 +74,8 @@ function CustomSearch() {
 				StartTimer('gif');
 		  	}
 		});
-	} else if (query.includes('#')) {
-		var queryWithLimit = query.split('#');
+	} else if (q.includes('#')) {
+		var queryWithLimit = q.split('#');
 		$.ajax({
 		  	url: searchUrlPre + queryWithLimit[0] + searchUrlPost + queryWithLimit[1],
 		  	type: 'GET',
@@ -109,7 +86,7 @@ function CustomSearch() {
 		});
 	} else {
 		$.ajax({
-		  	url: searchUrlPre + query + searchUrlPost + searchLimit,
+		  	url: searchUrlPre + q + searchUrlPost + searchLimit,
 		  	type: 'GET',
 		  	success: function(data) {
 				gifs = ParseGifs(data);

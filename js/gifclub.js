@@ -54,7 +54,7 @@ function BlurSearch(){
 }
 
 function ToggleUI() {
-    if (!isMobile) {
+    if (!isMobile && $('#editor').hasClass('editor-open') == false) {
         $(uiContainer).fadeToggle(300);
     }
 }

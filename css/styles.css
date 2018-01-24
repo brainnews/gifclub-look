@@ -420,6 +420,10 @@ h4 {
   animation: pulse 1s infinite;
 }
 
+.pulse {
+  animation: pulse 1s infinite;
+}
+
 @keyframes pulse {
   0% {
     opacity: 0.5;
@@ -1014,6 +1018,12 @@ i.sc-link:hover {
   font-size: 10px;
   font-weight: 700;
   margin-left: 5px;
+}
+
+#autosave-container {
+    font-size: 12px;
+    opacity: 0.5;
+    margin-right: 20px;
 }
 
 .z-depth-1 {

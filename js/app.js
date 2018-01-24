@@ -68,6 +68,14 @@ $(giphySearchMobile).keydown(function(){
     $('.btn-mobile-search-clear').removeClass('hidden');
 });
 
+$(giphySearchMobile).keydown(function( event ) {
+    if ( event.which == 13 ) {
+        q = giphySearchMobile.value;
+        CustomSearch(q);
+        giphySearchMobile.blur();
+    }
+});
+
 $('.mood-info').hover(function(){
     if (!isMobile){
         $(this).removeClass('no-show', 120, 'easeInOutQuint');
@@ -202,11 +210,18 @@ function GetMoodPreviews(){
 
 }
 
+$("#save-mood").click(function(){
+    SaveMood(currentUser.uid, currentUser.displayName);
+});
+
 //turn to inline mode
 $.fn.editable.defaults.mode = 'inline';
 
 $(document).ready(function() {
     $('.editable').editable({
-        showbuttons: false
+        showbuttons: false,
+        url: function() {
+            setTimeout(SaveMood, 500);
+        }
     });
 });
