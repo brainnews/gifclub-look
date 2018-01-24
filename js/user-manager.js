@@ -68,7 +68,7 @@ initApp = function() {
 
       $("#save-mood").click(function(){
         console.log("saving mood");
-		    saveMood(uid, displayName);
+		    writeNewPost(uid, displayName);
 	    });
 
       //Get object of user's moods
@@ -156,7 +156,8 @@ initApp = function() {
 //   }
 // }
 
-function saveMood(user_id, visuals_by) {
+function writeNewPost(user_id, visuals_by) {
+
   var moodData = {
     mood_title: document.getElementById('mood-title-input').textContent,
     track_url: document.getElementById("trackTitle").firstChild.getAttribute('href'),
@@ -168,15 +169,36 @@ function saveMood(user_id, visuals_by) {
     track_art: document.getElementById("trackArt").firstChild.getAttribute('src')
   };
 
-  var moodsListRef = firebase.database().ref('users/' + user_id + '/moods/');
-  var newMoodKey = moodsListRef.push().key;
-  var moodRef = moodsListRef.push();
+    var newMoodKey = firebase.database().ref().child('users/' + user_id + '/moods/').push().key;
+
+    var updates = {};
+    updates['users/' + user_id + '/moods/' + newMoodKey] = moodData;
+
+    firebase.database().ref().update(updates);
+}
+
+function saveMood(user_id, visuals_by) {
+  var newMoodKey;
+
+  var moodData = {
+    mood_title: document.getElementById('mood-title-input').textContent,
+    track_url: document.getElementById("trackTitle").firstChild.getAttribute('href'),
+    gpm: document.getElementById('mood-gpm-input').textContent,
+    timeline: visuals,
+    visuals_by: visuals_by,
+    sounds_by: document.getElementById('trackCreator').textContent,
+    duration: msDuration,
+    track_art: document.getElementById("trackArt").firstChild.getAttribute('src')
+  };
 
   if (!hasSaved) {
-    moodRef.set(moodData);
+      var moodsListRef = firebase.database().ref().child('users/' + user_id + '/moods/');
+  newMoodKey = moodsListRef.push().key;
+  var moodRef = moodsListRef.push();
+    moodRef.update(moodData);
     hasSaved = true;
   } else {
-    firebase.database().ref('users/' + user_id + '/moods/' + newMoodKey).update(moodData);
+    firebase.database().ref().child('users/' + user_id + '/moods/' + newMoodKey).update(moodData);
   }
 
 }
