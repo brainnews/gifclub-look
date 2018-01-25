@@ -187,31 +187,19 @@ $('#user-moods-list').on('click', '.edit-user-mood', function() {
 
   moodRef.once('value').then(function(snapshot) {
     var moodObj = snapshot.val();
+    visuals = moodObj[currentMoodKey].timeline;
     FetchTrackForEditor(moodObj[currentMoodKey].track_url, 'edit mood', moodObj[currentMoodKey].timeline);
+
+    for (x in visuals) {
+      $(pips).append(pipHtmlPre + msToPercent(x, moodObj[currentMoodKey].duration) + '%;" data-millis="' + x + '" title="' + visuals[x] + '">' + visuals[x] + '</div>');
+      CreateDraggable();
+    }
+
     hasSaved = true;
     $('#mood-title-input').text(moodObj[currentMoodKey].mood_title);
     $('#mood-gpm-input').text(moodObj[currentMoodKey].gpm);
   });
 });
-
-// $('.delete-user-mood').click(function(){
-//   var keyToDelete = $(this).data('mood-id');
-//   var moodRef = firebase.database().ref('/users/' + currentUser.uid + '/moods/' + keyToDelete);
-//   moodRef.remove()
-//     .then(function() {
-//       console.log("Remove succeeded.")
-//     })
-//     .catch(function(error) {
-//       console.log("Remove failed: " + error.message)
-//     });
-// });
-
-// $('.edit-user-mood').click(function(){
-//   var keyToEdit = $(this).data('mood-id');
-//   var moodRef = firebase.database().ref('/users/' + currentUser.uid + '/moods/' + keyToEdit);
-//   console.log(keyToEdit);
-
-// });
 
 window.addEventListener('load', function() {
   initApp()

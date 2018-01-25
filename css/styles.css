@@ -753,6 +753,7 @@ h4 {
 
 .noUi-pips-horizontal {
   height: 0px;
+  z-index: 9;
 }
 
 .loader,

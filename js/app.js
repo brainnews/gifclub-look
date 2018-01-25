@@ -112,8 +112,8 @@ $('.btn-mobile-fullscreen').click(function(){
 });
 
 function OpenEditor(){
-    $(editor).toggleClass('editor-open', 120, 'easeInOutQuint');
-    $('.overlay').toggleClass('overlay-active');
+    $(editor).addClass('editor-open', 120, 'easeInOutQuint');
+    $('.overlay').addClass('overlay-active');
 }
 
 $('#editor-button').click(function(){
@@ -122,8 +122,8 @@ $('#editor-button').click(function(){
 });
 
 $('.overlay').click(function(){
-    $(editor).toggleClass('editor-open', 120, 'easeInOutQuint');
-    $('.overlay').toggleClass('overlay-active');
+    $(editor).removeClass('editor-open', 120, 'easeInOutQuint');
+    $('.overlay').removeClass('overlay-active');
 })
 
 $('.switch-group .switch-item').click(function(){
@@ -213,10 +213,6 @@ function GetMoodPreviews(){
     }
 
 }
-
-$("#save-mood").click(function(){
-    SaveMood(currentUser.uid, currentUser.displayName);
-});
 
 //turn to inline mode
 $.fn.editable.defaults.mode = 'inline';

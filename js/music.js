@@ -151,7 +151,7 @@ widget.bind(SC.Widget.Events.READY, function() {
 			for (x in visuals) {
 		    	if (x < position) {
 		    		console.log("Seeking to: " + visuals[x]);
-		    		GetGifs(visuals[x]);
+		    		CustomSearch(visuals[x]);
 		    	}
 			}
 		});
@@ -160,15 +160,17 @@ widget.bind(SC.Widget.Events.READY, function() {
 
 $(soundCloudSearch).keydown(function( event ) {
 	if (event.which == 13) {
-	   	FetchTrackForEditor(soundCloudSearch.value, 'new track', {});
+	   	FetchTrackForEditor(soundCloudSearch.value, 'new mood', {});
 	}
 });
 
 function FetchTrackForEditor(track, trigger, visualArray){
 	if (track != '' || trigger == 'edit mood') {
+		if (!editorLoaded) {
+	   		ToggleEditorData();
+	   	}
 	   	editorLoaded = true;
 	   	visuals = visualArray;
-		ToggleEditorData();
 		LoadTrackForEditor(track);
 		$(staticContainer).css('background-image', 'url(images/static.gif)');
 	} else {
@@ -329,6 +331,8 @@ function ClearEditorTrack(){
 	$(trackArt).html('<div class="loader">Loading...</div>');
 	$(trackTitle).html('');
 	$(trackCreator).html('');
+	$('#mood-title-input').text('Untitled Mood');
+    $('#mood-gpm-input').text('1000');
 }
 
 $(scrubberButton).click(function() {
@@ -350,12 +354,12 @@ $(scrubberInput).keydown(function( event ) {
 	   	CustomSearch(inputQuery);
 	   	$(pips).append(pipHtmlPre + trackProgress + '%;" data-millis="' + trackMillis + '" title="' + inputQuery + '">' + inputQuery + '</div>');
 	   	SaveMood();
-	  	createDraggable();
+	  	CreateDraggable();
 	   	CloseGifSearch();
 	}
 });
 
-function createDraggable() {
+function CreateDraggable() {
 
 	var recoupLeft, recoupTop;
 	var positionInPercent;
