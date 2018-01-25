@@ -9,6 +9,7 @@
   --magenta: #C33167;
   --medium-blue: #4048a2;
   --dark-plum: #1f191d;
+  --light-gray: #d0d0d0;
 }
 
 body {
@@ -87,6 +88,10 @@ h4 {
   opacity: 0;
 }
 
+.border-bottom {
+  border-bottom: 1px solid var(--light-gray);
+}
+
 .opacity-5 {
   opacity: 0.5;
 }
@@ -104,7 +109,7 @@ h4 {
   height: 100vh;
 }
 
-.mobile-search {
+.topbar {
   position: fixed;
   top: 0;
   height: 60px;
@@ -454,14 +459,26 @@ h4 {
 
 .btn-mobile-search {
   position: absolute;
-  right: 15px;
+  left: 15px;
   top: 13px;
   z-index: 99999;
 }
 
-.btn-mobile-search-clear {
+#user-info {
   position: absolute;
   right: 15px;
+  top: 13px;
+  z-index: 99999;
+  font-size: 12px;
+}
+
+#user-info .user-photo {
+  cursor: pointer;
+}
+
+.btn-mobile-search-clear {
+  position: absolute;
+  left: 15px;
   top: 13px;
   z-index: 99999;
 }
@@ -479,8 +496,8 @@ h4 {
   border-radius: 0;
   font-size: 14px;
   font-style: italic;
-  background-color: var(--black);
-  color: var(--pale-pink);
+  background-color: transparent;
+  color: var(--white);
   letter-spacing: 0.08rem;
   height: 60px;
   padding-left: 45px;
@@ -939,8 +956,9 @@ i.sc-link:hover {
 }
 
 .user-photo {
-  width: 100px;
+  width: 33px;
   border: 2px solid var(--pale-pink);
+  border-radius: 50%;
 }
 
 .user-mood-thumb img {
@@ -978,11 +996,15 @@ i.sc-link:hover {
 }
 
 .dropdown-menu li {
-  cursor: pointer;
-  font-size: 14px;
+  padding: 6px;
 }
 
-.dropdown-menu li:hover {
+.dropdown-menu a {
+  font-size: 14px;
+  color: var(--black);
+}
+
+.dropdown-menu a:hover {
   color: var(--magenta);
 }
 
@@ -1046,6 +1068,14 @@ i.sc-link:hover {
 
 .z-depth-5 {
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+.modal-content {
+  background-color: var(--black);
+}
+
+.close {
+  color: var(--magenta);
 }
 
 @media (min-width: 768px) {
@@ -1115,10 +1145,10 @@ i.sc-link:hover {
   .search-primary {
     font-family: 'Archivo Black', sans-serif;
     border: none;
-    font-size: 30px;
+    font-size: 16px;
     font-style: italic;
-    background-color: var(--black);
-    color: var(--pale-pink);
+    background-color: transparent;
+    color: var(--white);
     letter-spacing: 0.08rem;
     margin: 0;
   }

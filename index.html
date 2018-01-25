@@ -45,6 +45,19 @@
 
 	</head>
 	<body>
+		<!-- Login Modal -->
+		<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <p class="modal-title" id="login-modal-title">Log in or Sign up</p>
+		      </div>
+		      <div id="firebaseui-auth-container" class="modal-body">
+		        ...
+		      </div>
+		    </div>
+		  </div>
+		</div>
 		<div class="wrapper">
 			<ul class="list-inline ui-carousel d-sm-none mobile-nav">
 					<li data-target="#uiCarousel" data-slide-to="0" class="list-inline-item active"><i class="fa fa-heartbeat" aria-hidden="true"></i></li>
@@ -52,19 +65,15 @@
 					<li data-target="#uiCarousel" data-slide-to="2" class="list-inline-item"><i class="fa fa-smile-o" aria-hidden="true"></i></li>
 					<li data-target="#uiCarousel" data-slide-to="3" class="list-inline-item"><i class="fa fa-sliders" aria-hidden="true"></i></li>
 			</ul>
-			<div class="mobile-search">
-				<span class="beta-tag float-left" style="margin-top: 20px; margin-left: 15px; opacity: 0.4; position: absolute;">gifclub beta</span>
+			<div class="topbar">
 				<div class="btn-mobile-search">
 					<i class="fa fa-search" aria-hidden="true"></i>
 				</div>
-				<div class="btn-mobile-search-back hidden">
-					<i class="fa fa-arrow-left" aria-hidden="true"></i>
+				<div id="user-info">
+					<p data-toggle="modal" data-target="#login-modal">Log in or Sign up</p>
 				</div>
-				<div class="btn-mobile-search-clear hidden">
-					<i class="fa fa-times" aria-hidden="true"></i>
-				</div>
-				<div class="input-group mobile-input hidden">
-			      	<input id="giphy-search-mobile" type="text" class="form-control search-primary shadow-1" placeholder="Search real quick" aria-label="Search real quick">
+				<div class="input-group mobile-input">
+			      	<input id="giphy-search-mobile" type="text" class="form-control search-primary" placeholder="Visual search" aria-label="Search real quick">
 			    </div>
 			</div>
 			<div class="overlay"></div>
@@ -201,7 +210,7 @@
 				      <div class="container">
 				      	<div class="row align-items-center shadow-1 settings-row">
 				      		<p class="small mb-20 ui-header d-sm-none">Mood Board</p>
-							<div class="col" id="firebaseui-auth-container">
+							<div class="col">
 								<p class="mb-20" id="welcome-message"></p>
 								<ul id="user-moods-list" class="list-inline">
 

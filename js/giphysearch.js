@@ -145,7 +145,7 @@ function ParseGifs(obj) {
 function ParseArenaChannel(obj) {
 	var gifArray = [];
 	for(i = 0; i < Object.keys(obj.contents).length; i++){
-		if (obj.contents[i].hasOwnProperty('image')){
+		if (obj.contents[i].hasOwnProperty('image') && obj.contents[i].image !== null){
 			gifArray.push(obj.contents[i].image.original.url);
 		}
 	}

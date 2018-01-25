@@ -6,6 +6,8 @@ var giphySearchMobile = document.getElementById("giphy-search-mobile");
 var isMobile = false;
 
 window.onload = function() {
+    console.log('\n G | I | F | C | l | u | b \n\n Audio Visual System\n version 1.0');
+    initApp();
     // PLATFORM CHECK
     widget.pause();
     var os = getOS();
@@ -37,36 +39,28 @@ $('.ui-carousel li').click(function(){
     }
 });
 
-$('.btn-mobile-search').click(function () {
-    $('.btn-mobile-search').addClass('hidden');
-    $('.btn-mobile-search-back').removeClass('hidden');
-    $('.btn-mobile-search-clear').addClass('hidden');
-    $('.mobile-input').removeClass('hidden');
-    $(giphySearchMobile).focus();
-});
+// $('.btn-mobile-search').click(function () {
+//     $('.btn-mobile-search').addClass('hidden');
+//     $('.btn-mobile-search-back').removeClass('hidden');
+//     $('.mobile-input').removeClass('hidden');
+//     $(giphySearchMobile).focus();
+// });
 
-$('.btn-mobile-search-back').click(function () {
-    HideSearch();
-});
+// $('.btn-mobile-search-back').click(function () {
+//     HideSearch();
+// });
 
 function HideSearch(){
-    $('.btn-mobile-search').removeClass('hidden');
-    $('.btn-mobile-search-back').addClass('hidden');
-    $('.btn-mobile-search-clear').addClass('hidden');
-    $('.mobile-input').addClass('hidden');
     $(giphySearchMobile).blur();
     ToggleUI();
 }
 
-$('.btn-mobile-search-clear').click(function () {
-    giphySearchMobile.value = '';
-    $(giphySearchMobile).focus();
-    $(this).toggleClass('hidden');
-});
+// $('.btn-mobile-search-back').click(function () {
+//     giphySearchMobile.value = '';
+//     $(giphySearchMobile).focus();
+//     $(this).toggleClass('hidden');
+// });
 
-$(giphySearchMobile).keydown(function(){
-    $('.btn-mobile-search-clear').removeClass('hidden');
-});
 
 $(giphySearchMobile).keydown(function( event ) {
     if ( event.which == 13 ) {

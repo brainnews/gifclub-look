@@ -53,7 +53,9 @@ initApp = function() {
       var providerData = user.providerData;
 
       user.getIdToken().then(function(accessToken) {
-      	document.getElementById('welcome-message').innerHTML = 'Your moods <button class="btn btn-new-mood editor-button">create new mood</button> <span class="float-right">Signed in as ' + displayName + ' – <a href="#" id="sign-out">Sign out</a>';
+        $('#user-info').html('<div class="dropdown"><img class="user-photo dropdown-toggle" id="accountDropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="' + photoURL + '"><div class="dropdown-menu" aria-labelledby="accountDropdownButton"><ul class="list-unstyled mb-0"><li><h6>' + displayName + '</h6></li><li><a href="#">Moods</a></li><li><a href="#">Settings</a></li><li><a href="#">Sign out</a></li></ul></div></div>');
+
+      	document.getElementById('welcome-message').innerHTML = 'Your moods <button class="float-right btn btn-new-mood editor-button">create new mood</button>';
 
         $('.editor-button').click(function(){
           $(editor).toggleClass('editor-open', 120, 'easeInOutQuint');
@@ -72,7 +74,7 @@ initApp = function() {
       ref.on('child_added', function(childSnapshot, prevChildKey) {
         var added_mood = childSnapshot.val();
         var mood_key = childSnapshot.key;
-        $('#user-moods-list').prepend('<li data-mood-id="' + mood_key + '" class="list-inline-item text-center user-mood-thumb"><div class="dropdown"><i id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-ellipsis-h" aria-hidden="true"></i><div class="dropdown-menu" aria-labelledby="dLabel"><ul class="list-unstyled"><li class="edit-user-mood" data-mood-id="' + mood_key + '">Edit mood</li><li class="delete-user-mood" data-mood-id="' + mood_key + '">Delete mood</li></ul></div></div><img data-mood-id="' + mood_key + '" class="mb-6 mood-thumb" src="' + added_mood.track_art + '"><p class="text-truncate">' + added_mood.mood_title + '</p></li>');
+        $('#user-moods-list').prepend('<li data-mood-id="' + mood_key + '" class="list-inline-item text-center user-mood-thumb"><div class="dropdown"><i id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-ellipsis-h" aria-hidden="true"></i><div class="dropdown-menu" aria-labelledby="dLabel"><ul class="list-unstyled"><li><a class="edit-user-mood" data-mood-id="' + mood_key + '" href="#">Edit mood</a></li><li><a class="delete-user-mood" data-mood-id="' + mood_key + '" href="#">Delete mood</a></li></ul></div></div><img data-mood-id="' + mood_key + '" class="mb-6 mood-thumb" src="' + added_mood.track_art + '"><p class="text-truncate">' + added_mood.mood_title + '</p></li>');
 
         $('.mood-thumb').click(function(){
           var keyToPlay = $(this).data('mood-id');
@@ -94,8 +96,8 @@ initApp = function() {
     } else {
       // User is signed out.
       // The start method will wait until the DOM is loaded.
+      $('#user-info').html('<p data-toggle="modal" data-target="#login-modal">Log in or Sign up</p>');
       ui.start('#firebaseui-auth-container', uiConfig);
-      document.getElementById('welcome-message').innerHTML = '<span class="text-center">Sign in to view moods created with the GIFClub editor.<br/>(desktop only)</span>';
       $('#user-moods-list').html('');
     }
   }, function(error) {
@@ -201,9 +203,9 @@ $('#user-moods-list').on('click', '.edit-user-mood', function() {
   });
 });
 
-window.addEventListener('load', function() {
-  initApp()
-});
+// window.addEventListener('load', function() {
+//   initApp();
+// });
 
 function SignOut(){
 	firebase.auth().signOut().then(function() {

@@ -447,7 +447,6 @@ function GetTopTracks(){
 
 	var time = msToTime(today.getTime());
 	formattedTime = year + '-' + month + '-' + day + ' ' + time;
-	console.log(formattedTime);
 
 	SC.get('/tracks', {
 		q: 'flip',
