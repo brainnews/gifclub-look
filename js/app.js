@@ -111,9 +111,13 @@ $('.btn-mobile-fullscreen').click(function(){
     $('#video-background').toggleClass('rotate-90');
 });
 
-$('#editor-button').click(function(){
-	$(editor).toggleClass('editor-open', 120, 'easeInOutQuint');
+function OpenEditor(){
+    $(editor).toggleClass('editor-open', 120, 'easeInOutQuint');
     $('.overlay').toggleClass('overlay-active');
+}
+
+$('#editor-button').click(function(){
+    OpenEditor();
     ToggleUI();
 });
 

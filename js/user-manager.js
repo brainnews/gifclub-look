@@ -72,7 +72,7 @@ initApp = function() {
       ref.on('child_added', function(childSnapshot, prevChildKey) {
         var added_mood = childSnapshot.val();
         var mood_key = childSnapshot.key;
-        $('#user-moods-list').prepend('<li data-mood-id="' + mood_key + '" class="list-inline-item text-center user-mood-thumb"><div class="dropdown"><i id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-ellipsis-h" aria-hidden="true"></i><div class="dropdown-menu" aria-labelledby="dLabel"><ul class="list-unstyled"><li class="edit-user-mood" data-mood-id="' + mood_key + '">Edit mood (soon)</li><li class="delete-user-mood" data-mood-id="' + mood_key + '">Delete mood</li></ul></div></div><img data-mood-id="' + mood_key + '" class="mb-6 mood-thumb" src="' + added_mood.track_art + '"><p class="text-truncate">' + added_mood.mood_title + '</p></li>');
+        $('#user-moods-list').prepend('<li data-mood-id="' + mood_key + '" class="list-inline-item text-center user-mood-thumb"><div class="dropdown"><i id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-ellipsis-h" aria-hidden="true"></i><div class="dropdown-menu" aria-labelledby="dLabel"><ul class="list-unstyled"><li class="edit-user-mood" data-mood-id="' + mood_key + '">Edit mood</li><li class="delete-user-mood" data-mood-id="' + mood_key + '">Delete mood</li></ul></div></div><img data-mood-id="' + mood_key + '" class="mb-6 mood-thumb" src="' + added_mood.track_art + '"><p class="text-truncate">' + added_mood.mood_title + '</p></li>');
 
         $('.mood-thumb').click(function(){
           var keyToPlay = $(this).data('mood-id');
@@ -83,22 +83,6 @@ initApp = function() {
             StartVisuals(moodObj, keyToPlay);
             ToggleUI();
           });
-        });
-
-        $('.delete-user-mood').click(function(){
-          var keyToDelete = $(this).data('mood-id');
-          var moodRef = firebase.database().ref('/users/' + uid + '/moods/' + keyToDelete);
-          moodRef.remove()
-            .then(function() {
-              console.log("Remove succeeded.")
-            })
-            .catch(function(error) {
-              console.log("Remove failed: " + error.message)
-            });
-        });
-
-        $('.edit-user-mood').click(function(){
-
         });
       });
 
@@ -182,6 +166,52 @@ function SaveMood() {
   firebase.database().ref().update(updates);
   console.log("saving mood");
 }
+
+$('#user-moods-list').on('click', '.delete-user-mood', function() {
+  var keyToDelete = $(this).data('mood-id');
+  var moodRef = firebase.database().ref('/users/' + currentUser.uid + '/moods/' + keyToDelete);
+  moodRef.remove()
+    .then(function() {
+      console.log("Remove succeeded.")
+    })
+    .catch(function(error) {
+      console.log("Remove failed: " + error.message)
+    });
+});
+
+$('#user-moods-list').on('click', '.edit-user-mood', function() {
+  currentMoodKey = $(this).data('mood-id');
+  var moodRef = firebase.database().ref('/users/' + currentUser.uid + '/moods/');
+  OpenEditor();
+  ToggleUI();
+
+  moodRef.once('value').then(function(snapshot) {
+    var moodObj = snapshot.val();
+    FetchTrackForEditor(moodObj[currentMoodKey].track_url, 'edit mood', moodObj[currentMoodKey].timeline);
+    hasSaved = true;
+    $('#mood-title-input').text(moodObj[currentMoodKey].mood_title);
+    $('#mood-gpm-input').text(moodObj[currentMoodKey].gpm);
+  });
+});
+
+// $('.delete-user-mood').click(function(){
+//   var keyToDelete = $(this).data('mood-id');
+//   var moodRef = firebase.database().ref('/users/' + currentUser.uid + '/moods/' + keyToDelete);
+//   moodRef.remove()
+//     .then(function() {
+//       console.log("Remove succeeded.")
+//     })
+//     .catch(function(error) {
+//       console.log("Remove failed: " + error.message)
+//     });
+// });
+
+// $('.edit-user-mood').click(function(){
+//   var keyToEdit = $(this).data('mood-id');
+//   var moodRef = firebase.database().ref('/users/' + currentUser.uid + '/moods/' + keyToEdit);
+//   console.log(keyToEdit);
+
+// });
 
 window.addEventListener('load', function() {
   initApp()

@@ -160,16 +160,16 @@ widget.bind(SC.Widget.Events.READY, function() {
 
 $(soundCloudSearch).keydown(function( event ) {
 	if (event.which == 13) {
-	   	FetchTrackForEditor();
+	   	FetchTrackForEditor(soundCloudSearch.value, 'new track', {});
 	}
 });
 
-function FetchTrackForEditor(){
-	if (soundCloudSearch.value != '') {
+function FetchTrackForEditor(track, trigger, visualArray){
+	if (track != '' || trigger == 'edit mood') {
 	   	editorLoaded = true;
-	   	visuals = {};
+	   	visuals = visualArray;
 		ToggleEditorData();
-		LoadTrackForEditor(soundCloudSearch.value);
+		LoadTrackForEditor(track);
 		$(staticContainer).css('background-image', 'url(images/static.gif)');
 	} else {
 		soundCloudSearch.value = 'Please enter a SoundCloud URL';
