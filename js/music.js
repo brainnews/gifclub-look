@@ -75,6 +75,8 @@ var widgetIframe = document.getElementById('sc-widget'),
 widget = SC.Widget(widgetIframe);
 
 widget.bind(SC.Widget.Events.READY, function() {
+	CatchMoodID();
+	
 	widget.bind(SC.Widget.Events.PLAY, function() { 
 		// get information about currently playing sound 
 		widget.getCurrentSound(function(currentSound) {

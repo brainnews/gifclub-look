@@ -147,13 +147,9 @@ function SaveMood() {
 $('#user-moods-list').on('click', '.delete-user-mood', function() {
   var keyToDelete = $(this).data('mood-id');
   var moodRef = firebase.database().ref('/users/' + currentUser.uid + '/moods/' + keyToDelete);
-  moodRef.remove()
-    .then(function() {
-      console.log("Remove succeeded.")
-    })
-    .catch(function(error) {
-      console.log("Remove failed: " + error.message)
-    });
+  var publicMoodRef = firebase.database().ref('/public_moods/' + keyToDelete);
+  moodRef.remove();
+  publicMoodRef.remove();
 });
 
 $('#user-moods-list').on('click', '.edit-user-mood', function() {

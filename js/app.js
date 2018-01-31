@@ -19,12 +19,53 @@ window.onload = function() {
         var bodyHeight = $('body').height();
         $('.wrapper').css({ height: bodyHeight })
     }
-
     ShowStatic();
-    GetMoods();
     GetTopTracks();
-    //GetMoodPreviews();
+    GetPublicMoods();
 };
+
+function CatchMoodID(){
+    let params = (new URL(document.location)).searchParams;
+    let mood = params.get("mood");
+    if (mood) {
+        var query = firebase.database().ref("public_moods");
+
+        query.once("value")
+          .then(function(snapshot) {
+            var publicMoods = snapshot.val();
+            LoadSoundToWidget(publicMoods[mood].track_url, publicMoods[mood].timeline, publicMoods[mood].gpm);
+            StartVisuals(publicMoods, mood);
+            ToggleUI();
+        });
+    }
+}
+
+function GetPublicMoods(){
+    var query = firebase.database().ref("public_moods").orderByKey();
+    query.once("value")
+      .then(function(snapshot) {
+        var publicMoods = snapshot.val();
+        snapshot.forEach(function(childSnapshot) {
+            // key will be "ada" the first time and "alan" the second time
+            var key = childSnapshot.key;
+            // childData will be the actual contents of the child
+            var moodData = childSnapshot.val();
+
+            $('.moods-list').append('<li class="list-inline-item mood-card" data-playlist="' + key + '"><img class="mood-art" src="' + moodData.track_art + '"><p class="mood-title" id="moodTitle">' + moodData.mood_title + '</p></li>');
+
+            $('#mood-loader').remove();
+
+            $('.mood-card').click(function() {
+                //StopTimer();
+                var q = $(this).data("playlist");
+                LoadSoundToWidget(publicMoods[q].track_url, publicMoods[q].timeline, publicMoods[q].gpm);
+                StartVisuals(publicMoods, q);
+                ToggleUI();
+            });
+
+      });
+    });
+}
 
 $('.carousel').carousel({
   interval: false,
@@ -178,36 +219,6 @@ function StartVisuals(db, q){
     }
 }
 
-function GetMoodPreviews(){
-    for (x in staffPicks) {
-        var q = staffPicks[x].timeline[0];
-        $.ajax({
-            url: searchUrlPre + q + searchUrlPost + 5,
-            type: 'GET',
-            success: function(data) {
-                var imageArray = data;
-                var images = [];
-
-                for (i = 0; i < Object.keys(imageArray.data).length; i++){
-                    images.push(imageArray.data[i].images.fixed_width_small.url);
-                }
-                
-                gifshot.createGIF({
-                  'images': images,
-                  'frameDuration': 5
-                },function(obj) {
-                  if(!obj.error) {
-                    var image = obj.image,
-                    animatedImage = document.createElement('img');
-                    animatedImage.src = image;
-                    $('.mood-art').attr('src', image);
-                  }
-                });
-            }
-        });
-    }
-
-}
 
 $('#no-login').click(function(){
     $('#ui-container').show();
