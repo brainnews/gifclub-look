@@ -19,8 +19,8 @@ window.onload = function() {
         var bodyHeight = $('body').height();
         $('.wrapper').css({ height: bodyHeight })
     }
+    new Clipboard('.get-short-link');
     ShowStatic();
-    GetTopTracks();
     GetPublicMoods();
 };
 
@@ -46,6 +46,7 @@ function GetPublicMoods(){
       .then(function(snapshot) {
         var publicMoods = snapshot.val();
         snapshot.forEach(function(childSnapshot) {
+            console.log('getting public moods');
             // key will be "ada" the first time and "alan" the second time
             var key = childSnapshot.key;
             // childData will be the actual contents of the child

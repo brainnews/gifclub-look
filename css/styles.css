@@ -993,9 +993,14 @@ i.sc-link:hover {
   border-radius: 50%;
 }
 
+.user-mood-thumb {
+    margin-bottom: 20px;
+}
+
 .user-mood-thumb img {
   border-radius: 2px;
   margin-bottom: 10px;
+  width: 150px;
 }
 
 .user-mood-thumb .dropdown {
@@ -1046,7 +1051,7 @@ i.sc-link:hover {
 }
 
 #user-moods-list p {
-  max-width: 100px;
+  max-width: inherit;
 }
 
 .gpm-input-container input {
@@ -1066,6 +1071,16 @@ i.sc-link:hover {
 }
 
 .beta-tag {
+  background-color: var(--magenta);
+  padding: 4px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 700;
+  margin-left: 5px;
+}
+
+.user-moods-alert {
   background-color: var(--magenta);
   padding: 4px;
   border-radius: 2px;
@@ -1117,6 +1132,22 @@ i.sc-link:hover {
     grid-template-rows: repeat(6, 1fr);
     height: 100vh;
     overflow: hidden;
+  }
+
+  .toast {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row-start: 6;
+    height: 40px;
+    padding: 8px;
+    border-radius: 2px;
+    background-color: var(--magenta);
+    color: var(--white);
+    display: none;
+  }
+
+  .show-toast {
+    display: block;
   }
 
   .ui-container {
@@ -1230,7 +1261,7 @@ i.sc-link:hover {
 
   .moods-list {
     margin-bottom: 40px;
-    overflow-x: hidden;
+    overflow-x: scroll;
   }
 
   .moods-list li {

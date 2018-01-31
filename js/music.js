@@ -80,7 +80,7 @@ widget.bind(SC.Widget.Events.READY, function() {
 	widget.bind(SC.Widget.Events.PLAY, function() { 
 		// get information about currently playing sound 
 		widget.getCurrentSound(function(currentSound) {
-			art = currentSound.artwork_url;
+			art = (currentSound.artwork_url).replace('large', 't500x500');
 			title = currentSound.title;
 			artist = currentSound.user.username;
 			url = currentSound.permalink_url;
