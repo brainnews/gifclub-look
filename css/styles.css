@@ -20,6 +20,11 @@ body {
   height: 100%;
 }
 
+.archivo {
+  font-family: 'Archivo Black', sans-serif;
+  font-style: italic;
+}
+
 a, a:visited {
   color: var(--white);
   font-weight: bold;
@@ -56,8 +61,16 @@ h4 {
   letter-spacing: 0.04rem;
 }
 
+.mr-5 {
+  margin-right: 5px !important;
+}
+
 .mr-20 {
   margin-right: 20px !important;
+}
+
+.ml-10 {
+  margin-left: 10px !important;
 }
 
 .mb-30 {
@@ -117,6 +130,12 @@ h4 {
   z-index: 9999;
   font-size: 22px;
   color: rgba(255,255,255,0.8);
+  opacity: 0.15;
+  transition: all .2s;
+}
+
+.topbar:hover {
+  opacity: 1;
 }
 
 .static {
@@ -195,6 +214,18 @@ h4 {
   min-height: 0;
   min-width: 0;
   background-color: var(--dark-plum);
+}
+
+#loginView {
+  z-index: 40;
+  grid-column-start: 1;
+  grid-column-end: span 6;
+  grid-row-start: 1;
+  grid-row-end: span 6;
+  box-shadow: none;
+  display: block;
+  background-color: transparent;
+  align-self: center;
 }
 
 .ui-header {
@@ -475,6 +506,7 @@ h4 {
 #user-info .user-photo {
   cursor: pointer;
 }
+
 
 .btn-mobile-search-clear {
   position: absolute;
@@ -830,7 +862,7 @@ input[type=range] {
     background-color: var(--pale-purple);
 }
 
-#gpmRange {
+#gpmRangeEditor, #gpmRangeSettings {
     -moz-transform: scaleX(-1);
         -o-transform: scaleX(-1);
         -webkit-transform: scaleX(-1);
@@ -838,7 +870,7 @@ input[type=range] {
         filter: FlipH;
         -ms-filter: "FlipH";
         width: 100%;
-        height: 26px;
+        height: 10px;
 }
 
 input[type='range']::-webkit-slider-thumb {
@@ -849,8 +881,8 @@ input[type='range']::-webkit-slider-thumb {
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   border: none;
-  height: 22px;
-  width: 16px;
+  height: 10px;
+  width: 12px;
   background: var(-dark-purple);
   cursor: pointer;
 

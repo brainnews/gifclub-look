@@ -127,7 +127,7 @@ widget.bind(SC.Widget.Events.READY, function() {
 			for (x in visuals) {
 		    	if (x == trackMillis && playing == true) {
 		    		console.log("Search: " + visuals[x]);
-		    		CustomSearch(visuals[x]);
+		    		GetGifs(visuals[x]);
 		    	}
 			}
 
@@ -151,7 +151,7 @@ widget.bind(SC.Widget.Events.READY, function() {
 			for (x in visuals) {
 		    	if (x < position) {
 		    		console.log("Seeking to: " + visuals[x]);
-		    		CustomSearch(visuals[x]);
+		    		GetGifs(visuals[x]);
 		    	}
 			}
 		});
@@ -231,26 +231,6 @@ function LoadTrackForEditor (q) {
 		"show_user": "false"
 	});
 	StartTimer();
-}
-
-function PlayVisuals() {
-	StartGifStream();
-	counter = setInterval(function(){
-		if (!editorLoaded) {
-			for (x in visuals) {
-		    	if (x == millis) {
-		    		console.log("timestamp matched: " + visuals[x]);
-		    		GetGifs(visuals[x]);
-		    	}
-			}
-		}
-		millis = millis + 1000;
-	}, 1000);
-
-
-	clearGifsTimeout = setInterval(function(){
-    	popupGridWrapper.innerHTML = emptyPopupGrid;
-    }, clearRate);
 }
 
 function ConvertTimestamp(timestamp) {
@@ -351,7 +331,7 @@ $(scrubberInput).keydown(function( event ) {
 		//create and populate the key value pair in timeline
 		var inputQuery = scrubberInput.value;
 	   	visuals[trackMillis] = inputQuery;
-	   	CustomSearch(inputQuery);
+	   	GetGifs(inputQuery);
 	   	$(pips).append(pipHtmlPre + trackProgress + '%;" data-millis="' + trackMillis + '" title="' + inputQuery + '">' + inputQuery + '</div>');
 	   	SaveMood();
 	  	CreateDraggable();

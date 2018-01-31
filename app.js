@@ -135,7 +135,7 @@ function GetMoods() {
     $('#mood-loader').remove();
 
     $('.mood-card').click(function() {
-        //StopTimer();
+        StopTimer();
         var q = $(this).data("playlist");
         LoadSoundToWidget(staffPicks[q].playlist, staffPicks[q].timeline, staffPicks[q].gpm);
         StartVisuals(staffPicks, q);
@@ -144,7 +144,6 @@ function GetMoods() {
 }
 
 function StartVisuals(db, q){
-    StopTimer();
     $('.btn-mobile-play-audio').addClass('hidden');
     $('.mood-loaded-overlay').removeClass('hidden');
 
@@ -163,7 +162,7 @@ function StartVisuals(db, q){
             $('.mood-loaded-play').html('<i class="fa fa-play btn-mobile-play-mood" aria-hidden="true"></i>');
             $('.mood-loaded-info').html('<span class="title">' + db[q].mood_title + '</span><span class="info">Visuals by ' + db[q].visuals_by + '</span><span class="info">Sounds by ' + db[q].sounds_by + '</span><span class="info">' + db[q].duration + '</span>');
             $('.btn-mobile-play-mood').click(function(){
-                StartTimer();
+                StartTimer('mp4');
                 $(staticContainer).css('background-image', 'url(images/static.gif)');
                 widget.play();
                 $(videoBackground).removeClass('hidden');
@@ -173,7 +172,7 @@ function StartVisuals(db, q){
             });
         }, 1800);
     } else {
-        StartTimer();
+        StartTimer('mp4');
         $(staticContainer).css('background-image', 'url(images/static.gif)');
     }
 }
@@ -207,22 +206,6 @@ function GetMoodPreviews(){
         });
     }
 
-}
-
-$('#no-login').click(function(){
-    $('#ui-container').show();
-    $('#topbar').show();
-    $('#loginView').hide();
-});
-
-$('#topbar-login').click(function(){
-    $('#ui-container').hide();
-    $('#topbar').hide();
-    $('#loginView').show();
-});
-
-function ext(url) {
-    return (url = url.substr(1 + url.lastIndexOf("/")).split('?')[0]).split('#')[0].substr(url.lastIndexOf("."))
 }
 
 //turn to inline mode

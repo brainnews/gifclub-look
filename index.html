@@ -45,32 +45,31 @@
 
 	</head>
 	<body>
-		<!-- Login Modal -->
-		<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true">
-		  <div class="modal-dialog modal-dialog-centered" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <p class="modal-title" id="login-modal-title">Log in or Sign up</p>
-		      </div>
-		      <div id="firebaseui-auth-container" class="modal-body">
-		        ...
-		      </div>
-		    </div>
-		  </div>
-		</div>
 		<div class="wrapper">
+			<!-- Login View -->
+			<div id="loginView" class="container">
+				<div class="row">
+					<div class="col-12 text-center">
+						<h4 class="archivo">GIFClub = Music + GIFs</h4>
+						<div id="firebaseui-auth-container" class="modal-body">
+			    		</div>
+			    		<p>Signing in let's you create and share your own moods</p>
+			    		<p class="small">or <a id="no-login" href="#">browse moods</a> without signing in</p>
+					</div>
+				</div>
+			</div>
 			<ul class="list-inline ui-carousel d-sm-none mobile-nav">
 					<li data-target="#uiCarousel" data-slide-to="0" class="list-inline-item active"><i class="fa fa-heartbeat" aria-hidden="true"></i></li>
 					<li data-target="#uiCarousel" data-slide-to="1" class="list-inline-item d-none d-md-block"><i class="fa fa-music" aria-hidden="true"></i></li>
 					<li data-target="#uiCarousel" data-slide-to="2" class="list-inline-item"><i class="fa fa-smile-o" aria-hidden="true"></i></li>
 					<li data-target="#uiCarousel" data-slide-to="3" class="list-inline-item"><i class="fa fa-sliders" aria-hidden="true"></i></li>
 			</ul>
-			<div class="topbar">
+			<div id="topbar" class="topbar">
 				<div class="btn-mobile-search">
 					<i class="fa fa-search" aria-hidden="true"></i>
 				</div>
 				<div id="user-info">
-					<p data-toggle="modal" data-target="#login-modal">Log in or Sign up</p>
+					<p><a id="topbar-login" href="#">Log in or Sign up</a></p>
 				</div>
 				<div class="input-group mobile-input">
 			      	<input id="giphy-search-mobile" type="text" class="form-control search-primary" placeholder="Visual search" aria-label="Search real quick">
@@ -97,24 +96,22 @@
 						<div class="row">
 							<div class="col-sm-4">
 								<!-- <a href="http://www.soundcloud.com"><img src="images/soundcloud-logo-white.png" class="responsive-img"></a> -->
+								<ul class="list-inline">
+									<li class="list-inline-item" onclick="ClearEditorTrack();" style="cursor: pointer; font-size: 12px"><i class="fa fa-chevron-left mr-5" aria-hidden="true"></i>Start over</li>
+								</ul>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-8">
 								<ul class="list-inline">
 									<li id="editorPlayPauseButton" style="cursor: pointer; margin-right: 10px;" class="list-inline-item"><i class="fa fa-play" aria-hidden="true"></i></li>
 									<li class="time-code active-time-code list-inline-item" style="margin-right: 0;"></li>
 									<li id="trackDurationContainer" class="list-inline-item mr-20"></li>	
 									<li class="list-inline-item mr-20 mood-title-input-container"><a class="editable" href="#" id="mood-title-input" data-type="text" data-title="Enter title">Untitled Mood</a></li>
-									<li class="list-inline-item gpm-input-container">GPM: <a class="editable" href="#" id="mood-gpm-input" data-type="text" data-title="Enter GPM">1000</a></li>
+									<li class="list-inline-item gpm-input-container">GPM <input type="range" id="gpmRangeEditor" min="300" max="3000" style="margin: 0 8px;" /><span class="gpm-readout" style="font-style: normal;">🔥</span></li>
+									<li id="autosave-container" class="list-inline-item ml-10">Autosaving enabled</li>
+									<li class="list-inline-item float-right"><a href="http://www.soundcloud.com"><img src="images/soundcloud-logo-white.png" class="responsive-img" style="margin-top: -18px;"></a></li>
 								</ul>
 							</div>
-							<div class="col-sm-4 text-right">
-								<ul class="list-inline">
-									<li id="autosave-container" class="list-inline-item">Autosaving enabled</li>
-									<li class="list-inline-item" onclick="ClearVisuals();"><button class="btn btn-editor" type="button">clear visuals</button></li>
-									<li class="list-inline-item" onclick="ClearEditorTrack();"><button class="btn btn-editor" type="button">clear track</button></li>
-									
-								</ul>
-							</div>
+							
 						</div>
 						<div class="row align-items-center">
 							<div class="col-sm-4">
@@ -131,22 +128,12 @@
 							<div class="col-sm-8">
 								<div id="trackScrubber" class="editor-timeline">
 									<div id="scrubberButtonContainer">
-										<button id="scrubberButton" class="btn btn-editor" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+										<button id="scrubberButton" class="btn btn-editor z-depth-1" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
 				    					<div id="scrubberInputContainer" class="input-field hidden">
 							           		<input id="scrubberInput" class="input-small" type="text" placeholder="Search GIPHY">
 							           		<div class="input-close"><i class="fa fa-times-circle"></i></div>
 							          	</div>
 				    				</div>
-								</div>
-							</div>
-						</div>
-						<div class="row" style="margin-top: 6px;">
-							<div class="col-sm-8 offset-sm-4">
-								<div class="alert alert-warning alert-dismissible fade show" role="alert">
-								  <strong>Click the <i class="fa fa-search" aria-hidden="true"></i></strong> to add visuals to the timeline. <strong>Double click</strong> a visual to delete it.
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								    <span aria-hidden="true">&times;</span>
-								  </button>
 								</div>
 							</div>
 						</div>
@@ -224,11 +211,11 @@
 							<div class="row align-items-center shadow-1 settings-row mb-10">
 								<p class="small mb-20 ui-header d-sm-none">Settings</p>
 								<div class="col-6">
-			      					<p class="mb-6"><strong>GPM:</strong> <span id="gpmContainer" style="font-style: normal;">🔥 🔥 🔥</span></p>
+			      					<p class="mb-6"><strong>GPM:</strong> <span class="gpm-readout" style="font-style: normal;">🔥</span></p>
 			      					<p class="small">GIFs per minute. Well not exactly, but you get it.</p>
 			      				</div>
 			      				<div class="col-6">
-				      				<input type="range" id="gpmRange" min="300" max="3000" style="margin-top: 8px;" />
+				      				<input id="gpmRangeSettings" type="range" min="300" max="3000" style="margin-top: 8px;" />
 								</div>
 							</div>
 							<div class="row align-items-center settings-row shadow-1 mb-10">

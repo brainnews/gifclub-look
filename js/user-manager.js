@@ -42,6 +42,7 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
 initApp = function() {
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
+      $('#loginView').hide();
       // User is signed in.
       var displayName = user.displayName;
       var email = user.email;
@@ -53,7 +54,7 @@ initApp = function() {
       var providerData = user.providerData;
 
       user.getIdToken().then(function(accessToken) {
-        $('#user-info').html('<div class="dropdown"><img class="user-photo dropdown-toggle" id="accountDropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="' + photoURL + '"><div class="dropdown-menu" aria-labelledby="accountDropdownButton"><ul class="list-unstyled mb-0"><li><h6>' + displayName + '</h6></li><li><a href="#">Moods</a></li><li><a href="#">Settings</a></li><li><a href="#">Sign out</a></li></ul></div></div>');
+        $('#user-info').html('<div class="dropdown"><img class="user-photo dropdown-toggle" id="accountDropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="' + photoURL + '"><div class="dropdown-menu" aria-labelledby="accountDropdownButton"><ul class="list-unstyled mb-0"><li><h6>' + displayName + '</h6></li><li><a href="#">Moods</a></li><li><a href="#">Settings</a></li><li><a id="sign-out" href="#">Sign out</a></li></ul></div></div>');
 
       	document.getElementById('welcome-message').innerHTML = 'Your moods <button class="float-right btn btn-new-mood editor-button">create new mood</button>';
 
@@ -96,46 +97,13 @@ initApp = function() {
     } else {
       // User is signed out.
       // The start method will wait until the DOM is loaded.
-      $('#user-info').html('<p data-toggle="modal" data-target="#login-modal">Log in or Sign up</p>');
       ui.start('#firebaseui-auth-container', uiConfig);
-      $('#user-moods-list').html('');
+
     }
   }, function(error) {
     console.log(error);
   });
 };
-
-// function saveMood(user_id, visuals_by) {
-//   var editorIsOpen = $('#editor').hasClass('editor-open');
-//   var newMoodKey = null;
-//   var newMoodRef = null;
-
-//   if (editorIsOpen) {
-//     if (!hasSaved) {
-//       var moodsListRef = firebase.database().ref('users/' + user_id + '/moods/');
-//       newMoodRef = moodsListRef.push();
-//       newMoodKey = moodsListRef.push().key;
-
-//       newMoodRef.set({
-//         mood_title: document.getElementById('mood-title-input').textContent,
-//         track_url: document.getElementById("trackTitle").firstChild.getAttribute('href'),
-//         gpm: document.getElementById('mood-gpm-input').textContent,
-//         timeline: visuals,
-//         visuals_by: visuals_by,
-//         sounds_by: document.getElementById('trackCreator').textContent,
-//         duration: msDuration,
-//         track_art: document.getElementById("trackArt").firstChild.getAttribute('src')
-//       });
-//       hasSaved = true;
-//     } else {
-//       newMoodRef.update({
-//         mood_title: document.getElementById('mood-title-input').textContent,
-//         gpm: document.getElementById('mood-gpm-input').textContent,
-//         timeline: visuals
-//       });
-//     }
-//   }
-// }
 
 function ShowAutoSave() {
   $('#autosave-container').html('<span class="pulse">Saving...</span>');
@@ -146,10 +114,17 @@ function ShowAutoSave() {
 
 function SaveMood() {
   ShowAutoSave();
+
+  if (!hasSaved) {
+    currentMoodKey = firebase.database().ref().child('users/' + currentUser.uid + '/moods/').push().key;
+    var moodId = CreateID();
+    hasSaved = true;
+  }
+
   var moodData = {
     mood_title: document.getElementById('mood-title-input').textContent,
     track_url: document.getElementById("trackTitle").firstChild.getAttribute('href'),
-    gpm: document.getElementById('mood-gpm-input').textContent,
+    gpm: document.getElementById('gpmRangeEditor').value,
     timeline: visuals,
     visuals_by: currentUser.displayName,
     sounds_by: document.getElementById('trackCreator').textContent,
@@ -157,12 +132,12 @@ function SaveMood() {
     track_art: document.getElementById("trackArt").firstChild.getAttribute('src')
   };
 
-  if (!hasSaved) {
-    currentMoodKey = firebase.database().ref().child('users/' + currentUser.uid + '/moods/').push().key;
-    hasSaved = true;
+  if (moodData.timeline == {}) {
+    moodData.timeline = {0: "double click to delete"};
   }
   
   var updates = {};
+  updates['public_moods/' + currentMoodKey] = moodData;
   updates['users/' + currentUser.uid + '/moods/' + currentMoodKey] = moodData;
 
   firebase.database().ref().update(updates);
@@ -196,10 +171,11 @@ $('#user-moods-list').on('click', '.edit-user-mood', function() {
       $(pips).append(pipHtmlPre + msToPercent(x, moodObj[currentMoodKey].duration) + '%;" data-millis="' + x + '" title="' + visuals[x] + '">' + visuals[x] + '</div>');
       CreateDraggable();
     }
-
-    hasSaved = true;
     $('#mood-title-input').text(moodObj[currentMoodKey].mood_title);
-    $('#mood-gpm-input').text(moodObj[currentMoodKey].gpm);
+    gpm = moodObj[currentMoodKey].gpm;
+    $('#gpmRangeEditor').val(moodObj[currentMoodKey].gpm);
+    $('.gpm-readout').html(UpdateGPMReadout(moodObj[currentMoodKey].gpm));
+    hasSaved = true;
   });
 });
 
@@ -210,6 +186,7 @@ $('#user-moods-list').on('click', '.edit-user-mood', function() {
 function SignOut(){
 	firebase.auth().signOut().then(function() {
   		console.log('Signed Out');
+      window.location.replace('index.html');
 	}, function(error) {
   		console.error('Sign Out Error', error);
 	});
@@ -224,6 +201,6 @@ function GetUserMoods() {
 }
 
 //create unique ID for moods
-var ID = function () {
-  return '_' + Math.random().toString(36).substr(2, 9);
+function CreateID() {
+  return Math.random().toString(36).substr(2, 9);
 };

@@ -154,29 +154,38 @@ $(playTapeButton).click(function(){
 
 //gpmRange.value = 1400;
 
-$(gpmRange).change(function(){
-    gpm = gpmRange.value;
-});
+$('#gpmRangeEditor, #gpmRangeSettings').change(function(){
+    StopTimer();
+    gpm = $(this).val();
+    StartTimer();
 
-$(gpmRange).on('input', function () {
-    var currentGpmRange = gpmRange.value;
-
-    if (currentGpmRange == 300) {
-        $(gpmContainer).html('💀 💀 💀');
-    } else if (currentGpmRange <= 600) {
-        $(gpmContainer).html('😰 😰 😰');
-    } else if (currentGpmRange <= 1000) {
-        $(gpmContainer).html('😮 😮 😮');
-    } else if (currentGpmRange <= 2000) {
-        $(gpmContainer).html('🔥 🔥 🔥');
-    } else if (currentGpmRange <= 2500) {
-        $(gpmContainer).html('🏝 🏝 🏝');
-    } else if (currentGpmRange <= 3000) {
-        $(gpmContainer).html('😴 😴 😴');
-    } else {
-        $(gpmContainer).html('Error');
+    if ($(editor).hasClass('editor-open')) {
+        SaveMood();
     }
 });
+
+$('#gpmRangeEditor, #gpmRangeSettings').on('input', function () {
+    var currentGpmRange = $(this).val();
+    $('.gpm-readout').html(UpdateGPMReadout(currentGpmRange));
+});
+
+function UpdateGPMReadout(newGPM){
+    if (newGPM == 300) {
+        return '💀';
+    } else if (newGPM <= 600) {
+        return '😰';
+    } else if (newGPM <= 1000) {
+        return '😮';
+    } else if (newGPM <= 2000) {
+        return '🔥';
+    } else if (newGPM <= 2500) {
+        return '🏝';
+    } else if (newGPM <= 3000) {
+        return '😴';
+    } else {
+        return 'Error';
+    }
+}
 
 // $(document).ready(function(){
 //     // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered

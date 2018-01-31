@@ -12,8 +12,21 @@ var searchUrlPre = 'https://api.giphy.com/v1/gifs/search?q=';
 var trendingUrl = 'https://api.giphy.com/v1/gifs/trending?api_key=' + config + '&limit=50';
 var searchUrlPost = '&api_key=' + config + '&limit=';
 
+
 function GetGifs(q) {
-	if (q.includes('#')) {
+	StopTimer();
+
+	if (q.startsWith('https://www.are.na')){
+		var lastSlash = q.lastIndexOf('/');
+		var channelTitle = q.slice(lastSlash + 1);
+		$.ajax({
+		  	url: 'http://api.are.na/v2/channels/' + channelTitle + '/contents',
+		  	type: 'GET',
+		  	success: function(data) {
+		  		gifs = ParseArenaChannel(data);
+		  	}
+		});
+	} else if (q.includes('#')) {
 		var queryWithLimit = q.split('#');
 		$.ajax({
 		  	url: searchUrlPre + queryWithLimit[0] + searchUrlPost + queryWithLimit[1],
@@ -31,35 +44,17 @@ function GetGifs(q) {
 		  	}
 		});
 	}
-}
 
-function GetTrending() {
-	$.ajax({
-	  url: trendingUrl,
-	  type: 'GET',
-	  success: function(data) {
-		gifs = ParseGifs(data);
-		//console.log(channelgifs);
-		//StartGifStream();
-	  }
-	});
 	if (!hasStarted) {
         $(staticContainer).css('background-image', 'url(images/static.gif)');
     }
-    if (playback) {
-    	playback = false;
-    	$(playTapeButton).children().html('play_arrow');
-    }
-}
 
-$(giphySearch).keydown(function( event ) {
-	if ( event.which == 13 ) {
-		CustomSearch();
-	}
-});
+    StartTimer();
+}
 
 function CustomSearch(q) {
 	HideSearch();
+
 	StopTimer();
 	var customSearchLimit;
 
@@ -71,7 +66,7 @@ function CustomSearch(q) {
 		  	type: 'GET',
 		  	success: function(data) {
 		  		gifs = ParseArenaChannel(data);
-				StartTimer('gif');
+				StartTimer();
 		  	}
 		});
 	} else if (q.includes('#')) {
@@ -81,7 +76,7 @@ function CustomSearch(q) {
 		  	type: 'GET',
 		  	success: function(data) {
 				gifs = ParseGifs(data);
-				StartTimer('mp4');
+				StartTimer();
 		  	}
 		});
 	} else {
@@ -90,17 +85,13 @@ function CustomSearch(q) {
 		  	type: 'GET',
 		  	success: function(data) {
 				gifs = ParseGifs(data);
-				StartTimer('mp4');
+				StartTimer();
 		  	}
 		});
 	}
 
 	if (!hasStarted) {
         $(staticContainer).css('background-image', 'url(images/static.gif)');
-    }
-    if (playback) {
-    	playback = false;
-    	$(playTapeButton).children().html('play_arrow');
     }
 }
 
