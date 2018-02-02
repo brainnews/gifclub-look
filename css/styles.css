@@ -506,6 +506,12 @@ h4 {
   cursor: pointer;
 }
 
+.new-mood {
+    right: 62px;
+    position: absolute;
+    top: 12px;
+    z-index: 9999;
+}
 
 .btn-mobile-search-clear {
   position: absolute;
@@ -1044,6 +1050,11 @@ i.sc-link:hover {
   color: var(--magenta);
 }
 
+#user-moods-list {
+  display: flex;
+  overflow-y: scroll;
+}
+
 #user-moods-list li{
   margin-right: 10px;
   position: relative;
@@ -1278,22 +1289,28 @@ i.sc-link:hover {
     box-shadow: 0 15px 12px 0 rgba(0,0,0,0.22), 0 19px 38px 0 rgba(0,0,0,0.30);
   }
 
+  .nav {
+    
+  }
+
+  .nav-item {
+
+  }
+
   .moods-list {
     margin-bottom: 40px;
     display: flex;
-    flex-wrap: wrap;
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
   }
 
   .moods-list li {
     height: 200px;
     max-width: 200px;
     min-width: 200px;
-    flex: 1 1 auto;
+/*    flex: 1 1 auto;*/
     margin-bottom: 15px;
-  }
-
-  .list-inline-item:not(:last-child) {
-    margin-right: 15px;
+    margin-right: 0px !important;
   }
 
   .mood-card {

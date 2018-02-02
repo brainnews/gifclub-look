@@ -73,6 +73,9 @@
 				<div id="user-info">
 					<p><a id="topbar-login" href="#">Log in or Sign up</a></p>
 				</div>
+				<div class="new-mood">
+					<button id="editor-button" class="btn btn-editor" type="button">New mood</button>
+				</div>
 				<div class="input-group mobile-input">
 			      	<input id="giphy-search-mobile" type="text" class="form-control search-primary" placeholder="Visual search" aria-label="Search real quick">
 			    </div>
@@ -146,7 +149,7 @@
 			<div id="ui-container" class="ui-container">
 				<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 				  <li class="nav-item">
-				    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Global moods</a>
+				    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Top Moods</a>
 				  </li>
 				  <li class="nav-item">
 				    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Your moods</a>
@@ -158,18 +161,15 @@
 				<div class="tab-content" id="pills-tabContent">
 				  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 				  	<div class="container">
-						<div class="row align-items-center" id="staffPicksContainer">
+						<div class="row align-items-center">
 						    <p class="small ui-header d-sm-none">Global Moods</p>
 						    <div class="col">
-						    	<ul class="list-inline moods-list">
-						    		<div id="mood-loader" class="loader text-center">Loading...</div>
-						    	</ul>						      
+						    	<div class="row">
+							    	<ul class="list-inline moods-list">
+							    		<div id="mood-loader" class="loader text-center">Loading...</div>
+							    	</ul>
+							    </div>						      
 						    </div>
-						</div>
-						<div class="row align-items-center d-none d-md-block">
-							<div class="col">
-								<button id="editor-button" class="btn btn-primary shadow-1" type="button">Create a mood</button>
-							</div>
 						</div>
 			    	</div>
 				  </div>

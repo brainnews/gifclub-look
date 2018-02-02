@@ -14,7 +14,7 @@ var clearTimer;
 var timerOn = false;
 
 function StartTimer(){
-    timerOn = true;
+    // timerOn = true;
     // timer = setInterval(ShowGif, gpm, imageType);
     // clearTimer = setInterval(ClearPopups, clearRate);
     timer = setTimeout(ShowGif, gpm);
@@ -23,14 +23,14 @@ function StartTimer(){
 
 function StopTimer() {
 	clearTimeout(timer);
-	if (timerOn) {
-		$(videoBackground).html('').toggleClass('hidden');
-		$(popupGridWrapper).html(emptyPopupGrid).toggleClass('hidden');
-	}
-	if ($('#editor').hasClass('editor-open') == false) {
-		//visuals = {};
-	}
-	timerOn = false;
+	// if (timerOn) {
+	// 	$(videoBackground).html('').toggleClass('hidden');
+	// 	$(popupGridWrapper).html(emptyPopupGrid).toggleClass('hidden');
+	// }
+	// if ($('#editor').hasClass('editor-open') == false) {
+	//		visuals = {};
+	// }
+	// timerOn = false;
 	//gifs = null;
 }
 
@@ -44,7 +44,7 @@ function CheckPlaybackStatus() {
     }
 }
 
-function ClearPopups () {
+function ClearPopups() {
 	popupGridWrapper.innerHTML = emptyPopupGrid;
 }
 
@@ -109,6 +109,7 @@ function ShowGif() {
 	}
 
 	if (Math.floor(Math.random() * 10) < clearRate) {
+		console.log('clearing popups');
 		ClearPopups();
 	}
 

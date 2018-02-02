@@ -78,17 +78,6 @@ initApp = function() {
         var mood_key = childSnapshot.key;
         
         $('#user-moods-list').prepend('<li data-mood-id="' + mood_key + '" class="list-inline-item text-center user-mood-thumb"><div class="dropdown"><i id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="fa fa-ellipsis-h" aria-hidden="true"></i><div class="dropdown-menu" aria-labelledby="dLabel"><ul class="list-unstyled"><li><a class="edit-user-mood" data-mood-id="' + mood_key + '" href="#">Edit mood</a></li><li><a class="delete-user-mood" data-mood-id="' + mood_key + '" href="#">Delete mood</a></li><li><a class="get-short-link" data-mood-id="' + mood_key + '" data-clipboard-text="thegif.club/?mood=' + mood_key + '" href="#">Shareable link</a></li></ul></div></div><img data-mood-id="' + mood_key + '" class="mb-6 mood-thumb" src="' + added_mood.track_art + '"><p class="text-truncate">' + added_mood.mood_title + '</p></li>');
-
-        $('.mood-thumb').click(function(){
-          var keyToPlay = $(this).data('mood-id');
-          
-          ref.once('value').then(function(snapshot) {
-            var moodObj = snapshot.val();
-            LoadSoundToWidget(moodObj[keyToPlay].track_url, moodObj[keyToPlay].timeline, moodObj[keyToPlay].gpm);
-            StartVisuals(moodObj, keyToPlay);
-            ToggleUI();
-          });
-        });
       });
 
       ref.on('child_removed', function(oldChildSnapshot) {
@@ -101,7 +90,7 @@ initApp = function() {
       // The start method will wait until the DOM is loaded.
       $('#ui-container').hide();
       ui.start('#firebaseui-auth-container', uiConfig);
-
+      document.getElementById('welcome-message').innerHTML = 'Sign in to see you moods';
     }
   }, function(error) {
     console.log(error);
@@ -146,6 +135,17 @@ function SaveMood() {
   firebase.database().ref().update(updates);
   console.log("saving mood");
 }
+
+$('#user-moods-list').on('click', '.mood-thumb', function() {
+  var keyToPlay = $(this).data('mood-id');
+  var moodRef = firebase.database().ref('/users/' + currentUser.uid + '/moods/');
+  moodRef.once('value').then(function(snapshot) {
+    var moodObj = snapshot.val();
+    LoadSoundToWidget(moodObj[keyToPlay].track_url, moodObj[keyToPlay].timeline, moodObj[keyToPlay].gpm);
+    StartVisuals(moodObj, keyToPlay);
+    ToggleUI();
+  });
+});
 
 $('#user-moods-list').on('click', '.delete-user-mood', function() {
   var keyToDelete = $(this).data('mood-id');
@@ -192,14 +192,6 @@ function SignOut(){
 	});
 }
 
-function GetUserMoods() {
-	ref.on("value", function(snapshot) {
-	   console.log(snapshot.val());
-	}, function (error) {
-	   console.log("Error: " + error.code);
-	});
-}
-
 //create unique ID for moods
 function CreateID() {
   return Math.random().toString(36).substr(2, 9);
@@ -211,12 +203,4 @@ $('ul').on('click', '.get-short-link', function() {
   setTimeout(function(){
     $('.toast').text('Link copied').removeClass('show-toast');
   }, 2000);
-  // $.ajax({
-  //   url: 'https://api-ssl.bitly.com/v3/shorten?access_token=01caf534d23ad99787f4582c6b0d230b8d5c3f5e&longUrl=http%3A%2F%2Fthegif.club%2F?mood=' + key + '&format=txt',
-  //   type: 'GET',
-  //   success: function(data) {
-  //     console.log(data);
-  //     $(el).text(data);
-  //   }
-  // });
 });

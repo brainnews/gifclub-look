@@ -41,7 +41,7 @@ function CatchMoodID(){
 }
 
 function GetPublicMoods(){
-    var query = firebase.database().ref("public_moods").orderByKey();
+    var query = firebase.database().ref("public_moods").limitToLast(8);
     query.once("value")
       .then(function(snapshot) {
         var publicMoods = snapshot.val();
@@ -52,19 +52,17 @@ function GetPublicMoods(){
             // childData will be the actual contents of the child
             var moodData = childSnapshot.val();
 
-            $('.moods-list').append('<li class="list-inline-item mood-card" data-playlist="' + key + '"><img class="mood-art" src="' + moodData.track_art + '"><p class="mood-title" id="moodTitle">' + moodData.mood_title + '</p></li>');
+            $('.moods-list').prepend('<li class="list-inline-item mood-card" data-playlist="' + key + '"><img class="mood-art" src="' + moodData.track_art + '"><p class="mood-title" id="moodTitle">' + moodData.mood_title + '</p></li>');
 
             $('#mood-loader').remove();
-
-            $('.mood-card').click(function() {
-                //StopTimer();
-                var q = $(this).data("playlist");
-                LoadSoundToWidget(publicMoods[q].track_url, publicMoods[q].timeline, publicMoods[q].gpm);
-                StartVisuals(publicMoods, q);
-                ToggleUI();
-            });
-
-      });
+        });
+        $('body').on('click', '.mood-card', function() {
+            //StopTimer();
+            var q = $(this).data("playlist");
+            LoadSoundToWidget(publicMoods[q].track_url, publicMoods[q].timeline, publicMoods[q].gpm);
+            StartVisuals(publicMoods, q);
+            ToggleUI();
+        });
     });
 }
 
@@ -169,21 +167,6 @@ $('.switch-group .switch-item').click(function(){
         $(this).siblings().removeClass('active');
     }
 });
-
-function GetMoods() {
-    for (x in staffPicks) {
-        $('.moods-list').append('<li class="list-inline-item mood-card" data-playlist="' + staffPicks[x].mood_title + '"><img class="mood-art" src="' + staffPicks[x].track_art + '"><p class="mood-title" id="moodTitle">' + staffPicks[x].mood_title + '</p></li>');
-    }
-    $('#mood-loader').remove();
-
-    $('.mood-card').click(function() {
-        //StopTimer();
-        var q = $(this).data("playlist");
-        LoadSoundToWidget(staffPicks[q].playlist, staffPicks[q].timeline, staffPicks[q].gpm);
-        StartVisuals(staffPicks, q);
-        ToggleUI();
-    });
-}
 
 function StartVisuals(db, q){
     StopTimer();
