@@ -61,10 +61,10 @@
 					</div>
 				</div>
 			</div>
-			<ul class="list-inline ui-carousel d-sm-none mobile-nav">
-					<li data-target="#uiCarousel" data-slide-to="0" class="list-inline-item active"><i class="fa fa-heartbeat" aria-hidden="true"></i></li>
-					<li data-target="#uiCarousel" data-slide-to="1" class="list-inline-item"><i class="fa fa-smile-o" aria-hidden="true"></i></li>
-					<li data-target="#uiCarousel" data-slide-to="2" class="list-inline-item"><i class="fa fa-sliders" aria-hidden="true"></i></li>
+			<ul class="list-inline d-sm-none mobile-nav">
+					<li href="#pills-global-moods" class="list-inline-item active"><i class="fa fa-heartbeat" aria-hidden="true"></i></li>
+					<li href="#pills-your-moods" class="list-inline-item"><i class="fa fa-smile-o" aria-hidden="true"></i></li>
+					<li href="#pills-presets" class="list-inline-item"><i class="fa fa-sliders" aria-hidden="true"></i></li>
 			</ul>
 			<div id="topbar" class="topbar">
 				<div class="btn-mobile-search">
@@ -147,19 +147,19 @@
 			</div>
 
 			<div id="ui-container" class="ui-container">
-				<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+				<ul class="nav nav-pills mb-3 desktop-nav" id="pills-tab" role="tablist">
 				  <li class="nav-item">
-				    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Top Moods</a>
+				    <a class="nav-link active" id="pills-global-moods-tab" data-toggle="pill" href="#pills-global-moods" role="tab" aria-controls="pills-global-moods" aria-selected="true">Top Moods</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Your moods</a>
+				    <a class="nav-link" id="pills-your-moods-tab" data-toggle="pill" href="#pills-your-moods" role="tab" aria-controls="pills-your-moods" aria-selected="false">Your moods</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Presets</a>
+				    <a class="nav-link" id="pills-presets-tab" data-toggle="pill" href="#pills-presets" role="tab" aria-controls="pills-presets" aria-selected="false">Presets</a>
 				  </li>
 				</ul>
 				<div class="tab-content" id="pills-tabContent">
-				  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+				  <div class="tab-pane fade show active" id="pills-global-moods" role="tabpanel" aria-labelledby="pills-global-moods-tab">
 				  	<div class="container">
 						<div class="row align-items-center">
 						    <p class="small ui-header d-sm-none">Global Moods</p>
@@ -173,7 +173,7 @@
 						</div>
 			    	</div>
 				  </div>
-				  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+				  <div class="tab-pane fade" id="pills-your-moods" role="tabpanel" aria-labelledby="pills-your-moods-tab">
 				  	<div class="container">
 			      		<div class="row align-items-center shadow-1 settings-row">
 			      			<p class="small mb-20 ui-header d-sm-none">Your Moods</p>
@@ -186,7 +186,7 @@
 						</div>
 			      	</div>
 				  </div>
-				  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+				  <div class="tab-pane fade" id="pills-presets" role="tabpanel" aria-labelledby="pills-presets-tab">
 				  	<div class="container">
 							<div class="row align-items-center shadow-1 settings-row mb-10">
 								<p class="small mb-20 ui-header d-sm-none">Presets</p>
